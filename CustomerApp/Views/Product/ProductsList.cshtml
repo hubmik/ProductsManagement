@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Model.Products>
+
+@{
+    ViewBag.Title = "Products";
+}
+<div class="panel-heading">
+    <form action="ProductsList" method="post">
+        <input type="search" name="productName" placeholder="Search..." />
+        <input type="submit" value="Search" />
+        <input type="submit" value="Show All" />
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.ActionLink("Product Name", "Sort", new { sortOrder = ViewBag.NameSortParam }) </th>
+            <th>@Html.ActionLink("Quantity", "Sort", new { sortOrder = ViewBag.QuantitySortParam })</th>
+            <th>@Html.ActionLink("Price", "Sort", new { sortOrder = ViewBag.PriceSortParam })</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prd in Model)
+        {
+            string name = prd.ProductName;
+            int quantity = prd.Quantity;
+            string price = prd.UnitPrice.ToString("c");
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => name)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => price)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

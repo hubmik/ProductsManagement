@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="ClientApp.Views.ProductsManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:ViewModels="clr-namespace:ClientApp.ViewModels"
+             xmlns:ValueConverters="clr-namespace:ClientApp.ValueConverters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClientApp.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ViewModels:ProductsManagementViewModel x:Key="ProductsManagementViewModel" />
+        <ValueConverters:NotValueConverter x:Key="vcNot" />
+    </UserControl.Resources>
+
+    <DockPanel LastChildFill="False" IsEnabled="{Binding Path=Executing, Converter={StaticResource ResourceKey=vcNot}}">
+        <WrapPanel DockPanel.Dock="Top" VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <Button Content="Get Products"
+                    Margin="0,0,15,0"
+                    Command="{Binding Path=GetProductsCommand}"
+                    />
+            <Button Content="Clear Values"
+                    Command="{Binding Path=ClearValuesCommand}"
+                    Margin="0,0,15,0"
+                    />
+            <Button Content="Update Data"
+                    />
+        </WrapPanel>
+        <StackPanel>
+            <WrapPanel Margin="5">
+                <Label Content="Type product name:" />
+                <TextBox Text="{Binding Path=ProductName}"
+                         Width="180"
+                         VerticalContentAlignment="Center"/>
+            </WrapPanel>
+            <WrapPanel Margin="5">
+                <Label Content="Type product quantity:"/>
+                <TextBox Text="{Binding Path=ProductQuantity}"
+                         Width="180"
+                         VerticalContentAlignment="Center"/>
+            </WrapPanel>
+            <WrapPanel Margin="5">
+                <Label Content="Type product unit price:"/>
+                <TextBox Text="{Binding Path=ProductUnitPrice}"
+                         Width="180"
+                         VerticalContentAlignment="Center"/>
+            </WrapPanel>
+            <WrapPanel Margin="5">
+                <Label Content="Type compartment of quantity:"/>
+                <TextBox Text="{Binding Path=ProductQuantityFrom}"
+                         Width="60"
+                         VerticalContentAlignment="Center"/>
+                <Label Content="-"/>
+                <TextBox Text="{Binding Path=ProductQuantityTo}"
+                         Width="60"
+                         VerticalContentAlignment="Center"/>
+            </WrapPanel>
+            <WrapPanel Margin="5">
+                <Label Content="Type compartment of unit price:"/>
+                <TextBox Text="{Binding Path=ProductUnitPriceFrom}"
+                         Width="60"
+                         VerticalContentAlignment="Center"/>
+                <Label Content="-"/>
+                <TextBox Text="{Binding Path=ProductUnitPriceTo}"
+                         Width="60"
+                         VerticalContentAlignment="Center"/>
+            </WrapPanel>
+        </StackPanel>
+        <DataGrid AutoGenerateColumns="False" DockPanel.Dock="Right" IsReadOnly="False" ItemsSource="{Binding Path=OutputProductsList}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Product Name" Binding="{Binding Path=ProductName}"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}"/>
+                <DataGridTextColumn Header="Unit Price" Binding="{Binding Path=UnitPrice}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </DockPanel>
+</UserControl>
