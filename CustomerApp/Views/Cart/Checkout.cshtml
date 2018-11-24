@@ -1,0 +1,20 @@
+﻿@model Model.Customers
+
+@{
+    ViewBag.Title = "This is Your Order Summary:";
+}
+
+<div class="form-group">
+    @Html.TextBoxFor(x => x.CompanyName)
+    @Html.TextBoxFor(x => x.Email)
+    @Html.TextBoxFor(x => x.Region.Country)
+    @Html.TextBoxFor(x => x.Region.City)
+    @Html.TextBoxFor(x => x.Region.Street)
+</div>
+@*foreach(var property in ViewData.ModelMetadata.Properties)
+    {
+        <div class="form-group">
+            <label>@(property.DisplayName ?? property.PropertyName)</label>
+            @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+        </div>
+    }*@

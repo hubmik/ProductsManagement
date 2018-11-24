@@ -8,13 +8,6 @@ namespace Model
 
     public partial class Regions
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Regions()
-        {
-            Customers = new HashSet<Customers>();
-            Employees = new HashSet<Employees>();
-        }
-
         [Key]
         public int RegionId { get; set; }
 
@@ -30,7 +23,7 @@ namespace Model
         [StringLength(50)]
         public string Street { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [InverseProperty(nameof(Model.Customers.Region))]
         public virtual ICollection<Customers> Customers { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

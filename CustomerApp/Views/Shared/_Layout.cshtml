@@ -25,6 +25,7 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Products List", "ProductsList", "Product")</li>
                     <li>@Html.ActionLink("Orders", "Orders", "Order")</li>
+                    <li>@Html.Action("Summary", "Cart")</li>
                 </ul>
             </div>
         </div>
@@ -33,7 +34,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Today.ToLocalTime() - ASP.NET Application</p>
+            <p>&copy; @System.DateTime.Now - ASP.NET Application by Hubert Mikołajewicz</p>
         </footer>
     </div>
 

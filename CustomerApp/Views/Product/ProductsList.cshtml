@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Model.Products>
+﻿@model CustomerApp.ViewModels.ProductsListViewModel
 
 @{
     ViewBag.Title = "Products";
@@ -11,7 +11,12 @@
     </form>
 </div>
 
-<table class="table">
+@foreach(var prd in Model.Products)
+{
+    @Html.Partial("ProductSummary", prd);
+}
+
+@*<table class="table">
     <thead>
         <tr>
             <th>@Html.ActionLink("Product Name", "Sort", new { sortOrder = ViewBag.NameSortParam }) </th>
@@ -20,24 +25,21 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var prd in Model)
+        @foreach (var prd in Model.Products)
         {
-            string name = prd.ProductName;
-            int quantity = prd.Quantity;
-            string price = prd.UnitPrice.ToString("c");
-
             <tr>
                 <td>
-                    @Html.DisplayFor(x => name)
+                    @Html.ActionLink("Add to Chart", "");
+                    @prd.ProductName
                 </td>
                 <td>
-                    @Html.DisplayFor(x => quantity)
+                    @prd.Quantity
                 </td>
                 <td>
-                    @Html.DisplayFor(x => price)
+                    @prd.UnitPrice
                 </td>
             </tr>
         }
     </tbody>
-</table>
+</table>*@
 

@@ -15,6 +15,18 @@ namespace Server
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
+        public List<Customers> GetCustomerData(int customerId)
+        {
+            List<Customers> custDet;
+            Model.Db context = new Model.Db();
+            IQueryable<Model.Customers> custData = context.Customers
+                .Include(cust => cust.Region)
+                .Where(cust => cust.CustomerId == customerId);
+            custDet = custData.ToList();
+
+            return custDet;
+        }
+
         public string GetData(int value)
         {
             return string.Format("You entered: {0}", value);

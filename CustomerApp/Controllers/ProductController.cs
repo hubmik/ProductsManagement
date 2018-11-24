@@ -52,14 +52,20 @@ namespace CustomerApp.Controllers
 
         public async Task<ViewResult> ProductsList(string productName)
         {
+            ViewModels.ProductsListViewModel model = new ViewModels.ProductsListViewModel();
+            
             Model.Products prod = new Model.Products
             {
                 ProductName = productName
             };
-
             WcfService.ProductExtension productExtension = new WcfService.ProductExtension();
 
-            return View(nameof(ProductsList), await new WcfService.Service1Client().GetProductsAsync(prod, productExtension));
+            using (var client = new WcfService.Service1Client())
+            {
+                model.Products = await client.GetProductsAsync(prod, productExtension);
+            }
+
+            return View(nameof(ProductsList), model);
         }
     }
 }

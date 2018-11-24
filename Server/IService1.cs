@@ -24,6 +24,10 @@ namespace Server
 
         [OperationContract]
         List<Model.Products> GetProducts(Model.Products product, DTO.ProductExtension productExtension);
+
+        [OperationContract]
+        List<Model.Customers> GetCustomerData(int customerId);
+
         // TODO: Add your service operations here
     }
 

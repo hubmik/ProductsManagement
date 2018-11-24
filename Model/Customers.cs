@@ -29,9 +29,11 @@ namespace Model
         [StringLength(50)]
         public string Email { get; set; }
 
-        public virtual Regions Regions { get; set; }
+        [ForeignKey(nameof(RegionId))]
+        public virtual Regions Region { get; set; }
 
-        public virtual Users Users { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public virtual Users User { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }

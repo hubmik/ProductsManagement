@@ -8,13 +8,6 @@ namespace Model
 
     public partial class Users
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
-        {
-            Customers = new HashSet<Customers>();
-            Employees = new HashSet<Employees>();
-        }
-
         [Key]
         public int UserId { get; set; }
 
@@ -29,7 +22,7 @@ namespace Model
         [StringLength(50)]
         public string AccessToken { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [ForeignKey(nameof(Model.Customers.User))]
         public virtual ICollection<Customers> Customers { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

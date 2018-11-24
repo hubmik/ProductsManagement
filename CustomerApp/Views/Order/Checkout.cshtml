@@ -1,0 +1,24 @@
+﻿@model CustomerApp.ViewModels.CartSummaryViewModel
+
+@{ 
+    ViewBag.Title = "This is Your Order Summary:";
+}
+
+@using (Html.BeginForm())
+{
+    foreach(var property in ViewData.ModelMetadata.Properties)
+    {
+        <div class="form-group">
+            <label>@(property.DisplayName ?? property.PropertyName)</label>
+            @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+        </div>
+    }
+
+    @*foreach(var property in ViewData.ModelMetadata.Properties)
+    {
+        <div class="form-group">
+            <label>@(property.DisplayName ?? property.PropertyName)</label>
+            @Html.TextBox(property.PropertyName, )
+        </div>
+    }*@
+}

@@ -51,7 +51,7 @@ namespace Model
 
             modelBuilder.Entity<Regions>()
                 .HasMany(e => e.Customers)
-                .WithRequired(e => e.Regions)
+                .WithRequired(e => e.Region)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Regions>()
