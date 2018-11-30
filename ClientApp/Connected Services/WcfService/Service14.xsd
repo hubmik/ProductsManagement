@@ -23,7 +23,7 @@
       <xs:element minOccurs="0" name="Orders" nillable="true" type="tns:Orders" />
       <xs:element minOccurs="0" name="ProductId" type="xs:int" />
       <xs:element minOccurs="0" name="Products" nillable="true" type="tns:Products" />
-      <xs:element minOccurs="0" name="ProductsQuantity" type="xs:int" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrderedProducts" nillable="true" type="tns:OrderedProducts" />
@@ -48,10 +48,10 @@
       <xs:element minOccurs="0" name="CustomerId" type="xs:int" />
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Orders" nillable="true" type="tns:ArrayOfOrders" />
+      <xs:element minOccurs="0" name="Region" nillable="true" type="tns:Regions" />
       <xs:element minOccurs="0" name="RegionId" type="xs:int" />
-      <xs:element minOccurs="0" name="Regions" nillable="true" type="tns:Regions" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:Users" />
       <xs:element minOccurs="0" name="UserId" type="xs:int" />
-      <xs:element minOccurs="0" name="Users" nillable="true" type="tns:Users" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Customers" nillable="true" type="tns:Customers" />

@@ -26,7 +26,7 @@ namespace Model
         [InverseProperty(nameof(Model.Customers.Region))]
         public virtual ICollection<Customers> Customers { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [InverseProperty(nameof(Model.Employees.Region))]
         public virtual ICollection<Employees> Employees { get; set; }
     }
 }

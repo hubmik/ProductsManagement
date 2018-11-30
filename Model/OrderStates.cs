@@ -21,7 +21,7 @@ namespace Model
         [StringLength(50)]
         public string Status { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [InverseProperty(nameof(Model.Orders.OrderStates))]
         public virtual ICollection<Orders> Orders { get; set; }
     }
 }

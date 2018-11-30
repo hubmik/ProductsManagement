@@ -37,6 +37,9 @@ namespace CustomerApp.Controllers
             IQueryable<Model.Customers> custData = context.Customers.Include(x => x.Region).Where(x => x.CustomerId == 1);
             Model.Customers cst = custData.FirstOrDefault();
 
+            //ShippingDetails shippingDetails = new ShippingDetails();
+            //Model.Customers cst = await shippingDetails.PassCustomerData();
+
             return View(nameof(Checkout), cst);
         }
 

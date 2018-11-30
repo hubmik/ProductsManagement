@@ -16,8 +16,10 @@ namespace Model
 
         public int Quantity { get; set; }
 
+        [ForeignKey(nameof(OrderId))]
         public virtual Orders Orders { get; set; }
 
+        [ForeignKey(nameof(ProductId))]
         public virtual Products Products { get; set; }
     }
 }

@@ -15,18 +15,6 @@ namespace Server
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
-        public List<Customers> GetCustomerData(int customerId)
-        {
-            List<Customers> custDet;
-            Model.Db context = new Model.Db();
-            IQueryable<Model.Customers> custData = context.Customers
-                .Include(cust => cust.Region)
-                .Where(cust => cust.CustomerId == customerId);
-            custDet = custData.ToList();
-
-            return custDet;
-        }
-
         public string GetData(int value)
         {
             return string.Format("You entered: {0}", value);
@@ -43,6 +31,20 @@ namespace Server
                 composite.StringValue += "Suffix";
             }
             return composite;
+        }
+
+        public List<Customers> GetCustomerData(int customerId)
+        {
+            List<Customers> custDet;
+            using (var context = new Db())
+            {
+                IQueryable<Customers> custData = context.Customers
+                    .Include(cust => cust.Region)
+                    .Where(cust => cust.CustomerId == customerId);
+
+                custDet = custData.ToList();
+            }
+            return custDet;
         }
 
         public List<Products> GetProducts(Products product, ProductExtension productExtension)
@@ -95,6 +97,39 @@ namespace Server
         public List<ProductExtension> ProductExtensions()
         {
             return new List<ProductExtension>();
+        }
+
+        public void AddProduct(Products product)
+        {
+            List<Products> prod;
+            using (var context = new Db())
+            {
+                prod = context.Products.ToList();
+                context.Products.Add(new Products { ProductName = product.ProductName, Quantity = product.Quantity, UnitPrice = product.UnitPrice });
+                context.SaveChanges();
+            }
+        }
+
+        public void DeleteProduct(Products product)
+        {
+            List<Products> productsList;
+            using (var context = new Db())
+            {
+                productsList = context.Products.ToList();
+                context.Products.Remove(product);
+                context.SaveChanges();
+            }
+        }
+
+        public void UpdateProduct(Products product)
+        {
+            List<Products> products;
+            using (var context = new Db())
+            {
+                products = context.Products.ToList();
+                products[products.IndexOf(product)] = product;
+                context.SaveChanges();
+            }
         }
     }
 

@@ -11,21 +11,21 @@ namespace Model
         [Key]
         public int UserId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         [StringLength(50)]
         public string Login { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         [StringLength(255)]
         public string Password { get; set; }
 
         [StringLength(50)]
         public string AccessToken { get; set; }
 
-        [ForeignKey(nameof(Model.Customers.User))]
+        [InverseProperty(nameof(Model.Customers.User))]
         public virtual ICollection<Customers> Customers { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [InverseProperty(nameof(Model.Employees.User))]
         public virtual ICollection<Employees> Employees { get; set; }
     }
 }

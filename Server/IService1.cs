@@ -20,12 +20,21 @@ namespace Server
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         [OperationContract]
+        void AddProduct(Model.Products product);
+
+        [OperationContract]
+        void DeleteProduct(Model.Products product);
+
+        [OperationContract]
+        void UpdateProduct(Model.Products product);
+
+        [OperationContract]
         List<DTO.ProductExtension> ProductExtensions();
 
         [OperationContract]
         List<Model.Products> GetProducts(Model.Products product, DTO.ProductExtension productExtension);
 
-        [OperationContract]
+        [OperationContract]        
         List<Model.Customers> GetCustomerData(int customerId);
 
         // TODO: Add your service operations here

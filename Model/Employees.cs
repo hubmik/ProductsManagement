@@ -35,8 +35,10 @@ namespace Model
         [Column(TypeName = "image")]
         public byte[] Image { get; set; }
 
-        public virtual Regions Regions { get; set; }
+        [ForeignKey(nameof(RegionId))]
+        public virtual Regions Region { get; set; }
 
-        public virtual Users Users { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public virtual Users User { get; set; }
     }
 }

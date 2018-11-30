@@ -194,6 +194,12 @@ namespace ClientApp.WcfService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetProducts", ReplyAction="http://tempuri.org/IService1/GetProductsResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<Model.Products>> GetProductsAsync(Model.Products product, ClientApp.WcfService.ProductExtension productExtension);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCustomerData", ReplyAction="http://tempuri.org/IService1/GetCustomerDataResponse")]
+        System.Collections.Generic.List<Model.Customers> GetCustomerData(int customerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCustomerData", ReplyAction="http://tempuri.org/IService1/GetCustomerDataResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Model.Customers>> GetCustomerDataAsync(int customerId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -253,6 +259,14 @@ namespace ClientApp.WcfService {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<Model.Products>> GetProductsAsync(Model.Products product, ClientApp.WcfService.ProductExtension productExtension) {
             return base.Channel.GetProductsAsync(product, productExtension);
+        }
+        
+        public System.Collections.Generic.List<Model.Customers> GetCustomerData(int customerId) {
+            return base.Channel.GetCustomerData(customerId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Model.Customers>> GetCustomerDataAsync(int customerId) {
+            return base.Channel.GetCustomerDataAsync(customerId);
         }
     }
 }

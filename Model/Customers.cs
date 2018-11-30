@@ -34,8 +34,8 @@ namespace Model
 
         [ForeignKey(nameof(UserId))]
         public virtual Users User { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
+        [InverseProperty(nameof(Model.Orders.Customers))]
         public virtual ICollection<Orders> Orders { get; set; }
     }
 }

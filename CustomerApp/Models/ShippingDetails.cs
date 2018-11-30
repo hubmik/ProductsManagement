@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace CustomerApp.Models
 {
     public class ShippingDetails
     {
-        public int CustomerId { get; set; }
-        public int RegionId { get; set; }
-        public string CompanyName { get; set; }
-        public string Email { get; set; }
-        public string Country { get; set; }
-        public string City { get; set; }
-        public string Street { get; set; }
+        public List<Model.Customers> CustomerData { get; set; }
 
-        public async void InitializeCustomerData()
+        private async Task InitializeCustomerData()
         {
-            using(var client = new WcfService.Service1Client())
-            {
-                var clientDetail = await client.GetCustomerDataAsync(1);
+            //List<Model.Customers> clientDetail;
+            var client = new WcfService.Service1Client();
+            CustomerData = await client.GetCustomerDataAsync(1);
 
-            }
+        }
+
+        public async Task<Model.Customers> PassCustomerData()
+        {
+            await InitializeCustomerData();
+            return CustomerData.FirstOrDefault();
         }
     }
 }

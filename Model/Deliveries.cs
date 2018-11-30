@@ -29,7 +29,7 @@ namespace Model
 
         public decimal DeliveryPrice { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [InverseProperty(nameof(Model.Orders.Deliveries))]
         public virtual ICollection<Orders> Orders { get; set; }
     }
 }

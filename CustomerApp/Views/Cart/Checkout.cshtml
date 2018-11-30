@@ -5,13 +5,18 @@
 }
 
 <div class="form-group">
-    @Html.TextBoxFor(x => x.CompanyName)
-    @Html.TextBoxFor(x => x.Email)
-    @Html.TextBoxFor(x => x.Region.Country)
-    @Html.TextBoxFor(x => x.Region.City)
-    @Html.TextBoxFor(x => x.Region.Street)
+    <label>Company Name</label>
+    @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control" })
+    <label>Email</label>
+    @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+    <label>Country</label>
+    @Html.TextBoxFor(x => x.Region.Country, new { @class = "form-control" })
+    <label>City</label>
+    @Html.TextBoxFor(x => x.Region.City, new { @class = "form-control" })
+    <label>Street</label>
+    @Html.TextBoxFor(x => x.Region.Street, new { @class = "form-control" })
 </div>
-@*foreach(var property in ViewData.ModelMetadata.Properties)
+@*@foreach(var property in ViewData.ModelMetadata.Properties)
     {
         <div class="form-group">
             <label>@(property.DisplayName ?? property.PropertyName)</label>
