@@ -8,11 +8,11 @@ namespace Model
 
     public partial class Orders
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Orders()
-        {
-            OrderedProducts = new HashSet<OrderedProducts>();
-        }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        //public Orders()
+        //{
+        //    OrderedProducts = new HashSet<OrderedProducts>();
+        //}
 
         [Key]
         public int OrderId { get; set; }

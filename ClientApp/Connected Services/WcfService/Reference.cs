@@ -76,6 +76,229 @@ namespace ClientApp.WcfService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="IdentityUserOfintCustomUserLoginCustomUserRoleCustomUserClaimJffEROMl", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.AspNet.Identity.EntityFramework" +
+        "")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CustomerApp.Models.ApplicationUser))]
+    public partial class IdentityUserOfintCustomUserLoginCustomUserRoleCustomUserClaimJffEROMl : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AccessFailedCountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool EmailConfirmedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool LockoutEnabledField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> LockoutEndDateUtcField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordHashField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool PhoneNumberConfirmedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SecurityStampField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool TwoFactorEnabledField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AccessFailedCount {
+            get {
+                return this.AccessFailedCountField;
+            }
+            set {
+                if ((this.AccessFailedCountField.Equals(value) != true)) {
+                    this.AccessFailedCountField = value;
+                    this.RaisePropertyChanged("AccessFailedCount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool EmailConfirmed {
+            get {
+                return this.EmailConfirmedField;
+            }
+            set {
+                if ((this.EmailConfirmedField.Equals(value) != true)) {
+                    this.EmailConfirmedField = value;
+                    this.RaisePropertyChanged("EmailConfirmed");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool LockoutEnabled {
+            get {
+                return this.LockoutEnabledField;
+            }
+            set {
+                if ((this.LockoutEnabledField.Equals(value) != true)) {
+                    this.LockoutEnabledField = value;
+                    this.RaisePropertyChanged("LockoutEnabled");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> LockoutEndDateUtc {
+            get {
+                return this.LockoutEndDateUtcField;
+            }
+            set {
+                if ((this.LockoutEndDateUtcField.Equals(value) != true)) {
+                    this.LockoutEndDateUtcField = value;
+                    this.RaisePropertyChanged("LockoutEndDateUtc");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PasswordHash {
+            get {
+                return this.PasswordHashField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordHashField, value) != true)) {
+                    this.PasswordHashField = value;
+                    this.RaisePropertyChanged("PasswordHash");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PhoneNumber {
+            get {
+                return this.PhoneNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneNumberField, value) != true)) {
+                    this.PhoneNumberField = value;
+                    this.RaisePropertyChanged("PhoneNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool PhoneNumberConfirmed {
+            get {
+                return this.PhoneNumberConfirmedField;
+            }
+            set {
+                if ((this.PhoneNumberConfirmedField.Equals(value) != true)) {
+                    this.PhoneNumberConfirmedField = value;
+                    this.RaisePropertyChanged("PhoneNumberConfirmed");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SecurityStamp {
+            get {
+                return this.SecurityStampField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SecurityStampField, value) != true)) {
+                    this.SecurityStampField = value;
+                    this.RaisePropertyChanged("SecurityStamp");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool TwoFactorEnabled {
+            get {
+                return this.TwoFactorEnabledField;
+            }
+            set {
+                if ((this.TwoFactorEnabledField.Equals(value) != true)) {
+                    this.TwoFactorEnabledField = value;
+                    this.RaisePropertyChanged("TwoFactorEnabled");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserName {
+            get {
+                return this.UserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
+                    this.UserNameField = value;
+                    this.RaisePropertyChanged("UserName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ProductExtension", Namespace="http://schemas.datacontract.org/2004/07/Server.DTO")]
     [System.SerializableAttribute()]
     public partial class ProductExtension : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -183,6 +406,24 @@ namespace ClientApp.WcfService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
         System.Threading.Tasks.Task<ClientApp.WcfService.CompositeType> GetDataUsingDataContractAsync(ClientApp.WcfService.CompositeType composite);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddProduct", ReplyAction="http://tempuri.org/IService1/AddProductResponse")]
+        void AddProduct(CustomerApp.Models.Products product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddProduct", ReplyAction="http://tempuri.org/IService1/AddProductResponse")]
+        System.Threading.Tasks.Task AddProductAsync(CustomerApp.Models.Products product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteProduct", ReplyAction="http://tempuri.org/IService1/DeleteProductResponse")]
+        void DeleteProduct(CustomerApp.Models.Products product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteProduct", ReplyAction="http://tempuri.org/IService1/DeleteProductResponse")]
+        System.Threading.Tasks.Task DeleteProductAsync(CustomerApp.Models.Products product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateProduct", ReplyAction="http://tempuri.org/IService1/UpdateProductResponse")]
+        void UpdateProduct(CustomerApp.Models.Products product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateProduct", ReplyAction="http://tempuri.org/IService1/UpdateProductResponse")]
+        System.Threading.Tasks.Task UpdateProductAsync(CustomerApp.Models.Products product);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ProductExtensions", ReplyAction="http://tempuri.org/IService1/ProductExtensionsResponse")]
         System.Collections.Generic.List<ClientApp.WcfService.ProductExtension> ProductExtensions();
         
@@ -190,16 +431,22 @@ namespace ClientApp.WcfService {
         System.Threading.Tasks.Task<System.Collections.Generic.List<ClientApp.WcfService.ProductExtension>> ProductExtensionsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetProducts", ReplyAction="http://tempuri.org/IService1/GetProductsResponse")]
-        System.Collections.Generic.List<Model.Products> GetProducts(Model.Products product, ClientApp.WcfService.ProductExtension productExtension);
+        System.Collections.Generic.List<CustomerApp.Models.Products> GetProducts(CustomerApp.Models.Products product, ClientApp.WcfService.ProductExtension productExtension);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetProducts", ReplyAction="http://tempuri.org/IService1/GetProductsResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<Model.Products>> GetProductsAsync(Model.Products product, ClientApp.WcfService.ProductExtension productExtension);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Products>> GetProductsAsync(CustomerApp.Models.Products product, ClientApp.WcfService.ProductExtension productExtension);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCustomerData", ReplyAction="http://tempuri.org/IService1/GetCustomerDataResponse")]
-        System.Collections.Generic.List<Model.Customers> GetCustomerData(int customerId);
+        System.Collections.Generic.List<CustomerApp.Models.Customers> GetCustomerData(int customerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCustomerData", ReplyAction="http://tempuri.org/IService1/GetCustomerDataResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<Model.Customers>> GetCustomerDataAsync(int customerId);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Customers>> GetCustomerDataAsync(int customerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOrders", ReplyAction="http://tempuri.org/IService1/GetOrdersResponse")]
+        System.Collections.Generic.List<CustomerApp.Models.Orders> GetOrders(CustomerApp.Models.Customers specifiedCustomer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOrders", ReplyAction="http://tempuri.org/IService1/GetOrdersResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Orders>> GetOrdersAsync(CustomerApp.Models.Customers specifiedCustomer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -245,6 +492,30 @@ namespace ClientApp.WcfService {
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
         
+        public void AddProduct(CustomerApp.Models.Products product) {
+            base.Channel.AddProduct(product);
+        }
+        
+        public System.Threading.Tasks.Task AddProductAsync(CustomerApp.Models.Products product) {
+            return base.Channel.AddProductAsync(product);
+        }
+        
+        public void DeleteProduct(CustomerApp.Models.Products product) {
+            base.Channel.DeleteProduct(product);
+        }
+        
+        public System.Threading.Tasks.Task DeleteProductAsync(CustomerApp.Models.Products product) {
+            return base.Channel.DeleteProductAsync(product);
+        }
+        
+        public void UpdateProduct(CustomerApp.Models.Products product) {
+            base.Channel.UpdateProduct(product);
+        }
+        
+        public System.Threading.Tasks.Task UpdateProductAsync(CustomerApp.Models.Products product) {
+            return base.Channel.UpdateProductAsync(product);
+        }
+        
         public System.Collections.Generic.List<ClientApp.WcfService.ProductExtension> ProductExtensions() {
             return base.Channel.ProductExtensions();
         }
@@ -253,20 +524,28 @@ namespace ClientApp.WcfService {
             return base.Channel.ProductExtensionsAsync();
         }
         
-        public System.Collections.Generic.List<Model.Products> GetProducts(Model.Products product, ClientApp.WcfService.ProductExtension productExtension) {
+        public System.Collections.Generic.List<CustomerApp.Models.Products> GetProducts(CustomerApp.Models.Products product, ClientApp.WcfService.ProductExtension productExtension) {
             return base.Channel.GetProducts(product, productExtension);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<Model.Products>> GetProductsAsync(Model.Products product, ClientApp.WcfService.ProductExtension productExtension) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Products>> GetProductsAsync(CustomerApp.Models.Products product, ClientApp.WcfService.ProductExtension productExtension) {
             return base.Channel.GetProductsAsync(product, productExtension);
         }
         
-        public System.Collections.Generic.List<Model.Customers> GetCustomerData(int customerId) {
+        public System.Collections.Generic.List<CustomerApp.Models.Customers> GetCustomerData(int customerId) {
             return base.Channel.GetCustomerData(customerId);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<Model.Customers>> GetCustomerDataAsync(int customerId) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Customers>> GetCustomerDataAsync(int customerId) {
             return base.Channel.GetCustomerDataAsync(customerId);
+        }
+        
+        public System.Collections.Generic.List<CustomerApp.Models.Orders> GetOrders(CustomerApp.Models.Customers specifiedCustomer) {
+            return base.Channel.GetOrders(specifiedCustomer);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Orders>> GetOrdersAsync(CustomerApp.Models.Customers specifiedCustomer) {
+            return base.Channel.GetOrdersAsync(specifiedCustomer);
         }
     }
 }

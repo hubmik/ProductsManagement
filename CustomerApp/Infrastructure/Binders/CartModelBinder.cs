@@ -16,7 +16,6 @@ namespace CustomerApp.Infrastructure.Binders
             Cart cart = null;
             if (controllerContext.HttpContext.Session != null)
                 cart = (Cart)controllerContext.HttpContext.Session[sessionKey];
-
             if (cart == null)
             {
                 cart = new Cart();

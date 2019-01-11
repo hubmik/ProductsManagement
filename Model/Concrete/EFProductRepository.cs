@@ -8,7 +8,7 @@ namespace Model.Concrete
 {
     public class EFProductRepository : Abstract.IProductRepository
     {
-        private Db context = new Db();
-        public IEnumerable<Products> Products => context.Products;
+        private CustomerApp.Models.ApplicationDbContext context = new CustomerApp.Models.ApplicationDbContext();
+        public IEnumerable<CustomerApp.Models.Products> Products => context.Products;
     }
 }

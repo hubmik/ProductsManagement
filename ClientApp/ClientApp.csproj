@@ -162,7 +162,13 @@
     <None Include="Connected Services\WcfService\Service14.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\WcfService\Service15.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\CustomerApp.Models.Customers.datasource" />
+    <None Include="Properties\DataSources\CustomerApp.Models.Orders.datasource" />
+    <None Include="Properties\DataSources\CustomerApp.Models.Products.datasource" />
     <None Include="Properties\DataSources\DBModel.Product.datasource" />
     <None Include="Properties\DataSources\DBModel.Products.datasource" />
     <None Include="Properties\DataSources\Model.Customers.datasource" />

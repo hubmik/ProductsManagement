@@ -9,20 +9,38 @@ namespace CustomerApp.Models
 {
     public class ShippingDetails
     {
-        public List<Model.Customers> CustomerData { get; set; }
-
-        private async Task InitializeCustomerData()
+        public ApplicationUser GetCustomerData(int id)
         {
-            //List<Model.Customers> clientDetail;
-            var client = new WcfService.Service1Client();
-            CustomerData = await client.GetCustomerDataAsync(1);
+            ApplicationUser custData = null;
 
+            using (var context = new ApplicationDbContext())
+            {
+                IQueryable<ApplicationUser> apUs = context.Users
+                    .Where(x => x.Id == id)
+                    .Include(x => x.Customers)
+                    .Include(x => x.Customers.Select(reg => reg.Region));
+                custData = apUs.FirstOrDefault();
+            }
+
+            //using (var context = new ApplicationDbContext())
+            //{
+            //    IQueryable<ApplicationUser> res = context.Users.Where(x => x.Id == id)
+            //        .Include(x => x.Customers)
+            //        .Include(x => x.Customers.Select(reg => reg.Region));
+
+            //    custData = res.FirstOrDefault();
+            //}
+
+            return custData;
         }
 
-        public async Task<Model.Customers> PassCustomerData()
+        public IEnumerable<Deliveries> GetDeliveries()
         {
-            await InitializeCustomerData();
-            return CustomerData.FirstOrDefault();
+            using (var context = new Model.Db())
+            {
+                IQueryable<Deliveries> res = context.Deliveries;
+                return res.ToList();
+            }
         }
     }
 }

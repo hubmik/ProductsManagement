@@ -183,6 +183,24 @@ namespace CustomerApp.WcfService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
         System.Threading.Tasks.Task<CustomerApp.WcfService.CompositeType> GetDataUsingDataContractAsync(CustomerApp.WcfService.CompositeType composite);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddProduct", ReplyAction="http://tempuri.org/IService1/AddProductResponse")]
+        void AddProduct(CustomerApp.Models.Products product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddProduct", ReplyAction="http://tempuri.org/IService1/AddProductResponse")]
+        System.Threading.Tasks.Task AddProductAsync(CustomerApp.Models.Products product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteProduct", ReplyAction="http://tempuri.org/IService1/DeleteProductResponse")]
+        void DeleteProduct(CustomerApp.Models.Products product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteProduct", ReplyAction="http://tempuri.org/IService1/DeleteProductResponse")]
+        System.Threading.Tasks.Task DeleteProductAsync(CustomerApp.Models.Products product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateProduct", ReplyAction="http://tempuri.org/IService1/UpdateProductResponse")]
+        void UpdateProduct(CustomerApp.Models.Products product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateProduct", ReplyAction="http://tempuri.org/IService1/UpdateProductResponse")]
+        System.Threading.Tasks.Task UpdateProductAsync(CustomerApp.Models.Products product);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ProductExtensions", ReplyAction="http://tempuri.org/IService1/ProductExtensionsResponse")]
         System.Collections.Generic.List<CustomerApp.WcfService.ProductExtension> ProductExtensions();
         
@@ -190,16 +208,22 @@ namespace CustomerApp.WcfService {
         System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.WcfService.ProductExtension>> ProductExtensionsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetProducts", ReplyAction="http://tempuri.org/IService1/GetProductsResponse")]
-        System.Collections.Generic.List<Model.Products> GetProducts(Model.Products product, CustomerApp.WcfService.ProductExtension productExtension);
+        System.Collections.Generic.List<CustomerApp.Models.Products> GetProducts(CustomerApp.Models.Products product, CustomerApp.WcfService.ProductExtension productExtension);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetProducts", ReplyAction="http://tempuri.org/IService1/GetProductsResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<Model.Products>> GetProductsAsync(Model.Products product, CustomerApp.WcfService.ProductExtension productExtension);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Products>> GetProductsAsync(CustomerApp.Models.Products product, CustomerApp.WcfService.ProductExtension productExtension);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCustomerData", ReplyAction="http://tempuri.org/IService1/GetCustomerDataResponse")]
-        System.Collections.Generic.List<Model.Customers> GetCustomerData(int customerId);
+        System.Collections.Generic.List<CustomerApp.Models.Customers> GetCustomerData(int customerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCustomerData", ReplyAction="http://tempuri.org/IService1/GetCustomerDataResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<Model.Customers>> GetCustomerDataAsync(int customerId);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Customers>> GetCustomerDataAsync(int customerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOrders", ReplyAction="http://tempuri.org/IService1/GetOrdersResponse")]
+        System.Collections.Generic.List<CustomerApp.Models.Orders> GetOrders(CustomerApp.Models.Customers specifiedCustomer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOrders", ReplyAction="http://tempuri.org/IService1/GetOrdersResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Orders>> GetOrdersAsync(CustomerApp.Models.Customers specifiedCustomer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -245,6 +269,30 @@ namespace CustomerApp.WcfService {
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
         
+        public void AddProduct(CustomerApp.Models.Products product) {
+            base.Channel.AddProduct(product);
+        }
+        
+        public System.Threading.Tasks.Task AddProductAsync(CustomerApp.Models.Products product) {
+            return base.Channel.AddProductAsync(product);
+        }
+        
+        public void DeleteProduct(CustomerApp.Models.Products product) {
+            base.Channel.DeleteProduct(product);
+        }
+        
+        public System.Threading.Tasks.Task DeleteProductAsync(CustomerApp.Models.Products product) {
+            return base.Channel.DeleteProductAsync(product);
+        }
+        
+        public void UpdateProduct(CustomerApp.Models.Products product) {
+            base.Channel.UpdateProduct(product);
+        }
+        
+        public System.Threading.Tasks.Task UpdateProductAsync(CustomerApp.Models.Products product) {
+            return base.Channel.UpdateProductAsync(product);
+        }
+        
         public System.Collections.Generic.List<CustomerApp.WcfService.ProductExtension> ProductExtensions() {
             return base.Channel.ProductExtensions();
         }
@@ -253,20 +301,28 @@ namespace CustomerApp.WcfService {
             return base.Channel.ProductExtensionsAsync();
         }
         
-        public System.Collections.Generic.List<Model.Products> GetProducts(Model.Products product, CustomerApp.WcfService.ProductExtension productExtension) {
+        public System.Collections.Generic.List<CustomerApp.Models.Products> GetProducts(CustomerApp.Models.Products product, CustomerApp.WcfService.ProductExtension productExtension) {
             return base.Channel.GetProducts(product, productExtension);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<Model.Products>> GetProductsAsync(Model.Products product, CustomerApp.WcfService.ProductExtension productExtension) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Products>> GetProductsAsync(CustomerApp.Models.Products product, CustomerApp.WcfService.ProductExtension productExtension) {
             return base.Channel.GetProductsAsync(product, productExtension);
         }
         
-        public System.Collections.Generic.List<Model.Customers> GetCustomerData(int customerId) {
+        public System.Collections.Generic.List<CustomerApp.Models.Customers> GetCustomerData(int customerId) {
             return base.Channel.GetCustomerData(customerId);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<Model.Customers>> GetCustomerDataAsync(int customerId) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Customers>> GetCustomerDataAsync(int customerId) {
             return base.Channel.GetCustomerDataAsync(customerId);
+        }
+        
+        public System.Collections.Generic.List<CustomerApp.Models.Orders> GetOrders(CustomerApp.Models.Customers specifiedCustomer) {
+            return base.Channel.GetOrders(specifiedCustomer);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Orders>> GetOrdersAsync(CustomerApp.Models.Customers specifiedCustomer) {
+            return base.Channel.GetOrdersAsync(specifiedCustomer);
         }
     }
 }

@@ -1,0 +1,32 @@
+﻿@model CustomerApp.ViewModels.OrdersViewModel
+
+@{
+    ViewBag.Title = "Orders History";
+    int counter = 0;
+}
+
+<h2>Here are all of your orders:</h2>
+<h3>Orders for company: @Model.CompanyName</h3>
+<table class="table table-striped table-condensed table-bordered">
+    <tr>
+        <th>No.</th>
+        <th>Order Date</th>
+        <th>Delivery Date</th>
+        <th>Employee Name</th>
+        <th>Order Status</th>
+        <th>Delivery Type</th>
+    </tr>
+    @foreach(var item in Model.CustomerOrders)
+    {
+        counter++;
+    <tr>
+        <td>@counter</td>
+        <td>@Html.DisplayFor(x => item.OrderDate)</td>
+        <td>@Html.DisplayFor(x => item.DeliveryDate)</td>
+        <td>@Html.DisplayFor(x => item.Employees.FirstName) @Html.DisplayFor(x=>item.Employees.LastName)</td>
+        <td>@Html.DisplayFor(x => item.OrderStates.Status)</td>
+        <td>@Html.DisplayFor(x => item.Deliveries.DeliveryType)</td>
+    </tr>
+    }
+</table>
+

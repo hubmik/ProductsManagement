@@ -1,4 +1,5 @@
-﻿using Model.Abstract;
+﻿using Model;
+using Model.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,12 @@ namespace CustomerApp.Controllers
 
         public ActionResult Sort(string sortOrder)
         {
-            var context = new Model.Db();
+            var context = new Models.ApplicationDbContext();
             ViewBag.NameSortParam = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.QuantitySortParam = sortOrder == "Quantity" ? "quantity_desc" : "Quantity";
             ViewBag.PriceSortParam = sortOrder == "Price" ? "price_desc" : "Price";
 
-            List<Model.Products> list = context.Products.ToList();
+            List<Models.Products> list = context.Products.ToList();
             switch (sortOrder)
             {
                 case "name_desc":
@@ -47,25 +48,30 @@ namespace CustomerApp.Controllers
                     break;
             }
 
-            return View(nameof(ProductsList), list);
+            return View(nameof(List), list);
         }
 
-        public async Task<ViewResult> ProductsList(string productName)
+        public async Task<ViewResult> List(string productName)
         {
             ViewModels.ProductsListViewModel model = new ViewModels.ProductsListViewModel();
-            
-            Model.Products prod = new Model.Products
+
+            using (var context = new Models.ApplicationDbContext())
+            {
+                model.Products = context.Products.ToList();
+            }
+
+            Models.Products prod = new Models.Products
             {
                 ProductName = productName
             };
             WcfService.ProductExtension productExtension = new WcfService.ProductExtension();
 
-            using (var client = new WcfService.Service1Client())
-            {
-                model.Products = await client.GetProductsAsync(prod, productExtension);
-            }
+            //using (var client = new WcfService.Service1Client())
+            //{
+            //    model.Products = await client.GetProductsAsync(prod, productExtension);
+            //}
 
-            return View(nameof(ProductsList), model);
+            return View(nameof(List), model);
         }
     }
 }

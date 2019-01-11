@@ -8,32 +8,24 @@ namespace Model
 
     public partial class Customers
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customers()
-        {
-            Orders = new HashSet<Orders>();
-        }
-
         [Key]
         public int CustomerId { get; set; }
 
+        [ForeignKey(nameof(ApplicationUser))]
         public int UserId { get; set; }
 
+        [ForeignKey(nameof(Region))]
         public int RegionId { get; set; }
 
         [Required]
         [StringLength(50)]
         public string CompanyName { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Email { get; set; }
-
+        
         [ForeignKey(nameof(RegionId))]
         public virtual Regions Region { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        public virtual Users User { get; set; }
+        public virtual CustomerApp.Models.ApplicationUser ApplicationUser { get; set; }
         
         [InverseProperty(nameof(Model.Orders.Customers))]
         public virtual ICollection<Orders> Orders { get; set; }

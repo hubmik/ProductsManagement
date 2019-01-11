@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomerApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -20,22 +21,25 @@ namespace Server
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         [OperationContract]
-        void AddProduct(Model.Products product);
+        void AddProduct(Products product);
 
         [OperationContract]
-        void DeleteProduct(Model.Products product);
+        void DeleteProduct(Products product);
 
         [OperationContract]
-        void UpdateProduct(Model.Products product);
+        void UpdateProduct(Products product);
 
         [OperationContract]
         List<DTO.ProductExtension> ProductExtensions();
 
         [OperationContract]
-        List<Model.Products> GetProducts(Model.Products product, DTO.ProductExtension productExtension);
+        List<Products> GetProducts(Products product, DTO.ProductExtension productExtension);
 
         [OperationContract]        
-        List<Model.Customers> GetCustomerData(int customerId);
+        List<Customers> GetCustomerData(int customerId);
+
+        [OperationContract]
+        List<Orders> GetOrders(Customers specifiedCustomer);
 
         // TODO: Add your service operations here
     }

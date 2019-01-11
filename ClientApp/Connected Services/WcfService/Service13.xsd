@@ -1,18 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Server.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Server.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="ArrayOfProductExtension">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/CustomerApp.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CustomerApp.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:57151/Service1.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Microsoft.AspNet.Identity.EntityFramework" />
+  <xs:complexType name="Products">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductExtension" nillable="true" type="tns:ProductExtension" />
+      <xs:element minOccurs="0" name="OrderedProducts" nillable="true" type="tns:ArrayOfOrderedProducts" />
+      <xs:element minOccurs="0" name="ProductId" type="xs:int" />
+      <xs:element minOccurs="0" name="ProductName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="UnitPrice" type="xs:decimal" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfProductExtension" nillable="true" type="tns:ArrayOfProductExtension" />
-  <xs:complexType name="ProductExtension">
+  <xs:element name="Products" nillable="true" type="tns:Products" />
+  <xs:complexType name="ArrayOfOrderedProducts">
     <xs:sequence>
-      <xs:element minOccurs="0" name="QuantityFrom" type="xs:int" />
-      <xs:element minOccurs="0" name="QuantityTo" type="xs:int" />
-      <xs:element minOccurs="0" name="UnitPriceFrom" type="xs:decimal" />
-      <xs:element minOccurs="0" name="UnitPriceTo" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderedProducts" nillable="true" type="tns:OrderedProducts" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ProductExtension" nillable="true" type="tns:ProductExtension" />
+  <xs:element name="ArrayOfOrderedProducts" nillable="true" type="tns:ArrayOfOrderedProducts" />
+  <xs:complexType name="OrderedProducts">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrderId" type="xs:int" />
+      <xs:element minOccurs="0" name="OrderedProductsId" type="xs:int" />
+      <xs:element minOccurs="0" name="Orders" nillable="true" type="tns:Orders" />
+      <xs:element minOccurs="0" name="ProductId" type="xs:int" />
+      <xs:element minOccurs="0" name="Products" nillable="true" type="tns:Products" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderedProducts" nillable="true" type="tns:OrderedProducts" />
+  <xs:complexType name="Orders">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CustomerId" type="xs:int" />
+      <xs:element minOccurs="0" name="Customers" nillable="true" type="tns:Customers" />
+      <xs:element minOccurs="0" name="Deliveries" nillable="true" type="tns:Deliveries" />
+      <xs:element minOccurs="0" name="DeliveryDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DeliveryId" type="xs:int" />
+      <xs:element minOccurs="0" name="EmployeeId" type="xs:int" />
+      <xs:element minOccurs="0" name="Employees" nillable="true" type="tns:Employees" />
+      <xs:element minOccurs="0" name="OrderDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OrderId" type="xs:int" />
+      <xs:element minOccurs="0" name="OrderStates" nillable="true" type="tns:OrderStates" />
+      <xs:element minOccurs="0" name="OrderedProducts" nillable="true" type="tns:ArrayOfOrderedProducts" />
+      <xs:element minOccurs="0" name="StatusId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Orders" nillable="true" type="tns:Orders" />
+  <xs:complexType name="Customers">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ApplicationUser" nillable="true" type="tns:ApplicationUser" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomerId" type="xs:int" />
+      <xs:element minOccurs="0" name="Orders" nillable="true" type="tns:ArrayOfOrders" />
+      <xs:element minOccurs="0" name="Region" nillable="true" type="tns:Regions" />
+      <xs:element minOccurs="0" name="RegionId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Customers" nillable="true" type="tns:Customers" />
+  <xs:complexType name="ApplicationUser">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/Microsoft.AspNet.Identity.EntityFramework" base="q1:IdentityUserOfintCustomUserLoginCustomUserRoleCustomUserClaimJffEROMl">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Customers" nillable="true" type="tns:ArrayOfCustomers" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ApplicationUser" nillable="true" type="tns:ApplicationUser" />
+  <xs:complexType name="ArrayOfCustomers">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Customers" nillable="true" type="tns:Customers" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomers" nillable="true" type="tns:ArrayOfCustomers" />
+  <xs:complexType name="ArrayOfOrders">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Orders" nillable="true" type="tns:Orders" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrders" nillable="true" type="tns:ArrayOfOrders" />
+  <xs:complexType name="Regions">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Customers" nillable="true" type="tns:ArrayOfCustomers" />
+      <xs:element minOccurs="0" name="RegionId" type="xs:int" />
+      <xs:element minOccurs="0" name="Street" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Regions" nillable="true" type="tns:Regions" />
+  <xs:complexType name="Deliveries">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DeliveryId" type="xs:int" />
+      <xs:element minOccurs="0" name="DeliveryType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Orders" nillable="true" type="tns:ArrayOfOrders" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Deliveries" nillable="true" type="tns:Deliveries" />
+  <xs:complexType name="Employees">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BirthDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EmployeeId" type="xs:int" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HireDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="JobPosition" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Orders" nillable="true" type="tns:ArrayOfOrders" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Employees" nillable="true" type="tns:Employees" />
+  <xs:complexType name="OrderStates">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Orders" nillable="true" type="tns:ArrayOfOrders" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StatusId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderStates" nillable="true" type="tns:OrderStates" />
+  <xs:complexType name="ArrayOfProducts">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Products" nillable="true" type="tns:Products" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProducts" nillable="true" type="tns:ArrayOfProducts" />
 </xs:schema>

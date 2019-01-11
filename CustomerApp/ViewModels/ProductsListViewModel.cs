@@ -6,7 +6,8 @@ using System.Web;
 namespace CustomerApp.ViewModels
 {
     public class ProductsListViewModel
-    { 
-        public IEnumerable<Model.Products> Products { get; set; }
+    {
+        public IEnumerable<Models.Products> Products { get; set; }
+        public Models.Products Product { get; set; }
     }
 }

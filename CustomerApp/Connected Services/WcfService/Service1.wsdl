@@ -5,8 +5,9 @@
       <xsd:import schemaLocation="http://localhost:57151/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:57151/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:57151/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Server" />
-      <xsd:import schemaLocation="http://localhost:57151/Service1.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Server.DTO" />
-      <xsd:import schemaLocation="http://localhost:57151/Service1.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Model" />
+      <xsd:import schemaLocation="http://localhost:57151/Service1.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CustomerApp.Models" />
+      <xsd:import schemaLocation="http://localhost:57151/Service1.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Microsoft.AspNet.Identity.EntityFramework" />
+      <xsd:import schemaLocation="http://localhost:57151/Service1.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Server.DTO" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IService1_GetData_InputMessage">
@@ -20,6 +21,24 @@
   </wsdl:message>
   <wsdl:message name="IService1_GetDataUsingDataContract_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddProduct" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteProduct" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_UpdateProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProduct" />
+  </wsdl:message>
+  <wsdl:message name="IService1_UpdateProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProductResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_ProductExtensions_InputMessage">
     <wsdl:part name="parameters" element="tns:ProductExtensions" />
@@ -39,6 +58,12 @@
   <wsdl:message name="IService1_GetCustomerData_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCustomerDataResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrders" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrdersResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetData" message="tns:IService1_GetData_InputMessage" />
@@ -47,6 +72,18 @@
     <wsdl:operation name="GetDataUsingDataContract">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetDataUsingDataContract" message="tns:IService1_GetDataUsingDataContract_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDataUsingDataContractResponse" message="tns:IService1_GetDataUsingDataContract_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AddProduct" message="tns:IService1_AddProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AddProductResponse" message="tns:IService1_AddProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteProduct" message="tns:IService1_DeleteProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteProductResponse" message="tns:IService1_DeleteProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/UpdateProduct" message="tns:IService1_UpdateProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/UpdateProductResponse" message="tns:IService1_UpdateProduct_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ProductExtensions">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/ProductExtensions" message="tns:IService1_ProductExtensions_InputMessage" />
@@ -59,6 +96,10 @@
     <wsdl:operation name="GetCustomerData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCustomerData" message="tns:IService1_GetCustomerData_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCustomerDataResponse" message="tns:IService1_GetCustomerData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOrders" message="tns:IService1_GetOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOrdersResponse" message="tns:IService1_GetOrders_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -74,6 +115,33 @@
     </wsdl:operation>
     <wsdl:operation name="GetDataUsingDataContract">
       <soap:operation soapAction="http://tempuri.org/IService1/GetDataUsingDataContract" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddProduct">
+      <soap:operation soapAction="http://tempuri.org/IService1/AddProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProduct">
+      <soap:operation soapAction="http://tempuri.org/IService1/DeleteProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProduct">
+      <soap:operation soapAction="http://tempuri.org/IService1/UpdateProduct" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -101,6 +169,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetCustomerData">
       <soap:operation soapAction="http://tempuri.org/IService1/GetCustomerData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrders">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetOrders" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

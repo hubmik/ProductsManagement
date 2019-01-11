@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Moq;
 using Model;
 
 namespace CustomerApp.Infrastructure

@@ -8,6 +8,6 @@ namespace Model.Abstract
 {
     public interface IProductRepository
     {
-        IEnumerable<Products> Products { get; }
+        IEnumerable<CustomerApp.Models.Products> Products { get; }
     }
 }

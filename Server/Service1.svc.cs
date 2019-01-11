@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
-using Model;
+using CustomerApp.Models;
 using Server.DTO;
 
 namespace Server
@@ -36,7 +36,7 @@ namespace Server
         public List<Customers> GetCustomerData(int customerId)
         {
             List<Customers> custDet;
-            using (var context = new Db())
+            using (var context = new ApplicationDbContext())
             {
                 IQueryable<Customers> custData = context.Customers
                     .Include(cust => cust.Region)
@@ -50,10 +50,11 @@ namespace Server
         public List<Products> GetProducts(Products product, ProductExtension productExtension)
         {
             List<Products> products = new List<Products>();
-            IQueryable<Products> pr;
-
-            using (var context = new Db())
+            IQueryable<Products> pr;            
+            
+            using (var context = new ApplicationDbContext())
             {
+                
                 pr = !string.IsNullOrEmpty(product.ProductName) || product.UnitPrice > 0 || product.Quantity > 0 ||
                     productExtension.QuantityFrom > 0
                     || productExtension.QuantityTo > 0 || productExtension.UnitPriceFrom > 0 || productExtension.UnitPriceTo > 0
@@ -101,11 +102,16 @@ namespace Server
 
         public void AddProduct(Products product)
         {
-            List<Products> prod;
-            using (var context = new Db())
+            Products productAdd;
+            using (var context = new ApplicationDbContext())
             {
-                prod = context.Products.ToList();
-                context.Products.Add(new Products { ProductName = product.ProductName, Quantity = product.Quantity, UnitPrice = product.UnitPrice });
+                productAdd = new Products
+                {
+                    ProductName = product.ProductName,
+                    Quantity = product.Quantity,
+                    UnitPrice = product.UnitPrice,
+                };
+                context.Products.Add(productAdd);
                 context.SaveChanges();
             }
         }
@@ -113,7 +119,7 @@ namespace Server
         public void DeleteProduct(Products product)
         {
             List<Products> productsList;
-            using (var context = new Db())
+            using (var context = new ApplicationDbContext())
             {
                 productsList = context.Products.ToList();
                 context.Products.Remove(product);
@@ -124,12 +130,22 @@ namespace Server
         public void UpdateProduct(Products product)
         {
             List<Products> products;
-            using (var context = new Db())
+            using (var context = new ApplicationDbContext())
             {
                 products = context.Products.ToList();
                 products[products.IndexOf(product)] = product;
                 context.SaveChanges();
             }
+        }
+
+        public List<Orders> GetOrders(Customers specifiedCustomer)
+        {
+            List<Orders> orders = new List<Orders>();
+            using (var context = new ApplicationDbContext())
+            {
+                orders = context.Orders.ToList();
+            }
+            return orders;
         }
     }
 

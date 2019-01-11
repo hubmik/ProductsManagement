@@ -1,15 +1,10 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-    if(Session["userId"] == null)
-    {
-        Response.Redirect("~/Login/Index");
-    }
 }
 
 <div class="jumbotron">
     <h1>Customer's Products Management</h1>
     <p class="lead">Welcome to MerchanApp customer's home view. In the top of the page you can select one of available menu's</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
 <div class="row">

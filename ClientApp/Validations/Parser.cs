@@ -8,7 +8,7 @@ namespace ClientApp.Validations
 {
     public class Parser
     {
-        public void ParseInput(Model.Products product, WcfService.ProductExtension productExtension,
+        public void ParseInput(CustomerApp.Models.Products product, WcfService.ProductExtension productExtension,
             string name,
             string quantity,
             string unitPrice,

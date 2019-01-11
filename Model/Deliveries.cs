@@ -8,11 +8,11 @@ namespace Model
 
     public partial class Deliveries
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Deliveries()
-        {
-            Orders = new HashSet<Orders>();
-        }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        //public Deliveries()
+        //{
+        //    Orders = new HashSet<Orders>();
+        //}
 
         [Key]
         public int DeliveryId { get; set; }

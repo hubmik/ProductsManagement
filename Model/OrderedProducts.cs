@@ -10,8 +10,10 @@ namespace Model
     {
         public int OrderedProductsId { get; set; }
 
+        [ForeignKey(nameof(Orders))]
         public int OrderId { get; set; }
 
+        [ForeignKey(nameof(Products))]
         public int ProductId { get; set; }
 
         public int Quantity { get; set; }

@@ -1,25 +1,24 @@
-﻿@model Model.Customers
+﻿@model CustomerApp.ViewModels.CartSummaryViewModel
 
 @{
     ViewBag.Title = "This is Your Order Summary:";
 }
 
 <div class="form-group">
-    <label>Company Name</label>
-    @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control" })
-    <label>Email</label>
-    @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
-    <label>Country</label>
-    @Html.TextBoxFor(x => x.Region.Country, new { @class = "form-control" })
-    <label>City</label>
-    @Html.TextBoxFor(x => x.Region.City, new { @class = "form-control" })
-    <label>Street</label>
-    @Html.TextBoxFor(x => x.Region.Street, new { @class = "form-control" })
-</div>
-@*@foreach(var property in ViewData.ModelMetadata.Properties)
+    @using (Html.BeginForm("CurrentOrder", "Order", FormMethod.Post))
     {
-        <div class="form-group">
-            <label>@(property.DisplayName ?? property.PropertyName)</label>
-            @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
-        </div>
-    }*@
+        @Html.LabelFor(x => x.Email);
+        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+        @Html.LabelFor(x => x.CompanyName);
+        @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control" })
+        @Html.LabelFor(x => x.Country);
+        @Html.TextBoxFor(x => x.Country, new { @class = "form-control" })
+        @Html.LabelFor(x => x.City);
+        @Html.TextBoxFor(x => x.City, new { @class = "form-control" })
+        @Html.LabelFor(x => x.Street);
+        @Html.TextBoxFor(x => x.Street, new { @class = "form-control" })
+        @Html.LabelFor(x => x.SelectedDeliveryId)
+        @Html.DropDownListFor(x => x.SelectedDeliveryId, Model.DeliveryItems, new { @class = "form-control" })
+        <input type="submit" value="Submit" />
+    }
+</div>

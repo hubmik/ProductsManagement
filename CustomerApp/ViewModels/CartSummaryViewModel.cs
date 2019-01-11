@@ -1,12 +1,44 @@
-﻿using System;
+﻿using CustomerApp.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace CustomerApp.ViewModels
 {
     public class CartSummaryViewModel
     {
-        public Models.ShippingDetails Details { get; set; }
+        private readonly IEnumerable<Deliveries> _deliveries;
+
+        public CartSummaryViewModel()
+        {
+            ShippingDetails shippingDetails = new ShippingDetails();
+            _deliveries = shippingDetails.GetDeliveries();
+        }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Company Name")]
+        public string CompanyName { get; set; }
+
+        [Required]
+        public string Country { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        public string Street { get; set; }
+
+        [Required]
+        [Display(Name = "Delivery Type")]
+        public int SelectedDeliveryId { get; set; }
+
+        public IEnumerable<SelectListItem> DeliveryItems => new SelectList(_deliveries, "DeliveryId", "DeliveryType");
     }
 }

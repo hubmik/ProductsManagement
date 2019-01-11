@@ -1,0 +1,22 @@
+﻿@model CustomerApp.ViewModels.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Products Ordered Successfully";
+}
+
+<h2>Current Order</h2>
+<h2>An Email has been sent with detailed informations about the shipment</h2>
+
+<table class="table table-striped table-condensed table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+    </tr>
+    @foreach (var item in Model.Cart.Lines)
+    {
+        <tr>
+            <td>@Html.DisplayFor(x => item.Product.ProductName)</td>
+            <td>@Html.DisplayFor(x => item.Quantity)</td>
+        </tr>
+    }
+</table>

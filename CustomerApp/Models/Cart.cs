@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace CustomerApp.Models
 {
@@ -9,7 +10,21 @@ namespace CustomerApp.Models
     {
         private List<CartLine> lineCollection = new List<CartLine>();
 
-        public void AddItem(Model.Products product, int quantity)
+        public int GetProductsCollectionSize(Products product)
+        {
+            int quantity;
+            using (var context = new ApplicationDbContext())
+            {
+                var query = context.Products
+                    .Where(x => x.ProductId == product.ProductId)
+                    .Include(x => x.ProductsCollections)
+                    .Select(x => x.ProductsCollections.CollectionSize);
+                quantity = query.FirstOrDefault();
+            }
+            return quantity;
+        }
+
+        public void AddItem(Products product, int quantity)
         {
             CartLine line = lineCollection
                 .Where(p => p.Product.ProductId == product.ProductId)
@@ -21,7 +36,7 @@ namespace CustomerApp.Models
                 line.Quantity += quantity;
         }
 
-        public void RemoveLine(Model.Products product)
+        public void RemoveLine(Products product)
         {
             lineCollection.RemoveAll(p => p.Product.ProductId == product.ProductId);
         }

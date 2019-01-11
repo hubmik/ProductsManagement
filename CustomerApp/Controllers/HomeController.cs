@@ -1,8 +1,11 @@
-﻿using System;
+﻿using CustomerApp.Models;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace CustomerApp.Controllers
 {
@@ -15,14 +18,14 @@ namespace CustomerApp.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Description page.";
-            
+            ViewBag.Message = "Your application description page.";
+
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Contact page.";
+            ViewBag.Message = "Your contact page.";
 
             return View();
         }

@@ -1,0 +1,17 @@
+﻿@model CustomerApp.ViewModels.ProductsListViewModel
+
+@{
+    ViewBag.Title = "Products";
+}
+<div class="panel-heading">
+    <form action="List" method="post">
+        <input type="search" name="productName" placeholder="Search..." />
+        <input type="submit" value="Search" />
+        <input type="submit" value="Show All" />
+    </form>
+</div>
+
+@foreach (var prd in Model.Products)
+{
+    @Html.Partial("_ProductSummary", prd);
+}

@@ -1,11 +1,13 @@
 ﻿@model CustomerApp.ViewModels.CartIndexViewModel
 
-@{ 
+@{
     ViewBag.Title = "MerchanApp: Your Cart:";
 }
 
 <style>
-    #cartTable td { vertical-align: middle; }
+    #cartTable td {
+        vertical-align: middle;
+    }
 </style>
 
 <h2>Your cart</h2>
@@ -19,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var line in Model.Cart.Lines)
+        @foreach (var line in Model.Cart.Lines)
         {
             <tr>
                 <td class="text-center">@line.Quantity</td>
@@ -30,7 +32,7 @@
                     @using (Html.BeginForm("RemoveFromCart", "Cart"))
                     {
                         @Html.Hidden("ProductId", line.Product.ProductId)
-                        @Html.HiddenFor(x=>x.ReturnUrl)
+                        @Html.HiddenFor(x => x.ReturnUrl)
                         <input class="btn btn-sm btn-warning" type="submit" value="Remove" />
                     }
                 </td>

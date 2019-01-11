@@ -1,4 +1,5 @@
 ﻿using CustomerApp.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -27,20 +28,26 @@ namespace CustomerApp.Controllers
             });
         }
 
-        public ViewResult Checkout()
+        public ActionResult Checkout(Cart cart, string returnUrl)
         {
-            //var client = new WcfService.Service1Client();
-            //List<Model.Customers> custDet = await client.GetCustomerDataAsync(1);
-            //Model.Customers cust = custDet.FirstOrDefault();
+            if(cart.Lines.Count() == 0)
+            {
+                return RedirectToAction(nameof(Index), new { returnUrl });
+            }
+            ShippingDetails shippingDetails = new ShippingDetails();
+            ApplicationUser result = shippingDetails.GetCustomerData(System.Web.HttpContext.Current.User.Identity.GetUserId<int>());
+            ViewModels.CartSummaryViewModel cartSummaryVM = new ViewModels.CartSummaryViewModel();
 
-            Model.Db context = new Model.Db();
-            IQueryable<Model.Customers> custData = context.Customers.Include(x => x.Region).Where(x => x.CustomerId == 1);
-            Model.Customers cst = custData.FirstOrDefault();
-
-            //ShippingDetails shippingDetails = new ShippingDetails();
-            //Model.Customers cst = await shippingDetails.PassCustomerData();
-
-            return View(nameof(Checkout), cst);
+            cartSummaryVM = new ViewModels.CartSummaryViewModel
+            {
+                City = result.Customers.FirstOrDefault().Region.City,
+                CompanyName = result.Customers.FirstOrDefault().CompanyName,
+                Country = result.Customers.FirstOrDefault().Region.Country,
+                Email = result.Email,
+                Street = result.Customers.FirstOrDefault().Region.Street,
+                SelectedDeliveryId = cartSummaryVM.SelectedDeliveryId
+            };
+            return View(nameof(Checkout), cartSummaryVM);
         }
 
         public PartialViewResult Summary(Cart cart)
@@ -50,18 +57,21 @@ namespace CustomerApp.Controllers
 
         public RedirectToRouteResult AddToCart(Cart cart, int productId, string returnUrl)
         {
-            Model.Products product = repository.
+            Products product = repository.
                 Products.FirstOrDefault(p => p.ProductId == productId);
-            
+            int quantity;
+
+            quantity = cart.GetProductsCollectionSize(product);
+
             if (product != null)
-                cart.AddItem(product, 1);
+                cart.AddItem(product, quantity);
 
             return RedirectToAction(nameof(Index), new { returnUrl });
         }
 
         public RedirectToRouteResult RemoveFromCart(Cart cart, int productId, string returnUrl)
         {
-            Model.Products product = repository.
+            Products product = repository.
                 Products.FirstOrDefault(p => p.ProductId == productId);
 
             if (product != null)

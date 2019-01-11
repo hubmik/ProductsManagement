@@ -11,8 +11,6 @@ namespace Model
         [Key]
         public int EmployeeId { get; set; }
 
-        public int UserId { get; set; }
-
         public int RegionId { get; set; }
 
         [Required]
@@ -37,8 +35,5 @@ namespace Model
 
         [ForeignKey(nameof(RegionId))]
         public virtual Regions Region { get; set; }
-
-        [ForeignKey(nameof(UserId))]
-        public virtual Users User { get; set; }
     }
 }
