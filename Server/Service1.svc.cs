@@ -138,14 +138,107 @@ namespace Server
             }
         }
 
-        public List<Orders> GetOrders(Customers specifiedCustomer)
+        public bool IsUserAuthenticated(string accessKey)
         {
-            List<Orders> orders = new List<Orders>();
+            string key = accessKey;
+            List<string> list = null;
+
             using (var context = new ApplicationDbContext())
             {
-                orders = context.Orders.ToList();
+                IQueryable<string> keysList = context.Employees.Select(x => x.AccessKey);
+                list = keysList.ToList();
             }
+            if (list.Any(key.Contains))
+                return true;
+
+            return false;
+        }
+
+        public Employees GetUserCredentials(string accessKey)
+        {
+            Employees employee = null;
+            using (var context = new ApplicationDbContext())
+            {
+                var query = context.Employees
+                    .FirstOrDefault(x => x.AccessKey == accessKey);
+
+                employee = query as Employees;
+            }
+
+            return employee;
+        }
+
+        public List<Orders> TakeOrders(string accessKey)
+        {
+            List<Orders> orders = new List<Orders>();
+            IQueryable<Orders> query = null;
+
+            using (var context = new ApplicationDbContext())
+            {
+                //orders = context.Orders;
+                    
+                    //.Where(x => x.Employees.AccessKey == accessKey)
+                    //.Include(x => x.Customers.Select(s => s.Orders
+                    //  .Select(em => em.Employees)
+                    //  .Select(or => or.Orders.Select(d => d.Deliveries)
+                    //  .Select(ord => ord.Orders.Select(st => st.OrderStates)
+                    //  ))));
+
+                //orders = query.ToList();
+            }
+
             return orders;
+        }
+
+        public List<OrderContext> EmployeesOrders(string accessKey)
+        {
+            List<OrderContext> orderContext = new List<OrderContext>();
+            OrderContext order = new OrderContext();
+            string key = accessKey;
+            int colIndex;
+            using (var db = new System.Data.SqlClient.SqlConnection
+                (System.Configuration.ConfigurationManager.ConnectionStrings["CompanyDB"].ConnectionString))
+            {
+                db.Open();
+                using (var cmd = new System.Data.SqlClient.SqlCommand())
+                {
+                    cmd.Connection = db;
+                    cmd.CommandText =
+                        "select Orders.OrderId, Orders.DeliveryDate, Orders.OrderDate, Customers.CompanyName, Regions.Country, Regions.City, Regions.Street, Deliveries.DeliveryType, OrderStates.Status " +
+                        "from Orders " +
+                        "inner join Employees on Orders.EmployeeId = Employees.EmployeeId " +
+                        "inner join Customers on Orders.CustomerId = Customers.CustomerId " +
+                        "inner join Regions on Customers.RegionId = Regions.RegionId " +
+                        "inner join Deliveries on Orders.DeliveryId = Deliveries.DeliveryId " +
+                        "inner join OrderStates on Orders.StatusId = OrderStates.StatusId " +
+                        "where Employees.AccessKey = @accessKey";
+                    cmd.Parameters.AddWithValue("@accessKey", key);
+                    
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            colIndex = dr.GetOrdinal("DeliveryDate");
+                            order.DeliveryDate = dr.IsDBNull(colIndex) ? null : string.Format("{0:d/M/yyyy}", dr["DeliveryDate"]);
+
+                            orderContext.Add(new OrderContext()
+                            {
+                                City = (string)dr["City"],
+                                CompanyName = (string)dr["CompanyName"],
+                                Country = (string)dr["Country"],
+                                DeliveryDate = order.DeliveryDate,
+                                DeliveryType = (string)dr["DeliveryType"],
+                                OrderDate = (DateTime)dr["OrderDate"],
+                                OrderId = (int)dr["OrderId"],
+                                Status = (string)dr["Status"],
+                                Street = (string)dr["Street"]
+                            });
+                        }
+                    }
+                }
+            }
+
+            return orderContext;
         }
     }
 

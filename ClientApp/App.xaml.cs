@@ -17,10 +17,13 @@ namespace ClientApp
         {
             base.OnStartup(e);
 
-            Views.ApplicationView app = new Views.ApplicationView();
-            ViewModels.ApplicationViewModel context = new ViewModels.ApplicationViewModel();
-            app.DataContext = context;
+            Views.UserLoginView app = new Views.UserLoginView();
             app.Show();
+            
+            //Views.ApplicationView app = new Views.ApplicationView();
+            //ViewModels.ApplicationViewModel context = new ViewModels.ApplicationViewModel();
+            //app.DataContext = context;
+            //app.Show();
         }
     }
 }

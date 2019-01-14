@@ -10,12 +10,22 @@
     <UserControl.Resources>
         <ViewModels:HomeViewModel x:Key="HomeViewModel"/>
     </UserControl.Resources>
-    
+
     <DockPanel>
-        <StackPanel DockPanel.Dock="Top">
-            <Image />
-            <Label FontSize="30"/>
-            <Label FontSize="30"/>
+        <StackPanel Margin="30" DockPanel.Dock="Top">
+            <Label FontSize="30" Content="Welcome to your user's panel"/>
+            <Separator></Separator>
+            <Label FontSize="30" Margin="0,0,0,15" Content="{Binding Path=UserName}" />
+            <Separator></Separator>
+            <WrapPanel>
+                <Label FontSize="30" Content="Your hire date is:"/>
+                <Label FontSize="30" Content="{Binding Path=HireDate}"/>
+                <Separator></Separator>
+            </WrapPanel>
+            <WrapPanel>
+                <Label FontSize="30" Content="Job Position:"/>
+                <Label FontSize="30" Content="{Binding Path=JobPosition}"/>
+            </WrapPanel>
         </StackPanel>
     </DockPanel>
 

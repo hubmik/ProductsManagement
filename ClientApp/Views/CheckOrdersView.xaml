@@ -6,8 +6,20 @@
              xmlns:local="clr-namespace:ClientApp.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="600">
-    <Grid>
-        <TextBlock Text="This is a Check Orders View." FontSize="18" 
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Grid>
+    <DockPanel>
+        <DataGrid DockPanel.Dock="Right" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Path=OrdersList}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Order ID" Binding="{Binding Path=OrderId}"/>
+                <DataGridTextColumn Header="Company Name" Binding="{Binding Path=CompanyName}"/>
+                <DataGridTextColumn Header="Order Date" Binding="{Binding Path=OrderDate}"/>
+                <DataGridTextColumn Header="Delivery Date" Binding="{Binding Path=DeliveryDate}"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Path=Country}"/>
+                <DataGridTextColumn Header="City" Binding="{Binding Path=City}"/>
+                <DataGridTextColumn Header="Street" Binding="{Binding Path=Street}"/>
+                <DataGridTextColumn Header="Delivery Type" Binding="{Binding Path=DeliveryType}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+
 </UserControl>

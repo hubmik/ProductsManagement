@@ -76,229 +76,6 @@ namespace ClientApp.WcfService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="IdentityUserOfintCustomUserLoginCustomUserRoleCustomUserClaimJffEROMl", Namespace="http://schemas.datacontract.org/2004/07/Microsoft.AspNet.Identity.EntityFramework" +
-        "")]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CustomerApp.Models.ApplicationUser))]
-    public partial class IdentityUserOfintCustomUserLoginCustomUserRoleCustomUserClaimJffEROMl : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AccessFailedCountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string EmailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool EmailConfirmedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool LockoutEnabledField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.DateTime> LockoutEndDateUtcField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PasswordHashField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PhoneNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool PhoneNumberConfirmedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SecurityStampField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool TwoFactorEnabledField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UserNameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AccessFailedCount {
-            get {
-                return this.AccessFailedCountField;
-            }
-            set {
-                if ((this.AccessFailedCountField.Equals(value) != true)) {
-                    this.AccessFailedCountField = value;
-                    this.RaisePropertyChanged("AccessFailedCount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email {
-            get {
-                return this.EmailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
-                    this.EmailField = value;
-                    this.RaisePropertyChanged("Email");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool EmailConfirmed {
-            get {
-                return this.EmailConfirmedField;
-            }
-            set {
-                if ((this.EmailConfirmedField.Equals(value) != true)) {
-                    this.EmailConfirmedField = value;
-                    this.RaisePropertyChanged("EmailConfirmed");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool LockoutEnabled {
-            get {
-                return this.LockoutEnabledField;
-            }
-            set {
-                if ((this.LockoutEnabledField.Equals(value) != true)) {
-                    this.LockoutEnabledField = value;
-                    this.RaisePropertyChanged("LockoutEnabled");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> LockoutEndDateUtc {
-            get {
-                return this.LockoutEndDateUtcField;
-            }
-            set {
-                if ((this.LockoutEndDateUtcField.Equals(value) != true)) {
-                    this.LockoutEndDateUtcField = value;
-                    this.RaisePropertyChanged("LockoutEndDateUtc");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PasswordHash {
-            get {
-                return this.PasswordHashField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PasswordHashField, value) != true)) {
-                    this.PasswordHashField = value;
-                    this.RaisePropertyChanged("PasswordHash");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PhoneNumber {
-            get {
-                return this.PhoneNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PhoneNumberField, value) != true)) {
-                    this.PhoneNumberField = value;
-                    this.RaisePropertyChanged("PhoneNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool PhoneNumberConfirmed {
-            get {
-                return this.PhoneNumberConfirmedField;
-            }
-            set {
-                if ((this.PhoneNumberConfirmedField.Equals(value) != true)) {
-                    this.PhoneNumberConfirmedField = value;
-                    this.RaisePropertyChanged("PhoneNumberConfirmed");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string SecurityStamp {
-            get {
-                return this.SecurityStampField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SecurityStampField, value) != true)) {
-                    this.SecurityStampField = value;
-                    this.RaisePropertyChanged("SecurityStamp");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool TwoFactorEnabled {
-            get {
-                return this.TwoFactorEnabledField;
-            }
-            set {
-                if ((this.TwoFactorEnabledField.Equals(value) != true)) {
-                    this.TwoFactorEnabledField = value;
-                    this.RaisePropertyChanged("TwoFactorEnabled");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string UserName {
-            get {
-                return this.UserNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
-                    this.UserNameField = value;
-                    this.RaisePropertyChanged("UserName");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ProductExtension", Namespace="http://schemas.datacontract.org/2004/07/Server.DTO")]
     [System.SerializableAttribute()]
     public partial class ProductExtension : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -390,6 +167,179 @@ namespace ClientApp.WcfService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OrderContext", Namespace="http://schemas.datacontract.org/2004/07/Server.DTO")]
+    [System.SerializableAttribute()]
+    public partial class OrderContext : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CompanyNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CountryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DeliveryDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DeliveryTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime OrderDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int OrderIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StreetField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string City {
+            get {
+                return this.CityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CityField, value) != true)) {
+                    this.CityField = value;
+                    this.RaisePropertyChanged("City");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CompanyName {
+            get {
+                return this.CompanyNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompanyNameField, value) != true)) {
+                    this.CompanyNameField = value;
+                    this.RaisePropertyChanged("CompanyName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Country {
+            get {
+                return this.CountryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CountryField, value) != true)) {
+                    this.CountryField = value;
+                    this.RaisePropertyChanged("Country");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DeliveryDate {
+            get {
+                return this.DeliveryDateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DeliveryDateField, value) != true)) {
+                    this.DeliveryDateField = value;
+                    this.RaisePropertyChanged("DeliveryDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DeliveryType {
+            get {
+                return this.DeliveryTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DeliveryTypeField, value) != true)) {
+                    this.DeliveryTypeField = value;
+                    this.RaisePropertyChanged("DeliveryType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime OrderDate {
+            get {
+                return this.OrderDateField;
+            }
+            set {
+                if ((this.OrderDateField.Equals(value) != true)) {
+                    this.OrderDateField = value;
+                    this.RaisePropertyChanged("OrderDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int OrderId {
+            get {
+                return this.OrderIdField;
+            }
+            set {
+                if ((this.OrderIdField.Equals(value) != true)) {
+                    this.OrderIdField = value;
+                    this.RaisePropertyChanged("OrderId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Street {
+            get {
+                return this.StreetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StreetField, value) != true)) {
+                    this.StreetField = value;
+                    this.RaisePropertyChanged("Street");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WcfService.IService1")]
     public interface IService1 {
@@ -442,11 +392,29 @@ namespace ClientApp.WcfService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCustomerData", ReplyAction="http://tempuri.org/IService1/GetCustomerDataResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Customers>> GetCustomerDataAsync(int customerId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOrders", ReplyAction="http://tempuri.org/IService1/GetOrdersResponse")]
-        System.Collections.Generic.List<CustomerApp.Models.Orders> GetOrders(CustomerApp.Models.Customers specifiedCustomer);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/IsUserAuthenticated", ReplyAction="http://tempuri.org/IService1/IsUserAuthenticatedResponse")]
+        bool IsUserAuthenticated(string accessKey);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOrders", ReplyAction="http://tempuri.org/IService1/GetOrdersResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Orders>> GetOrdersAsync(CustomerApp.Models.Customers specifiedCustomer);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/IsUserAuthenticated", ReplyAction="http://tempuri.org/IService1/IsUserAuthenticatedResponse")]
+        System.Threading.Tasks.Task<bool> IsUserAuthenticatedAsync(string accessKey);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUserCredentials", ReplyAction="http://tempuri.org/IService1/GetUserCredentialsResponse")]
+        CustomerApp.Models.Employees GetUserCredentials(string accessKey);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUserCredentials", ReplyAction="http://tempuri.org/IService1/GetUserCredentialsResponse")]
+        System.Threading.Tasks.Task<CustomerApp.Models.Employees> GetUserCredentialsAsync(string accessKey);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/TakeOrders", ReplyAction="http://tempuri.org/IService1/TakeOrdersResponse")]
+        System.Collections.Generic.List<CustomerApp.Models.Orders> TakeOrders(string accessKey);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/TakeOrders", ReplyAction="http://tempuri.org/IService1/TakeOrdersResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Orders>> TakeOrdersAsync(string accessKey);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EmployeesOrders", ReplyAction="http://tempuri.org/IService1/EmployeesOrdersResponse")]
+        System.Collections.Generic.List<ClientApp.WcfService.OrderContext> EmployeesOrders(string accessKey);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EmployeesOrders", ReplyAction="http://tempuri.org/IService1/EmployeesOrdersResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<ClientApp.WcfService.OrderContext>> EmployeesOrdersAsync(string accessKey);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -540,12 +508,36 @@ namespace ClientApp.WcfService {
             return base.Channel.GetCustomerDataAsync(customerId);
         }
         
-        public System.Collections.Generic.List<CustomerApp.Models.Orders> GetOrders(CustomerApp.Models.Customers specifiedCustomer) {
-            return base.Channel.GetOrders(specifiedCustomer);
+        public bool IsUserAuthenticated(string accessKey) {
+            return base.Channel.IsUserAuthenticated(accessKey);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Orders>> GetOrdersAsync(CustomerApp.Models.Customers specifiedCustomer) {
-            return base.Channel.GetOrdersAsync(specifiedCustomer);
+        public System.Threading.Tasks.Task<bool> IsUserAuthenticatedAsync(string accessKey) {
+            return base.Channel.IsUserAuthenticatedAsync(accessKey);
+        }
+        
+        public CustomerApp.Models.Employees GetUserCredentials(string accessKey) {
+            return base.Channel.GetUserCredentials(accessKey);
+        }
+        
+        public System.Threading.Tasks.Task<CustomerApp.Models.Employees> GetUserCredentialsAsync(string accessKey) {
+            return base.Channel.GetUserCredentialsAsync(accessKey);
+        }
+        
+        public System.Collections.Generic.List<CustomerApp.Models.Orders> TakeOrders(string accessKey) {
+            return base.Channel.TakeOrders(accessKey);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<CustomerApp.Models.Orders>> TakeOrdersAsync(string accessKey) {
+            return base.Channel.TakeOrdersAsync(accessKey);
+        }
+        
+        public System.Collections.Generic.List<ClientApp.WcfService.OrderContext> EmployeesOrders(string accessKey) {
+            return base.Channel.EmployeesOrders(accessKey);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<ClientApp.WcfService.OrderContext>> EmployeesOrdersAsync(string accessKey) {
+            return base.Channel.EmployeesOrdersAsync(accessKey);
         }
     }
 }

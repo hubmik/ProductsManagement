@@ -39,7 +39,16 @@ namespace Server
         List<Customers> GetCustomerData(int customerId);
 
         [OperationContract]
-        List<Orders> GetOrders(Customers specifiedCustomer);
+        bool IsUserAuthenticated(string accessKey);
+
+        [OperationContract]
+        Employees GetUserCredentials(string accessKey);
+
+        [OperationContract]
+        List<Orders> TakeOrders(string accessKey);
+
+        [OperationContract]
+        List<DTO.OrderContext> EmployeesOrders(string accessKey);
 
         // TODO: Add your service operations here
     }

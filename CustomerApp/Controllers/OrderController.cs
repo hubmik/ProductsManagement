@@ -22,7 +22,11 @@ namespace CustomerApp.Controllers
                 CompanyName = orderContext.GetCompanyName(),
                 OrdersCollection = orderContext.GetOrders(),
             };
-            ordersVM.CustomerOrders = ordersVM.OrdersCollection.FirstOrDefault().Customers.FirstOrDefault().Orders;
+            ordersVM.CustomerOrders = ordersVM.OrdersCollection.FirstOrDefault()
+                .Customers
+                .FirstOrDefault()
+                .Orders
+                .OrderBy(x => x.OrderDate);
 
             return View(nameof(Index), ordersVM);
         }

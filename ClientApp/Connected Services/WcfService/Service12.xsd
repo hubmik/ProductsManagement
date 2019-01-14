@@ -108,17 +108,59 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetOrders">
+  <xs:element name="IsUserAuthenticated">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/CustomerApp.Models" minOccurs="0" name="specifiedCustomer" nillable="true" type="q11:Customers" />
+        <xs:element minOccurs="0" name="accessKey" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetOrdersResponse">
+  <xs:element name="IsUserAuthenticatedResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/CustomerApp.Models" minOccurs="0" name="GetOrdersResult" nillable="true" type="q12:ArrayOfOrders" />
+        <xs:element minOccurs="0" name="IsUserAuthenticatedResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserCredentials">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="accessKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserCredentialsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/CustomerApp.Models" minOccurs="0" name="GetUserCredentialsResult" nillable="true" type="q11:Employees" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TakeOrders">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="accessKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TakeOrdersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/CustomerApp.Models" minOccurs="0" name="TakeOrdersResult" nillable="true" type="q12:ArrayOfOrders" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EmployeesOrders">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="accessKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EmployeesOrdersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Server.DTO" minOccurs="0" name="EmployeesOrdersResult" nillable="true" type="q13:ArrayOfOrderContext" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

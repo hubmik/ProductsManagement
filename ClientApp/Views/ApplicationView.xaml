@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:ViewModels="clr-namespace:ClientApp.ViewModels"
         xmlns:Views="clr-namespace:ClientApp.Views"
-        Title="ApplicationView" Height="450" Width="800">
+        Title="ApplicationView" Background="AliceBlue" Height="450" Width="800">
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type ViewModels:HomeViewModel}">

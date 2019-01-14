@@ -3,9 +3,11 @@
   <xs:import schemaLocation="http://localhost:57151/Service1.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Microsoft.AspNet.Identity.EntityFramework" />
   <xs:complexType name="Products">
     <xs:sequence>
+      <xs:element minOccurs="0" name="CollectionId" type="xs:int" />
       <xs:element minOccurs="0" name="OrderedProducts" nillable="true" type="tns:ArrayOfOrderedProducts" />
       <xs:element minOccurs="0" name="ProductId" type="xs:int" />
       <xs:element minOccurs="0" name="ProductName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductsCollections" nillable="true" type="tns:ProductsCollections" />
       <xs:element minOccurs="0" name="Quantity" type="xs:int" />
       <xs:element minOccurs="0" name="UnitPrice" type="xs:decimal" />
     </xs:sequence>
@@ -99,6 +101,7 @@
   <xs:element name="Deliveries" nillable="true" type="tns:Deliveries" />
   <xs:complexType name="Employees">
     <xs:sequence>
+      <xs:element minOccurs="0" name="AccessKey" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="BirthDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="EmployeeId" type="xs:int" />
       <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
@@ -117,6 +120,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrderStates" nillable="true" type="tns:OrderStates" />
+  <xs:complexType name="ProductsCollections">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CollectionId" type="xs:int" />
+      <xs:element minOccurs="0" name="CollectionSize" type="xs:int" />
+      <xs:element minOccurs="0" name="Products" nillable="true" type="tns:ArrayOfProducts" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductsCollections" nillable="true" type="tns:ProductsCollections" />
   <xs:complexType name="ArrayOfProducts">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Products" nillable="true" type="tns:Products" />

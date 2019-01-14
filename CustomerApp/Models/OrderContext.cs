@@ -8,22 +8,11 @@ using Model;
 
 namespace CustomerApp.Models
 {
-    public class OrderContext
+    public class OrderContext : OrderEmployeeAssigner
     {
         private readonly int _usrId;
 
         public OrderContext() => this._usrId = HttpContext.Current.User.Identity.GetUserId<int>();
-
-        private int AssignEmployeeToOrder()
-        {
-            int id = 0;
-            using (var context = new ApplicationDbContext())
-            {
-                IQueryable<Orders> query = context.Orders;
-            }
-
-            return id;
-        }
 
         public int SaveOrder(ViewModels.CartSummaryViewModel dataToSave)
         {
@@ -44,9 +33,9 @@ namespace CustomerApp.Models
                     DeliveryId = dataToSave.SelectedDeliveryId,
                     StatusId = 1,
                     OrderDate = myDateTime,
-                    EmployeeId = 2
+                    EmployeeId = AssignEmployeeToOrder()
                 };
-                //context.Orders.Add(order);
+
                 context.Orders.Add(order);
                 context.SaveChanges();
 
@@ -91,21 +80,6 @@ namespace CustomerApp.Models
             
             return orders;
         }
-
-        //public IEnumerable<ApplicationUser> GetOrders()
-        //{
-        //    IEnumerable<ApplicationUser> custOrders = null;
-        //    using (var context = new ApplicationDbContext())
-        //    {
-        //        IQueryable<ApplicationUser> q = context.Users
-        //            .Where(x => x.Id == this._usrId)
-        //            .Include(x => x.Customers)
-        //            .Include(x => x.Customers.Select(s => s.Orders));
-        //        custOrders = q.ToList();
-
-        //        return custOrders;
-        //    }
-        //}
 
         public string GetCompanyName()
         {

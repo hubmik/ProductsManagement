@@ -210,6 +210,7 @@
     <Compile Include="Models\MailSender.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderContext.cs" />
+    <Compile Include="Models\OrderEmployeeAssigner.cs" />
     <Compile Include="Models\SessionProcess.cs" />
     <Compile Include="Models\ShippingDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -34,6 +34,7 @@ namespace CustomerApp.Models
             : base("CompanyDB")
         {
             Configuration.ProxyCreationEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -107,17 +108,11 @@ namespace CustomerApp.Models
         public virtual ApplicationUser ApplicationUser { get; set; }
         
         [InverseProperty(nameof(Models.Orders.Customers))]
-        public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<Orders> Orders {  get; set; }
     }
 
     public partial class Deliveries
     {
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        //public Deliveries()
-        //{
-        //    Orders = new HashSet<Orders>();
-        //}
-
         [Key]
         public int DeliveryId { get; set; }
 
@@ -149,6 +144,9 @@ namespace CustomerApp.Models
 
         public DateTime HireDate { get; set; }
 
+        [Required]
+        public string AccessKey { get; set; }
+
         [InverseProperty(nameof(Models.Orders.Employees))]
         public virtual ICollection<Orders> Orders { get; set; }
     }
@@ -174,12 +172,6 @@ namespace CustomerApp.Models
 
     public partial class Orders
     {
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        //public Orders()
-        //{
-        //    OrderedProducts = new HashSet<OrderedProducts>();
-        //}
-
         [Key]
         public int OrderId { get; set; }
 
@@ -217,12 +209,6 @@ namespace CustomerApp.Models
 
     public partial class OrderStates
     {
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        //public OrderStates()
-        //{
-        //    Orders = new HashSet<Orders>();
-        //}
-
         [Key]
         public int StatusId { get; set; }
 

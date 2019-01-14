@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomerApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,9 @@ namespace ClientApp.ViewModels
         private string _quantityTo;
         private string _unitPriceFrom;
         private string _unitPriceTo;
-        private List<CustomerApp.Models.Products> _outputList;
+        private List<Products> _outputList;
 
-        public List<CustomerApp.Models.Products> OutputProductsList { get => this._outputList; set => this.SetProperty(ref _outputList, value); }
+        public List<Products> OutputProductsList { get => this._outputList; set => this.SetProperty(ref _outputList, value); }
         public string ProductName { get => this._name; set => this.SetProperty(ref _name, value); }
         public string ProductQuantity { get => this._quantity; set => this.SetProperty(ref _quantity, value); }
         public string ProductUnitPrice { get => this._unitPrice; set => this.SetProperty(ref _unitPrice, value); }
@@ -52,7 +53,7 @@ namespace ClientApp.ViewModels
         {
             Executing = true;
 
-            CustomerApp.Models.Products product = new CustomerApp.Models.Products();
+            Products product = new Products();
             WcfService.ProductExtension productExtension = new WcfService.ProductExtension();
 
             Validations.Parser parser = new Validations.Parser();
@@ -85,7 +86,6 @@ namespace ClientApp.ViewModels
             this.ProductUnitPrice = null;
             this.ProductUnitPriceFrom = null;
             this.ProductUnitPriceTo = null;
-            //this.OutputProductsList = null;
 
             Executing = false;
         }

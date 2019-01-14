@@ -80,6 +80,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\OrderContext.cs" />
     <Compile Include="DTO\ProductExtension.cs" />
     <Compile Include="Service1.svc.cs">
       <DependentUpon>Service1.svc</DependentUpon>

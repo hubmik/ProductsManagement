@@ -58,11 +58,29 @@
   <wsdl:message name="IService1_GetCustomerData_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCustomerDataResponse" />
   </wsdl:message>
-  <wsdl:message name="IService1_GetOrders_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetOrders" />
+  <wsdl:message name="IService1_IsUserAuthenticated_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsUserAuthenticated" />
   </wsdl:message>
-  <wsdl:message name="IService1_GetOrders_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetOrdersResponse" />
+  <wsdl:message name="IService1_IsUserAuthenticated_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsUserAuthenticatedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetUserCredentials_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserCredentials" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetUserCredentials_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserCredentialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_TakeOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:TakeOrders" />
+  </wsdl:message>
+  <wsdl:message name="IService1_TakeOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TakeOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_EmployeesOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:EmployeesOrders" />
+  </wsdl:message>
+  <wsdl:message name="IService1_EmployeesOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EmployeesOrdersResponse" />
   </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetData">
@@ -97,9 +115,21 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCustomerData" message="tns:IService1_GetCustomerData_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCustomerDataResponse" message="tns:IService1_GetCustomerData_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetOrders">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOrders" message="tns:IService1_GetOrders_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOrdersResponse" message="tns:IService1_GetOrders_OutputMessage" />
+    <wsdl:operation name="IsUserAuthenticated">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/IsUserAuthenticated" message="tns:IService1_IsUserAuthenticated_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/IsUserAuthenticatedResponse" message="tns:IService1_IsUserAuthenticated_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCredentials">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetUserCredentials" message="tns:IService1_GetUserCredentials_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetUserCredentialsResponse" message="tns:IService1_GetUserCredentials_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TakeOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/TakeOrders" message="tns:IService1_TakeOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/TakeOrdersResponse" message="tns:IService1_TakeOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EmployeesOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/EmployeesOrders" message="tns:IService1_EmployeesOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/EmployeesOrdersResponse" message="tns:IService1_EmployeesOrders_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -176,8 +206,35 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetOrders">
-      <soap:operation soapAction="http://tempuri.org/IService1/GetOrders" style="document" />
+    <wsdl:operation name="IsUserAuthenticated">
+      <soap:operation soapAction="http://tempuri.org/IService1/IsUserAuthenticated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCredentials">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetUserCredentials" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TakeOrders">
+      <soap:operation soapAction="http://tempuri.org/IService1/TakeOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EmployeesOrders">
+      <soap:operation soapAction="http://tempuri.org/IService1/EmployeesOrders" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

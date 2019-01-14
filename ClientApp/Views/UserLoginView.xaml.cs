@@ -15,14 +15,14 @@ using System.Windows.Shapes;
 namespace ClientApp.Views
 {
     /// <summary>
-    /// Interaction logic for ApplicationView.xaml
+    /// Interaction logic for UserLoginView.xaml
     /// </summary>
-    public partial class ApplicationView : Window
+    public partial class UserLoginView : Window
     {
-        public ApplicationView()
+        public UserLoginView()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.ApplicationViewModel();
+            this.DataContext = new ViewModels.UserLoginViewModel();
         }
     }
 }
