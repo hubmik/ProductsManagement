@@ -92,7 +92,11 @@
     </Compile>
     <Compile Include="HelperClasses\RelayCommand.cs" />
     <Compile Include="Interfaces\ICloseable.cs" />
+    <Compile Include="Interfaces\IOrderChangeable.cs" />
     <Compile Include="Interfaces\IOService.cs" />
+    <Compile Include="Models\OrderedProductsStorage.cs" />
+    <Compile Include="Models\OrderModifier.cs" />
+    <Compile Include="Models\UpdatedOrder.cs" />
     <Compile Include="Models\UserCredentials.cs" />
     <Compile Include="Models\UserIdentification.cs" />
     <Compile Include="Models\UsersImplements.cs" />
@@ -101,14 +105,19 @@
     <Compile Include="ValueConverters\NotValueConverter.cs" />
     <Compile Include="ValueConverters\TemplateValueConverter.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
+    <Compile Include="ViewModels\ChangeOrderViewModel.cs" />
     <Compile Include="ViewModels\CheckOrdersViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ImageHandler.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="ViewModels\ProductsManagementViewModel.cs" />
+    <Compile Include="ViewModels\SelectedDateEventArgs.cs" />
     <Compile Include="ViewModels\UserLoginViewModel.cs" />
     <Compile Include="Views\ApplicationView.xaml.cs">
       <DependentUpon>ApplicationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangeOrderView.xaml.cs">
+      <DependentUpon>ChangeOrderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CheckOrdersView.xaml.cs">
       <DependentUpon>CheckOrdersView.xaml</DependentUpon>
@@ -127,6 +136,10 @@
       <DependentUpon>UserLoginView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\ApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChangeOrderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

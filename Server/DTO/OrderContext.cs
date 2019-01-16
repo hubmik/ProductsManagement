@@ -16,7 +16,7 @@ namespace Server.DTO
         [DataMember]
         public DateTime OrderDate { get; set; }
         [DataMember]
-        public string DeliveryDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
         [DataMember]
         public string Country { get; set; }
         [DataMember]

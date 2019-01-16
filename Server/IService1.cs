@@ -50,6 +50,9 @@ namespace Server
         [OperationContract]
         List<DTO.OrderContext> EmployeesOrders(string accessKey);
 
+        [OperationContract]
+        DateTime GetCurrentTime();
+
         // TODO: Add your service operations here
     }
 

@@ -1,0 +1,39 @@
+﻿<Window x:Class="ClientApp.Views.ChangeOrderView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ViewModels="clr-namespace:ClientApp.ViewModels"
+        xmlns:ValueConverters="clr-namespace:ClientApp.ValueConverters"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientApp.Views"
+        mc:Ignorable="d"
+        Title="ChangeOrderView" ResizeMode="NoResize" Height="400" Width="600" >
+    <Window.Resources>
+        <ViewModels:ChangeOrderViewModel x:Key="ChangeOrderViewModel" />
+        <ValueConverters:NotValueConverter x:Key="vcNot" />
+    </Window.Resources>
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Center">
+            <WrapPanel Margin="10">
+                <Label Content="Select order id:"/>
+                <ComboBox ItemsSource="{Binding Path=OrderIds}" SelectedItem="{Binding Path=SelectedId}" Cursor="Hand"/>
+            </WrapPanel>
+            <WrapPanel Margin="10">
+                <Label Content="Select delivery date"/>
+                <DatePicker DisplayDateStart="{Binding Path=CurrentDate}" SelectedDate="{Binding Path=DeliveryDate}"/>
+            </WrapPanel>
+            <WrapPanel Margin="10">
+                <Label Content="Select order state" />
+                <ComboBox ItemsSource="{Binding Path=OrderStates}" SelectedItem="{Binding Path=SelectedOrderState}" SelectedIndex="0" Cursor="Hand"/>
+            </WrapPanel>
+            <Button Margin="0,80,0,0" Content="Confirm" Cursor="Hand" Height="30" Width="120" DockPanel.Dock="Bottom" Command="{Binding Path=AcceptCommand}"/>
+        </StackPanel>
+        <DataGrid AutoGenerateColumns="False" DockPanel.Dock="Top" ItemsSource="{Binding Path=OrderedProductsList}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Product Name" Binding="{Binding Path=ProductName}"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}"/>
+                <DataGridTextColumn Header="Value" Binding="{Binding Path=OrderedValue}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</Window>

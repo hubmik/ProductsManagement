@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClientApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,20 +11,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ClientApp.Views
 {
     /// <summary>
-    /// Interaction logic for CheckOrdersView.xaml
+    /// Interaction logic for ChangeOrderView.xaml
     /// </summary>
-    public partial class CheckOrdersView : UserControl
+    public partial class ChangeOrderView : Window
     {
-        public CheckOrdersView()
+        public ChangeOrderView()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.CheckOrdersViewModel();
+            ViewModels.ChangeOrderViewModel vm = new ViewModels.ChangeOrderViewModel();
+            this.DataContext = vm;
+            if (vm.CloseAction == null)
+                vm.CloseAction = new Action(() => this.Close());
         }
     }
 }

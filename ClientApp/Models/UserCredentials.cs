@@ -6,8 +6,19 @@ using System.Threading.Tasks;
 
 namespace ClientApp.Models
 {
-    public static class UserCredentials
+    public class UserCredentials
     {
         public static string SessionKey;
+        public readonly DateTime CurrentTime = Time();
+        
+        private static DateTime Time()
+        {
+            DateTime time;
+            using (var client = new WcfService.Service1Client())
+            {
+                time = client.GetCurrentTime();
+            }
+            return time;
+        }
     }
 }

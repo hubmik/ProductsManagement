@@ -219,8 +219,9 @@ namespace Server
                         while (dr.Read())
                         {
                             colIndex = dr.GetOrdinal("DeliveryDate");
-                            order.DeliveryDate = dr.IsDBNull(colIndex) ? null : string.Format("{0:d/M/yyyy}", dr["DeliveryDate"]);
-
+                            if (!dr.IsDBNull(colIndex))
+                                order.DeliveryDate = (DateTime)dr["DeliveryDate"];
+                            
                             orderContext.Add(new OrderContext()
                             {
                                 City = (string)dr["City"],
@@ -239,6 +240,13 @@ namespace Server
             }
 
             return orderContext;
+        }
+
+        public DateTime GetCurrentTime()
+        {
+            DateTime date = DateTime.Now;
+
+            return date;
         }
     }
 

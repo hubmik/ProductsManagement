@@ -186,7 +186,7 @@ namespace ClientApp.WcfService {
         private string CountryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DeliveryDateField;
+        private System.Nullable<System.DateTime> DeliveryDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DeliveryTypeField;
@@ -253,12 +253,12 @@ namespace ClientApp.WcfService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string DeliveryDate {
+        public System.Nullable<System.DateTime> DeliveryDate {
             get {
                 return this.DeliveryDateField;
             }
             set {
-                if ((object.ReferenceEquals(this.DeliveryDateField, value) != true)) {
+                if ((this.DeliveryDateField.Equals(value) != true)) {
                     this.DeliveryDateField = value;
                     this.RaisePropertyChanged("DeliveryDate");
                 }
@@ -415,6 +415,12 @@ namespace ClientApp.WcfService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EmployeesOrders", ReplyAction="http://tempuri.org/IService1/EmployeesOrdersResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<ClientApp.WcfService.OrderContext>> EmployeesOrdersAsync(string accessKey);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCurrentTime", ReplyAction="http://tempuri.org/IService1/GetCurrentTimeResponse")]
+        System.DateTime GetCurrentTime();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCurrentTime", ReplyAction="http://tempuri.org/IService1/GetCurrentTimeResponse")]
+        System.Threading.Tasks.Task<System.DateTime> GetCurrentTimeAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -538,6 +544,14 @@ namespace ClientApp.WcfService {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<ClientApp.WcfService.OrderContext>> EmployeesOrdersAsync(string accessKey) {
             return base.Channel.EmployeesOrdersAsync(accessKey);
+        }
+        
+        public System.DateTime GetCurrentTime() {
+            return base.Channel.GetCurrentTime();
+        }
+        
+        public System.Threading.Tasks.Task<System.DateTime> GetCurrentTimeAsync() {
+            return base.Channel.GetCurrentTimeAsync();
         }
     }
 }
