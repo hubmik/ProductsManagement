@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClientApp.Interfaces
 {
-    public interface ICloseable
+    interface ICloseable
     {
         event EventHandler CloseRequest;
     }

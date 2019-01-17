@@ -93,9 +93,12 @@
     <Compile Include="HelperClasses\RelayCommand.cs" />
     <Compile Include="Interfaces\ICloseable.cs" />
     <Compile Include="Interfaces\IOrderChangeable.cs" />
+    <Compile Include="Interfaces\IOrderchangeLogic.cs" />
     <Compile Include="Interfaces\IOService.cs" />
+    <Compile Include="Interfaces\IProductsRepository.cs" />
     <Compile Include="Models\OrderedProductsStorage.cs" />
     <Compile Include="Models\OrderModifier.cs" />
+    <Compile Include="Models\ProductsRepository.cs" />
     <Compile Include="Models\UpdatedOrder.cs" />
     <Compile Include="Models\UserCredentials.cs" />
     <Compile Include="Models\UserIdentification.cs" />

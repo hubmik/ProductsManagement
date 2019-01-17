@@ -9,5 +9,6 @@ namespace CustomerApp.ViewModels
     {
         public IEnumerable<Models.Products> Products { get; set; }
         public Models.Products Product { get; set; }
+        public Models.ProductsCollections ProductsCollections { get; set; }
     }
 }

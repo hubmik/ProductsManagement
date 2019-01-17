@@ -22,6 +22,6 @@ namespace ClientApp.Models
         public string ProductName { get; set; }
         public int Quantity { get; set; }
         public decimal OrderedValue { get; set; }
-        public IEnumerable<OrderedProductsStorage> Storage { get; set; }
+        
     }
 }

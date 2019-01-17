@@ -16,15 +16,15 @@
         <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Center">
             <WrapPanel Margin="10">
                 <Label Content="Select order id:"/>
-                <ComboBox ItemsSource="{Binding Path=OrderIds}" SelectedItem="{Binding Path=SelectedId}" Cursor="Hand"/>
+                <ComboBox ItemsSource="{Binding Path=OrderIds}" SelectedItem="{Binding Path=SelectedOrderId}" Cursor="Hand"/>
             </WrapPanel>
             <WrapPanel Margin="10">
                 <Label Content="Select delivery date"/>
-                <DatePicker DisplayDateStart="{Binding Path=CurrentDate}" SelectedDate="{Binding Path=DeliveryDate}"/>
+                <DatePicker DisplayDateStart="{Binding Path=CurrentDate}" SelectedDate="{Binding Path=DeliveryDate}" IsEnabled="{Binding Path=IsChangingEnabled}"/>
             </WrapPanel>
             <WrapPanel Margin="10">
                 <Label Content="Select order state" />
-                <ComboBox ItemsSource="{Binding Path=OrderStates}" SelectedItem="{Binding Path=SelectedOrderState}" SelectedIndex="0" Cursor="Hand"/>
+                <ComboBox ItemsSource="{Binding Path=OrderStates}" SelectedItem="{Binding Path=SelectedOrderState}" Cursor="Hand"/>
             </WrapPanel>
             <Button Margin="0,80,0,0" Content="Confirm" Cursor="Hand" Height="30" Width="120" DockPanel.Dock="Bottom" Command="{Binding Path=AcceptCommand}"/>
         </StackPanel>

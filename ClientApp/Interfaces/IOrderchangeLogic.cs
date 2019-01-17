@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ClientApp.Interfaces
 {
-    interface IOService
+    interface IOrderchangeLogic
     {
-        string OpenFileDialog(string defaultPath);
+        bool IsChangingEnabled();
     }
 }

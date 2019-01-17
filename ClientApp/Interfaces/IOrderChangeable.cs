@@ -12,5 +12,6 @@ namespace ClientApp.Interfaces
     {
         List<string> GetOrderStates();
         List<int> GetOrderIds(string accessKey);
+        string GetStateOfSpecifiedOrder(int orderId);
     }
 }

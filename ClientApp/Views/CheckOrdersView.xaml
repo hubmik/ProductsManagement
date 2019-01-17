@@ -21,7 +21,7 @@
         <DataGrid DockPanel.Dock="Right" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Path=OrdersList}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Order ID" Binding="{Binding Path=OrderId}"/>
-                <DataGridTextColumn Header="Company Name" Binding="{Binding Path=CompanyName}"/>
+                <DataGridTextColumn Header="Company Name" Binding="{Binding Path=Customers.CompanyName}"/>
                 <DataGridTextColumn Header="Order Date" Binding="{Binding Path=OrderDate}"/>
                 <DataGridTemplateColumn Header="Delivery Date">
                     <DataGridTemplateColumn.CellTemplate>
@@ -35,11 +35,11 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Country" Binding="{Binding Path=Country}"/>
-                <DataGridTextColumn Header="City" Binding="{Binding Path=City}"/>
-                <DataGridTextColumn Header="Street" Binding="{Binding Path=Street}"/>
-                <DataGridTextColumn Header="Delivery Type" Binding="{Binding Path=DeliveryType}"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Path=Customers.Region.Country}"/>
+                <DataGridTextColumn Header="City" Binding="{Binding Path=Customers.Region.City}"/>
+                <DataGridTextColumn Header="Street" Binding="{Binding Path=Customers.Region.Street}"/>
+                <DataGridTextColumn Header="Delivery Type" Binding="{Binding Path=Deliveries.DeliveryType}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Path=OrderStates.Status}"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

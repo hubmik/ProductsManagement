@@ -16,7 +16,7 @@ namespace ClientApp.Models
             List<string> states = null;
             using (var context = new ApplicationDbContext())
             {
-                var query = context.OrderStates.Select(x => x.Status);
+                IQueryable<string> query = context.OrderStates.Select(x => x.Status);
                 states = query.ToList();
             }
             return states;
@@ -28,7 +28,7 @@ namespace ClientApp.Models
 
             using (var context = new ApplicationDbContext())
             {
-                var query = context.Orders
+                IQueryable<Orders> query = context.Orders
                     .Where(x => x.Employees.AccessKey == accessKey)
                     .Include(x => x.OrderStates);
                 orders = query.ToList();
@@ -42,7 +42,9 @@ namespace ClientApp.Models
             List<int> orderIds = null;
             using (var context = new ApplicationDbContext())
             {
-                IQueryable<int> query = context.Orders.Where(x => x.Employees.AccessKey == accessKey).Select(x=>x.OrderId);
+                IQueryable<int> query = context.Orders
+                    .Where(x => x.Employees.AccessKey == accessKey)
+                    .Select(x => x.OrderId);
                 orderIds = query.ToList();
             }
             return orderIds;
@@ -69,10 +71,53 @@ namespace ClientApp.Models
 
             return orderedProducts;
         }
-
-        public void UpdateOrder()
+                       
+        public virtual void UpdateOrder(UpdatedOrder updatedOrder)
         {
+            List<OrderStates> statusIds = GetStatusesId();
+            using (var context = new ApplicationDbContext())
+            {
+                var c = context.Orders
+                    .Where(x => x.OrderId == updatedOrder.OrderId)
+                    .Include(x => x.OrderStates).FirstOrDefault();
 
+                int id = context.OrderStates
+                    .Where(x => x.Status == updatedOrder.OrderState)
+                    .Select(x => x.StatusId)
+                    .FirstOrDefault();
+
+                c.StatusId = id;
+                c.DeliveryDate = updatedOrder.DeliveryDate;
+                context.SaveChanges();
+            }
+        }
+
+        private List<OrderStates> GetStatusesId()
+        {
+            List<OrderStates> list = new List<OrderStates>();
+            using (var context = new ApplicationDbContext())
+            {
+                IQueryable<OrderStates> q = context.OrderStates;
+                list = q.ToList();
+            }
+
+            return list;
+        }
+
+        public string GetStateOfSpecifiedOrder(int orderId)
+        {
+            string state = null;
+
+            using (var context = new ApplicationDbContext())
+            {
+                state = context.Orders
+                    .Where(x => x.OrderId == orderId)
+                    .Include(x => x.OrderStates)
+                    .Select(x => x.OrderStates.Status)
+                    .FirstOrDefault();
+            }
+
+            return state;
         }
     }
 }

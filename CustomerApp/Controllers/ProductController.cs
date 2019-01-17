@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace CustomerApp.Controllers
 {
@@ -57,7 +58,8 @@ namespace CustomerApp.Controllers
 
             using (var context = new Models.ApplicationDbContext())
             {
-                model.Products = context.Products.ToList();
+                model.Products = context.Products
+                    .Include(x => x.ProductsCollections).ToList();
             }
 
             Models.Products prod = new Models.Products

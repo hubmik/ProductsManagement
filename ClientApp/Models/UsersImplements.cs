@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace ClientApp.Models
 {
@@ -37,7 +38,7 @@ namespace ClientApp.Models
             {
                 using (var client = new WcfService.Service1Client())
                 {
-                    emp = await client.EmployeesOrdersAsync(Models.UserCredentials.SessionKey);
+                    emp = await client.EmployeesOrdersAsync(UserCredentials.SessionKey);
                 }
             }
             catch(TimeoutException ex)
@@ -45,6 +46,25 @@ namespace ClientApp.Models
                 throw new Exception(ex.ToString());
             }
             return emp;
+        }
+        
+        public List<Orders> OrdersForSpecifiedEmployee(string accessKey)
+        {
+            List<Orders> list = null;
+
+            using (var context = new ApplicationDbContext())
+            {
+                IQueryable<Orders> query = context.Orders
+                    .Where(x => x.Employees.AccessKey == accessKey)
+                    .Include(x => x.Customers)
+                    .Include(x => x.Deliveries)
+                    .Include(x => x.Customers.Region)
+                    .Include(x => x.OrderStates);
+
+                list = query.ToList();
+            }
+
+            return list;
         }
     }
 }

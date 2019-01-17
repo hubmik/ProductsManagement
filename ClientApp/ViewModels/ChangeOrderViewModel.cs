@@ -11,12 +11,14 @@ namespace ClientApp.ViewModels
 {
     public class ChangeOrderViewModel : Prism.Mvvm.BindableBase
     {
+        OrderModifier orderModifier = new OrderModifier();
         private List<OrderedProductsStorage> _orderedProducts;
         private List<string> _orderStates;
         private List<int> _orderIds;
         private DateTime _deliveryDate;
+        private bool _isChangingEnabled;
         private string _selectedOrderState;
-        private int _selectedId;
+        private int _selectedOrderId;
         private enum OrderFlags
         {
             Ordered,
@@ -30,12 +32,22 @@ namespace ClientApp.ViewModels
         public List<string> OrderStates { get => this._orderStates; set => this.SetProperty(ref this._orderStates, value); }
         public List<int> OrderIds { get => this._orderIds; set => this.SetProperty(ref this._orderIds, value); }
         public DateTime DeliveryDate { get => this._deliveryDate; set => this.SetProperty(ref this._deliveryDate, value); }
-        public string SelectedOrderState { get => this._selectedOrderState; set => this.SetProperty(ref this._selectedOrderState, value); }
-        public int SelectedId
+        public bool IsChangingEnabled { get => this._isChangingEnabled; set => this.SetProperty(ref this._isChangingEnabled, value); }
+        public string SelectedOrderState
         {
-            get => this._selectedId; set
+            get => this._selectedOrderState;
+            set
             {
-                this.SetProperty(ref this._selectedId, value);
+                this.SetProperty(ref this._selectedOrderState, value);
+            }
+        }
+
+        public int SelectedOrderId
+        {
+            get => this._selectedOrderId;
+            set
+            {
+                this.SetProperty(ref this._selectedOrderId, value);
                 this.SetChangeableOrderedProducts();
             }
         }
@@ -53,30 +65,42 @@ namespace ClientApp.ViewModels
 
         public void UpdateOrder()
         {
+            ProductsRepository productsRepository = new ProductsRepository();
+
             UpdatedOrder updatedOrder = new UpdatedOrder()
             {
-                OrderId = this.SelectedId,
+                OrderId = this.SelectedOrderId,
                 DeliveryDate = this.DeliveryDate,
                 OrderState = this.SelectedOrderState
             };
-            CheckOrdersViewModel checkOrdersVM = new CheckOrdersViewModel(updatedOrder);
+            orderModifier.UpdateOrder(updatedOrder);
+            //orderedProductsList = productsRepository.QueryUpdateProducts(updatedOrder.OrderId);
+            productsRepository.UpdateProducts(updatedOrder.OrderId);
             CloseAction();
         }
 
         private void InitValues()
         {
-            OrderModifier orderModifier = new OrderModifier();
             this.DeliveryDate = this.CurrentDate;
             this.OrderIds = orderModifier.GetOrderIds(UserCredentials.SessionKey);
             this.OrderStates = orderModifier.GetOrderStates();
-            this.SelectedOrderState = OrderFlags.Ordered.ToString();
-            this.SelectedId = this.OrderIds.FirstOrDefault();
+            this.SelectedOrderId = this.OrderIds.FirstOrDefault();
+            this.SelectedOrderState = orderModifier.GetStateOfSpecifiedOrder(this.SelectedOrderId);
+            this.IsChangingEnabled = CanChangeValue();
         }
 
         private void SetChangeableOrderedProducts()
         {
-            OrderModifier orderModifier = new OrderModifier();
-            this.OrderedProductsList = orderModifier.GetOrderedProducts(this.SelectedId);
+            this.OrderedProductsList = orderModifier.GetOrderedProducts(this.SelectedOrderId);
+            this.IsChangingEnabled = orderModifier.GetStateOfSpecifiedOrder(this.SelectedOrderId) != OrderFlags.Ordered.ToString() 
+                ? false : true;
+        }
+        private bool CanChangeValue()
+        {
+            if (this.SelectedOrderState != OrderFlags.Ordered.ToString())
+                return false;
+
+            return true;
         }
     }
 }

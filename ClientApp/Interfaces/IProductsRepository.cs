@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomerApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ClientApp.Interfaces
 {
-    interface IOService
+    interface IProductsRepository
     {
-        string OpenFileDialog(string defaultPath);
+        void UpdateProducts(int orderId);
     }
 }
