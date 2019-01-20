@@ -34,6 +34,42 @@ namespace ClientApp.Validations
                 productExtension.UnitPriceTo = decimal.Parse(unitPriceTo);
         }
 
+        public Products ParseInput(string name, string quantity, string price, int size, bool update)
+        {
+            Products product = new Products();
+
+            if (string.IsNullOrWhiteSpace(name) || size <= 0)
+                return null;
+            if (string.IsNullOrWhiteSpace(quantity) && string.IsNullOrWhiteSpace(price))
+                return null;
+
+            if (!string.IsNullOrWhiteSpace(quantity))
+                product.Quantity = int.Parse(quantity);
+            if (!string.IsNullOrWhiteSpace(price))
+                product.UnitPrice = decimal.Parse(price);
+
+            product.ProductName = name;
+
+            using (var context = new ApplicationDbContext())
+            {
+                var q = context.Products
+                    .Where(x => x.ProductsCollections.CollectionSize == size)
+                    .Select(x => x.CollectionId);
+                product.CollectionId = q.FirstOrDefault();
+                product.ProductId = context.Products
+                    .Where(x => x.ProductName == product.ProductName)
+                    .Select(x => x.ProductId)
+                    .FirstOrDefault();
+
+                if (product.UnitPrice <= 0)
+                    product.UnitPrice = context.Products.Where(x => x.ProductId == product.ProductId).Select(x => x.UnitPrice).FirstOrDefault();
+                if(product.Quantity <= 0)
+                    product.Quantity = context.Products.Where(x => x.ProductId == product.ProductId).Select(x => x.Quantity).FirstOrDefault();
+            }
+            
+            return product;
+        }
+
         public Products ParseInput(string name, string quantity, string price, int size)
         {
             Products product = new Products();

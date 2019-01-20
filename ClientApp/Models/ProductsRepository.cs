@@ -19,7 +19,6 @@ namespace ClientApp.Models
                 IQueryable<OrderedProducts> query = context.OrderedProducts
                     .Where(x => x.Orders.OrderId == orderId)
                     .Include(x => x.Products.ProductsCollections);
-                    //.Include(x => x.Products.ProductsCollections)
                     
                 orderedProducts = query.ToList();
                 foreach (var item in orderedProducts)
@@ -84,6 +83,41 @@ namespace ClientApp.Models
                 list = query.ToList();
             }
             return list;
+        }
+
+        public List<string> GetProductNames()
+        {
+            List<string> list = null;
+            using (var context = new ApplicationDbContext())
+            {
+                IQueryable<string> query = context.Products
+                    .Select(x=>x.ProductName);
+                list = query.ToList();
+            }
+            return list;
+        }
+
+        public bool UpdateProducts(Products product)
+        {
+            Products prd = null;
+            bool isSuccess = false;
+            using (var context = new ApplicationDbContext())
+            {
+                var prod = context.Products
+                    .Where(x => x.ProductId == product.ProductId);
+                prd = prod.FirstOrDefault();
+                prd.ProductName = product.ProductName;
+                prd.Quantity = product.Quantity;
+                prd.UnitPrice = product.UnitPrice;
+                prd.CollectionId = product.CollectionId;
+                context.SaveChanges();
+                isSuccess = true;
+            }
+
+            if (isSuccess)
+                return true;
+            else
+                return false;
         }
     }
 }
