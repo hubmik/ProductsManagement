@@ -24,9 +24,12 @@
                     Margin="0,0,15,0"
                     />
             <Button Content="Update Data"
+                    Command="{Binding Path=UpdateDataCommand}"
                     />
         </WrapPanel>
+        
         <StackPanel>
+            <Label Content="Select products" FontSize="20"/>
             <WrapPanel Margin="5">
                 <Label Content="Type product name:" />
                 <TextBox Text="{Binding Path=ProductName}"
@@ -66,7 +69,28 @@
                          VerticalContentAlignment="Center"/>
             </WrapPanel>
         </StackPanel>
-        <DataGrid AutoGenerateColumns="False" DockPanel.Dock="Right" IsReadOnly="False" ItemsSource="{Binding Path=OutputProductsList}" >
+
+        <StackPanel>
+            <Label Content="Insert new product" FontSize="20"/>
+            <WrapPanel Margin="5">
+                <Label Content="Product Name:"/>
+                <TextBox Text="{Binding Path=InsertedProductName}" Width="140"/>
+            </WrapPanel>
+            <WrapPanel Margin="5">
+                <Label Content="Product Unit Price:"/>
+                <TextBox Text="{Binding Path=InsertedProductPrice}" Width="140"/>
+            </WrapPanel>
+            <WrapPanel Margin="5">
+                <Label Content="Product Quantity:"/>
+                <TextBox Text="{Binding Path=InsertedProductQuantity}" Width="140"/>
+            </WrapPanel>
+            <WrapPanel Margin="5">
+                <Label Content="Collection Size:"/>
+                <ComboBox Cursor="Hand" ItemsSource="{Binding Path=CollectionSizes}" SelectedItem="{Binding Path=SelectedCollectionSize}"/>
+            </WrapPanel>
+        </StackPanel>
+        
+        <DataGrid AutoGenerateColumns="False" DockPanel.Dock="Right" IsReadOnly="True" ItemsSource="{Binding Path=OutputProductsList}" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Product Name" Binding="{Binding Path=ProductName}"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}"/>

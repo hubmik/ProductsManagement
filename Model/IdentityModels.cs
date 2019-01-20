@@ -94,21 +94,18 @@ namespace CustomerApp.Models
         [ForeignKey(nameof(ApplicationUser))]
         public int UserId { get; set; }
 
-        [ForeignKey(nameof(Region))]
-        public int RegionId { get; set; }
-
         [Required]
         [StringLength(50)]
         public string CompanyName { get; set; }
-
-        [ForeignKey(nameof(RegionId))]
-        public virtual Regions Region { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public virtual ApplicationUser ApplicationUser { get; set; }
         
         [InverseProperty(nameof(Models.Orders.Customers))]
         public virtual ICollection<Orders> Orders {  get; set; }
+
+        [InverseProperty(nameof(Models.Orders.Customers))]
+        public virtual ICollection<Regions> Regions { get; set; }
     }
 
     public partial class Deliveries
@@ -187,6 +184,9 @@ namespace CustomerApp.Models
         [ForeignKey(nameof(Employees))]
         public int EmployeeId { get; set; }
 
+        [ForeignKey(nameof(Regions))]
+        public int RegionId { get; set; }
+
         public DateTime OrderDate { get; set; }
 
         public DateTime? DeliveryDate { get; set; }
@@ -202,6 +202,9 @@ namespace CustomerApp.Models
 
         [ForeignKey(nameof(EmployeeId))]
         public virtual Employees Employees { get; set; }
+
+        [ForeignKey(nameof(RegionId))]
+        public virtual Regions Regions { get; set; }
 
         [InverseProperty(nameof(Models.OrderedProducts.Orders))]
         public virtual ICollection<OrderedProducts> OrderedProducts { get; set; }
@@ -248,6 +251,9 @@ namespace CustomerApp.Models
         [Key]
         public int RegionId { get; set; }
 
+        [ForeignKey(nameof(Customers))]
+        public int CustomerId { get; set; }
+
         [Required]
         [StringLength(50)]
         public string Country { get; set; }
@@ -260,8 +266,13 @@ namespace CustomerApp.Models
         [StringLength(50)]
         public string Street { get; set; }
 
-        [InverseProperty(nameof(Models.Customers.Region))]
-        public virtual ICollection<Customers> Customers { get; set; }
+        public bool IsDefault { get; set; }
+
+        [ForeignKey(nameof(CustomerId))]
+        public virtual Customers Customers { get; set; }
+
+        [InverseProperty(nameof(Models.Orders.Regions))]
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 
     public partial class ProductsCollections

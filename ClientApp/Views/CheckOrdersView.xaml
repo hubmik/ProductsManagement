@@ -18,7 +18,7 @@
                 <Button Cursor="Hand" Content="Change Order State" Command="{Binding Path=ChangeOrderStateCommand}"/>
             </GroupBox>
         </StackPanel>
-        <DataGrid DockPanel.Dock="Right" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Path=OrdersList}">
+        <DataGrid DockPanel.Dock="Right" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Path=OrdersList}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Order ID" Binding="{Binding Path=OrderId}"/>
                 <DataGridTextColumn Header="Company Name" Binding="{Binding Path=Customers.CompanyName}"/>

@@ -9,6 +9,7 @@ namespace ClientApp.ViewModels
 {
     public class ProductsManagementViewModel : Prism.Mvvm.BindableBase, IPageViewModel
     {
+        Models.ProductsRepository productsRepository;
         private bool _executing;
         private string _name;
         private string _quantity;
@@ -17,6 +18,10 @@ namespace ClientApp.ViewModels
         private string _quantityTo;
         private string _unitPriceFrom;
         private string _unitPriceTo;
+        private int _selectedCollectionSize;
+        private string _insertedProductName;
+        private string _insertedProductPrice;
+        private string _insertedProductQuantity;
         private List<Products> _outputList;
 
         public List<Products> OutputProductsList { get => this._outputList; set => this.SetProperty(ref _outputList, value); }
@@ -27,9 +32,15 @@ namespace ClientApp.ViewModels
         public string ProductQuantityTo { get => this._quantityTo; set => this.SetProperty(ref _quantityTo, value); }
         public string ProductUnitPriceFrom { get => this._unitPriceFrom; set => this.SetProperty(ref _unitPriceFrom, value); }
         public string ProductUnitPriceTo { get => this._unitPriceTo; set => this.SetProperty(ref _unitPriceTo, value); }
+        public int SelectedCollectionSize { get => this._selectedCollectionSize; set => this.SetProperty(ref _selectedCollectionSize, value); }
+        public string InsertedProductName { get => this._insertedProductName; set => this.SetProperty(ref _insertedProductName, value); }
+        public string InsertedProductPrice { get => this._insertedProductPrice; set => this.SetProperty(ref _insertedProductPrice, value); }
+        public string InsertedProductQuantity { get => this._insertedProductQuantity; set => this.SetProperty(ref _insertedProductQuantity, value); }
+        public List<int> CollectionSizes { get; set; }
 
         public Prism.Commands.DelegateCommand GetProductsCommand { get; set; }
         public Prism.Commands.DelegateCommand ClearValuesCommand { get; set; }
+        public Prism.Commands.DelegateCommand UpdateDataCommand { get; set; }
 
         public string Name => "Products Management";
 
@@ -45,8 +56,12 @@ namespace ClientApp.ViewModels
 
         public ProductsManagementViewModel()
         {
+            productsRepository = new Models.ProductsRepository();
+            CollectionSizes = productsRepository.GetCollections();
+
             GetProductsCommand = new Prism.Commands.DelegateCommand(SetDataGrid, () => !Executing);
             ClearValuesCommand = new Prism.Commands.DelegateCommand(ClearValues, () => !Executing);
+            UpdateDataCommand = new Prism.Commands.DelegateCommand(ExecuteUpdateProduct, () => !Executing);
         }
 
         public async void SetDataGrid()
@@ -69,10 +84,30 @@ namespace ClientApp.ViewModels
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.ToString(), "", System.Windows.MessageBoxButton.OK);
+                System.Windows.MessageBox.Show(ex.ToString(), "Error", System.Windows.MessageBoxButton.OK);
             }
 
             Executing = false;
+        }
+
+        public void ExecuteUpdateProduct()
+        {
+            bool commandExecutedSuccessful = false;
+            Products product;
+            Validations.Parser parser = new Validations.Parser();
+            product = parser.ParseInput(this.InsertedProductName, this.InsertedProductQuantity, this.InsertedProductPrice, this.SelectedCollectionSize);
+            if (product == null)
+                System.Windows.MessageBox.Show("Invalid input!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            else
+            {
+                productsRepository = new Models.ProductsRepository();
+                commandExecutedSuccessful = productsRepository.InsertProducts(product);
+                if(commandExecutedSuccessful)
+                    System.Windows.MessageBox.Show("Product has been added to database.", "Success", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                else
+                    System.Windows.MessageBox.Show("Error during establishing connection to database!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            ClearValues();
         }
 
         public void ClearValues()
@@ -86,6 +121,9 @@ namespace ClientApp.ViewModels
             this.ProductUnitPrice = null;
             this.ProductUnitPriceFrom = null;
             this.ProductUnitPriceTo = null;
+            this.InsertedProductName = null;
+            this.InsertedProductPrice = null;
+            this.InsertedProductQuantity = null;
 
             Executing = false;
         }

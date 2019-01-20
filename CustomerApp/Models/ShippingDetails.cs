@@ -9,34 +9,26 @@ namespace CustomerApp.Models
 {
     public class ShippingDetails
     {
-        public ApplicationUser GetCustomerData(int id)
+        public List<Regions> GetCustomerData(int id)
         {
-            ApplicationUser custData = null;
+            List<Regions> custData = null;
 
             using (var context = new ApplicationDbContext())
             {
-                IQueryable<ApplicationUser> apUs = context.Users
-                    .Where(x => x.Id == id)
-                    .Include(x => x.Customers)
-                    .Include(x => x.Customers.Select(reg => reg.Region));
-                custData = apUs.FirstOrDefault();
+                IQueryable<Regions> query = context.Regions
+                    .Where(x=>x.Customers.UserId == id)
+                    .Include(x=>x.Customers)
+                    .Include(s=>s.Customers.ApplicationUser);
+
+                custData = query.ToList();
             }
-
-            //using (var context = new ApplicationDbContext())
-            //{
-            //    IQueryable<ApplicationUser> res = context.Users.Where(x => x.Id == id)
-            //        .Include(x => x.Customers)
-            //        .Include(x => x.Customers.Select(reg => reg.Region));
-
-            //    custData = res.FirstOrDefault();
-            //}
 
             return custData;
         }
 
         public IEnumerable<Deliveries> GetDeliveries()
         {
-            using (var context = new Model.Db())
+            using (var context = new ApplicationDbContext())
             {
                 IQueryable<Deliveries> res = context.Deliveries;
                 return res.ToList();

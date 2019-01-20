@@ -14,27 +14,86 @@ namespace CustomerApp.Models
 
         public OrderContext() => this._usrId = HttpContext.Current.User.Identity.GetUserId<int>();
 
+        private bool AddAddress(ViewModels.CartSummaryViewModel data)
+        {
+            List<Regions> list = null;
+            using (var context = new ApplicationDbContext())
+            {
+                IQueryable<Regions> query = context.Regions
+                    .Where(x => x.Customers.UserId == SessionProcess.SessionIdentifier);
+
+                list = query.ToList();
+            }
+            foreach (var item in list)
+            {
+                if (item.City == data.City && item.Country == data.Country && item.Street == data.Street)
+                    return false;
+            }
+            return true;
+        }
+
+        private int InsertRegion(ViewModels.CartSummaryViewModel data)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                Regions region = new Regions
+                {
+                    City = data.City,
+                    Country = data.Country,
+                    IsDefault = false,
+                    Street = data.Street,
+                    CustomerId = context.Customers.Where(x => x.UserId == SessionProcess.SessionIdentifier).Select(x => x.CustomerId).FirstOrDefault()
+                };
+                context.Regions.Add(region);
+                context.SaveChanges();
+
+                return region.RegionId;
+            }
+        }
+
         public int SaveOrder(ViewModels.CartSummaryViewModel dataToSave)
         {
+            int regionId = 0;
+            bool isAddressAdded = false;
+            if (isAddressAdded = AddAddress(dataToSave))
+                regionId = InsertRegion(dataToSave);
+
             using (var context = new ApplicationDbContext())
             {
                 int custId;
                 DateTime myDateTime = DateTime.Now;
                 string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
-                
+                Orders order = null;
+
                 var customer = context.Customers
                     .Where(x => x.UserId == this._usrId)
                     .Select(cid => cid.CustomerId);
                 custId = customer.FirstOrDefault();
 
-                Orders order = new Orders
-                {                    
-                    CustomerId = custId,
-                    DeliveryId = dataToSave.SelectedDeliveryId,
-                    StatusId = 1,
-                    OrderDate = myDateTime,
-                    EmployeeId = AssignEmployeeToOrder()
-                };
+                if (isAddressAdded)
+                {
+                    order = new Orders
+                    {
+                        CustomerId = custId,
+                        DeliveryId = dataToSave.SelectedDeliveryId,
+                        StatusId = 1,
+                        OrderDate = myDateTime,
+                        EmployeeId = AssignEmployeeToOrder(),
+                        RegionId = regionId
+                    };
+                }
+                else
+                {
+                    order = new Orders
+                    {
+                        CustomerId = custId,
+                        DeliveryId = dataToSave.SelectedDeliveryId,
+                        StatusId = 1,
+                        OrderDate = myDateTime,
+                        EmployeeId = AssignEmployeeToOrder(),
+                        RegionId = dataToSave.RegionId
+                    };
+                }
 
                 context.Orders.Add(order);
                 context.SaveChanges();

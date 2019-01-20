@@ -14,15 +14,13 @@ namespace ClientApp.Models
         public void UpdateProducts(int orderId)
         {
             List<OrderedProducts> orderedProducts = null;
-            List<Products> productsList = null;
             using (var context = new ApplicationDbContext())
             {
                 IQueryable<OrderedProducts> query = context.OrderedProducts
                     .Where(x => x.Orders.OrderId == orderId)
-                    .Include(x => x.Products.ProductsCollections)
+                    .Include(x => x.Products.ProductsCollections);
                     //.Include(x => x.Products.ProductsCollections)
-                    ;
-
+                    
                 orderedProducts = query.ToList();
                 foreach (var item in orderedProducts)
                 {
@@ -43,6 +41,48 @@ namespace ClientApp.Models
                     //.Include(x => x.Products.ProductsCollections)
                     ;
 
+                list = query.ToList();
+            }
+            return list;
+        }
+
+        public bool InsertProducts(Products productToInsert)
+        {
+            bool isChangesCommited = false;
+            List<string> productsList = null;
+            Products product;
+
+            using (var context = new ApplicationDbContext())
+            {
+                IQueryable<string> productsQuery = context.Products.Select(x => x.ProductName);
+                productsList = productsQuery.ToList();
+                if (productsList.Contains(productToInsert.ProductName))
+                    return false;
+                
+                product = new Products()
+                {
+                    ProductName = productToInsert.ProductName,
+                    UnitPrice = productToInsert.UnitPrice,
+                    Quantity = productToInsert.Quantity,
+                    CollectionId = productToInsert.CollectionId
+                };
+
+                context.Products.Add(product);
+                context.SaveChanges();
+                isChangesCommited = true;
+            }
+            if (isChangesCommited)
+                return true;
+            else
+                return false;
+        }
+
+        public List<int> GetCollections()
+        {
+            List<int> list = null;
+            using (var db = new ApplicationDbContext())
+            {
+                IQueryable<int> query = db.ProductsCollections.Select(x=>x.CollectionSize);
                 list = query.ToList();
             }
             return list;

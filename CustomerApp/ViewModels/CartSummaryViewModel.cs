@@ -18,6 +18,8 @@ namespace CustomerApp.ViewModels
             _deliveries = shippingDetails.GetDeliveries();
         }
 
+        public int RegionId { get; set; }
+
         [Required]
         [EmailAddress]
         public string Email { get; set; }

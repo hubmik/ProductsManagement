@@ -1,14 +1,16 @@
-﻿using System;
+﻿using CustomerApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace ClientApp.Validations
 {
     public class Parser
     {
-        public void ParseInput(CustomerApp.Models.Products product, WcfService.ProductExtension productExtension,
+        public void ParseInput(Products product, WcfService.ProductExtension productExtension,
             string name,
             string quantity,
             string unitPrice,
@@ -30,6 +32,37 @@ namespace ClientApp.Validations
                 productExtension.UnitPriceFrom = decimal.Parse(unitPriceFrom);
             if (decimal.TryParse(unitPriceTo, out result))
                 productExtension.UnitPriceTo = decimal.Parse(unitPriceTo);
+        }
+
+        public Products ParseInput(string name, string quantity, string price, int size)
+        {
+            Products product = new Products();
+            bool parseSuccedded = false;
+            int productsCollectionId;
+
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(quantity) || string.IsNullOrWhiteSpace(price) || size <= 0)
+                return null;
+            
+            if (parseSuccedded = int.TryParse(quantity, out int quantRes))
+                product.Quantity = int.Parse(quantity);
+            if (parseSuccedded = decimal.TryParse(price, out decimal priceRes))
+                product.UnitPrice = decimal.Parse(price);
+
+            using (var context = new ApplicationDbContext())
+            {
+                productsCollectionId = context.Products
+                    .Where(x => x.ProductsCollections.CollectionSize == size)
+                    .Select(x => x.ProductsCollections.CollectionId).FirstOrDefault();
+            }
+
+            product.CollectionId = productsCollectionId;
+            if (product.CollectionId == 0)
+                parseSuccedded = false;
+            product.ProductName = name;
+
+            if (parseSuccedded == false)
+                return null;
+            return product;
         }
     }
 }

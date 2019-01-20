@@ -161,26 +161,25 @@ namespace CustomerApp.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    using (var context = new ApplicationDbContext())
+                    bool isRegistrationSucceeded = false;
+                    Registration registration = new Registration();
+                    isRegistrationSucceeded = registration.SignUp(user.Id, model);
+                    if (isRegistrationSucceeded)
                     {
-                        Customers customer = new Customers();
-                        customer.Region = new Regions();
-                        customer.CompanyName = model.CompanyName;
-                        customer.UserId = user.Id;
-                        customer.Region.Country = model.Country;
-                        customer.Region.City = model.City;
-                        customer.Region.Street = model.Street;
-                        context.Customers.Add(customer);
-                        context.SaveChanges();
-                    }
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        return View(nameof(Register), model);
+                    }
+
                 }
                 AddErrors(result);
             }

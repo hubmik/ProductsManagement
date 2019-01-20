@@ -211,6 +211,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderContext.cs" />
     <Compile Include="Models\OrderEmployeeAssigner.cs" />
+    <Compile Include="Models\Registration.cs" />
     <Compile Include="Models\SessionProcess.cs" />
     <Compile Include="Models\ShippingDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -324,6 +325,7 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\CurrentOrder.cshtml" />
     <Content Include="Views\Shared\_GeneratedOrder.cshtml" />
+    <Content Include="Views\Shared\_CheckoutContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

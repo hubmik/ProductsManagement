@@ -39,8 +39,8 @@ namespace Server
             using (var context = new ApplicationDbContext())
             {
                 IQueryable<Customers> custData = context.Customers
-                    .Include(cust => cust.Region)
-                    .Where(cust => cust.CustomerId == customerId);
+                    .Where(x => x.CustomerId == customerId)
+                    .Include(cust => cust.Regions);
 
                 custDet = custData.ToList();
             }

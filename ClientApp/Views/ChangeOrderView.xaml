@@ -28,7 +28,7 @@
             </WrapPanel>
             <Button Margin="0,80,0,0" Content="Confirm" Cursor="Hand" Height="30" Width="120" DockPanel.Dock="Bottom" Command="{Binding Path=AcceptCommand}"/>
         </StackPanel>
-        <DataGrid AutoGenerateColumns="False" DockPanel.Dock="Top" ItemsSource="{Binding Path=OrderedProductsList}">
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" DockPanel.Dock="Top" ItemsSource="{Binding Path=OrderedProductsList}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Product Name" Binding="{Binding Path=ProductName}"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}"/>

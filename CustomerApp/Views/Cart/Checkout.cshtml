@@ -4,21 +4,33 @@
     ViewBag.Title = "This is Your Order Summary:";
 }
 
-<div class="form-group">
-    @using (Html.BeginForm("CurrentOrder", "Order", FormMethod.Post))
-    {
-        @Html.LabelFor(x => x.Email);
-        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
-        @Html.LabelFor(x => x.CompanyName);
-        @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control" })
-        @Html.LabelFor(x => x.Country);
-        @Html.TextBoxFor(x => x.Country, new { @class = "form-control" })
-        @Html.LabelFor(x => x.City);
-        @Html.TextBoxFor(x => x.City, new { @class = "form-control" })
-        @Html.LabelFor(x => x.Street);
-        @Html.TextBoxFor(x => x.Street, new { @class = "form-control" })
-        @Html.LabelFor(x => x.SelectedDeliveryId)
-        @Html.DropDownListFor(x => x.SelectedDeliveryId, Model.DeliveryItems, new { @class = "form-control" })
-        <input type="submit" value="Submit" />
-    }
+<div class="container">
+    <div class="form-group">
+        @using (Html.BeginForm("CurrentOrder", "Order", FormMethod.Post))
+        {
+            <div class="dropdown">
+                @if (ViewBag.RegionsList != null)
+                {
+                    <p>Select address:</p>
+                    @Html.DropDownListFor(x => x.RegionId, ViewBag.RegionsList as SelectList, new { @class = "form-control" });
+                }
+            </div>
+            <div id="templateContent">
+                @Html.Partial("_CheckoutContent", Model)
+            </div>
+            @Html.LabelFor(x => x.SelectedDeliveryId)
+            @Html.DropDownListFor(x => x.SelectedDeliveryId, Model.DeliveryItems, new { @class = "form-control" })
+            <input type="submit" value="Submit" />
+        }
+    </div>
 </div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#RegionId").change(function () {
+            var regionId = $("#RegionId").val();
+            $("#templateContent").load('@(Url.Action("GetAddressData", "Cart", null, Request.Url.Scheme))?RegionId=' + regionId)
+        });
+    });
+</script>

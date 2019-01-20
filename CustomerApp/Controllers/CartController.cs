@@ -34,20 +34,45 @@ namespace CustomerApp.Controllers
             {
                 return RedirectToAction(nameof(Index), new { returnUrl });
             }
-            ShippingDetails shippingDetails = new ShippingDetails();
-            ApplicationUser result = shippingDetails.GetCustomerData(System.Web.HttpContext.Current.User.Identity.GetUserId<int>());
             ViewModels.CartSummaryViewModel cartSummaryVM = new ViewModels.CartSummaryViewModel();
-
+            ShippingDetails shippingDetails = new ShippingDetails();
+            Regions defaultResult = shippingDetails
+                .GetCustomerData(SessionProcess.SessionIdentifier)
+                .Where(x => x.IsDefault)
+                .FirstOrDefault();
+            List<Regions> regionsList = shippingDetails.GetCustomerData(SessionProcess.SessionIdentifier);
+            
+            ViewBag.RegionsList = new SelectList(regionsList, "RegionId", "RegionId");
             cartSummaryVM = new ViewModels.CartSummaryViewModel
             {
-                City = result.Customers.FirstOrDefault().Region.City,
-                CompanyName = result.Customers.FirstOrDefault().CompanyName,
-                Country = result.Customers.FirstOrDefault().Region.Country,
-                Email = result.Email,
-                Street = result.Customers.FirstOrDefault().Region.Street,
+                RegionId = defaultResult.RegionId,
+                City = defaultResult.City,
+                CompanyName = defaultResult.Customers.CompanyName,
+                Country = defaultResult.Country,
+                Email = defaultResult.Customers.ApplicationUser.Email,
+                Street = defaultResult.Street,
                 SelectedDeliveryId = cartSummaryVM.SelectedDeliveryId
             };
             return View(nameof(Checkout), cartSummaryVM);
+        }
+
+        public PartialViewResult GetAddressData(int RegionId)
+        {
+            ViewModels.CartSummaryViewModel cartSummaryVM = new ViewModels.CartSummaryViewModel();
+            ShippingDetails shippingDetails = new ShippingDetails();
+            List<Regions> regionsList = shippingDetails.GetCustomerData(SessionProcess.SessionIdentifier);
+            Regions region = regionsList.Where(x => x.RegionId == RegionId).FirstOrDefault();
+            cartSummaryVM = new ViewModels.CartSummaryViewModel()
+            {
+                City = region.City,
+                CompanyName = region.Customers.CompanyName,
+                Country = region.Country,
+                Email = region.Customers.ApplicationUser.Email,
+                RegionId = region.RegionId,
+                SelectedDeliveryId = cartSummaryVM.SelectedDeliveryId,
+                Street = region.Street
+            };
+            return PartialView("_CheckoutContent", cartSummaryVM);
         }
 
         public PartialViewResult Summary(Cart cart)

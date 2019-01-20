@@ -10,5 +10,6 @@ namespace ClientApp.Interfaces
     interface IProductsRepository
     {
         void UpdateProducts(int orderId);
+        bool InsertProducts(Products product);
     }
 }
