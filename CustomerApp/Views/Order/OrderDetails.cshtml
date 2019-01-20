@@ -1,0 +1,17 @@
+﻿@model IEnumerable<CustomerApp.Models.OrderedProducts>
+@{ 
+    Layout = null;
+}
+<div class="container">
+    <h4><b>Order Details</b></h4>
+    @foreach (var item in Model)
+    {
+        <p><label>Product Name:</label> @item.Products.ProductName</p>
+        <p><label>Product Quantity:</label> @item.Quantity</p>
+        <p><label>Price:</label> @(item.Quantity * item.Products.UnitPrice)</p>
+    }
+    <p><label>Total Value:</label> @(Model.Sum(x=>x.Quantity * x.Products.UnitPrice))</p>
+    <p><label>Country:</label> @Model.FirstOrDefault().Orders.Regions.Country</p>
+    <p><label>City:</label> @Model.FirstOrDefault().Orders.Regions.City</p>
+    <p><label>Street:</label> @Model.FirstOrDefault().Orders.Regions.Street</p>    
+</div>

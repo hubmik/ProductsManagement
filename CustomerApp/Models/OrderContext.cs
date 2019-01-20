@@ -51,7 +51,7 @@ namespace CustomerApp.Models
             }
         }
 
-        public int SaveOrder(ViewModels.CartSummaryViewModel dataToSave)
+        public int SaveOrder(ViewModels.CartSummaryViewModel dataToSave, Cart cart)
         {
             int regionId = 0;
             bool isAddressAdded = false;
@@ -79,7 +79,8 @@ namespace CustomerApp.Models
                         StatusId = 1,
                         OrderDate = myDateTime,
                         EmployeeId = AssignEmployeeToOrder(),
-                        RegionId = regionId
+                        RegionId = regionId,
+                        Value = cart.ComputeTotalValue()
                     };
                 }
                 else

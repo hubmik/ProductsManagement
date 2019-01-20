@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace CustomerApp.Controllers
 {
@@ -37,7 +38,7 @@ namespace CustomerApp.Controllers
             int orderId;
             MailSender mailSender = new MailSender();
             OrderContext orderContext = new OrderContext();
-            orderId = orderContext.SaveOrder(csVM);
+            orderId = orderContext.SaveOrder(csVM, cart);
             orderContext.SetOrderedProducts(cart, orderId);
             SessionProcess.IsSessionDisposed = true;
             await mailSender.Send(csVM, cart);
@@ -47,6 +48,21 @@ namespace CustomerApp.Controllers
                 Session["Cart"] = null;
             }
             return View(nameof(CurrentOrder), new CartIndexViewModel { Cart = crt });
+        }
+
+        public ActionResult OrderDetails(int id)
+        {
+            List<OrderedProducts> list = null;
+            using (var context = new ApplicationDbContext())
+            {
+                IQueryable<OrderedProducts> query = context.OrderedProducts
+                    .Where(x => x.OrderId == id)
+                    .Include(x => x.Products)
+                    .Include(x => x.Orders.Regions);
+                list = query.ToList();
+            }
+
+            return View(list);
         }
     }
 }

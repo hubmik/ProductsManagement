@@ -191,6 +191,8 @@ namespace CustomerApp.Models
 
         public DateTime? DeliveryDate { get; set; }
 
+        public decimal Value { get; set; }
+
         [ForeignKey(nameof(CustomerId))]
         public virtual Customers Customers { get; set; }
 
