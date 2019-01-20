@@ -40,6 +40,7 @@ namespace CustomerApp.Controllers
                 .GetCustomerData(SessionProcess.SessionIdentifier)
                 .Where(x => x.IsDefault)
                 .FirstOrDefault();
+
             List<Regions> regionsList = shippingDetails.GetCustomerData(SessionProcess.SessionIdentifier);
             
             ViewBag.RegionsList = new SelectList(regionsList, "RegionId", "RegionId");

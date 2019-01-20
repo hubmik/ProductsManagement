@@ -23,32 +23,35 @@
                     Command="{Binding Path=ClearValuesCommand}"
                     Margin="0,0,15,0"
                     />
-            <Button Content="Update Data"
-                    Command="{Binding Path=UpdateDataCommand}"
+            <Button Content="Insert Product"
+                    Command="{Binding Path=InsertDataCommand}"
+                    Margin="0,0,15,0"
                     />
+            <Button Content="Update Product"
+                    Command="{Binding Path=UpdateDataCommand}"/>
         </WrapPanel>
         
         <StackPanel>
             <Label Content="Select products" FontSize="20"/>
-            <WrapPanel Margin="5">
+            <WrapPanel Margin="2">
                 <Label Content="Type product name:" />
                 <TextBox Text="{Binding Path=ProductName}"
-                         Width="180"
+                         Width="140"
                          VerticalContentAlignment="Center"/>
             </WrapPanel>
-            <WrapPanel Margin="5">
+            <WrapPanel Margin="2">
                 <Label Content="Type product quantity:"/>
                 <TextBox Text="{Binding Path=ProductQuantity}"
-                         Width="180"
+                         Width="140"
                          VerticalContentAlignment="Center"/>
             </WrapPanel>
-            <WrapPanel Margin="5">
+            <WrapPanel Margin="2">
                 <Label Content="Type product unit price:"/>
                 <TextBox Text="{Binding Path=ProductUnitPrice}"
-                         Width="180"
+                         Width="140"
                          VerticalContentAlignment="Center"/>
             </WrapPanel>
-            <WrapPanel Margin="5">
+            <WrapPanel Margin="2">
                 <Label Content="Type compartment of quantity:"/>
                 <TextBox Text="{Binding Path=ProductQuantityFrom}"
                          Width="60"
@@ -58,7 +61,7 @@
                          Width="60"
                          VerticalContentAlignment="Center"/>
             </WrapPanel>
-            <WrapPanel Margin="5">
+            <WrapPanel Margin="2">
                 <Label Content="Type compartment of unit price:"/>
                 <TextBox Text="{Binding Path=ProductUnitPriceFrom}"
                          Width="60"
@@ -72,21 +75,41 @@
 
         <StackPanel>
             <Label Content="Insert new product" FontSize="20"/>
-            <WrapPanel Margin="5">
+            <WrapPanel Margin="2">
                 <Label Content="Product Name:"/>
                 <TextBox Text="{Binding Path=InsertedProductName}" Width="140"/>
             </WrapPanel>
-            <WrapPanel Margin="5">
+            <WrapPanel Margin="2">
                 <Label Content="Product Unit Price:"/>
                 <TextBox Text="{Binding Path=InsertedProductPrice}" Width="140"/>
             </WrapPanel>
-            <WrapPanel Margin="5">
+            <WrapPanel Margin="2">
                 <Label Content="Product Quantity:"/>
                 <TextBox Text="{Binding Path=InsertedProductQuantity}" Width="140"/>
             </WrapPanel>
-            <WrapPanel Margin="5">
+            <WrapPanel Margin="2">
                 <Label Content="Collection Size:"/>
                 <ComboBox Cursor="Hand" ItemsSource="{Binding Path=CollectionSizes}" SelectedItem="{Binding Path=SelectedCollectionSize}"/>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel>
+            <Label Content="Update Product" FontSize="20"/>
+            <ComboBox Width="120" Cursor="Hand" HorizontalAlignment="Left" ItemsSource="{Binding Path=ProductsList}" SelectedItem="{Binding Path=SelectedProduct}"/>
+            <WrapPanel Margin="2">
+                <Label Content="Update quantity:"/>
+                <TextBox Text="{Binding Path=UpdateQuantity}"
+                         Width="120"
+                         VerticalContentAlignment="Center"/>                
+            </WrapPanel>
+            <WrapPanel Margin="2">
+                <Label Content="Update unit price:"/>
+                <TextBox Text="{Binding Path=UpdateUnitPrice}"
+                         Width="120"/>
+            </WrapPanel>
+            <WrapPanel Margin="2">
+                <Label Content="Update Collection Size:" />
+                <ComboBox Cursor="Hand" ItemsSource="{Binding Path=CollectionSizes}" SelectedItem="{Binding Path=SelectedCollectionSizeToUpdate}"/>
             </WrapPanel>
         </StackPanel>
         

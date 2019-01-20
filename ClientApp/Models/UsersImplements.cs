@@ -58,7 +58,7 @@ namespace ClientApp.Models
                     .Where(x => x.Employees.AccessKey == accessKey)
                     .Include(x => x.Customers)
                     .Include(x => x.Deliveries)
-                    .Include(x => x.Customers.Region)
+                    .Include(x => x.Customers.Regions)
                     .Include(x => x.OrderStates);
 
                 list = query.ToList();

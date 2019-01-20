@@ -42,11 +42,11 @@ namespace ClientApp.ViewModels
         //    UpdatedOrderValues = order;
         //}
 
-        public async void InitOrders()
+        public void InitOrders()
         {
             //List<WcfService.OrderContext> ordersList = null;
             UsersImplements usersImplements = new UsersImplements();
-            List<Orders> ordersList = usersImplements.OrdersForSpecifiedEmployee(Models.UserCredentials.SessionKey);
+            List<Orders> ordersList = usersImplements.OrdersForSpecifiedEmployee(UserCredentials.SessionKey);
             //ordersList = await usersImplements.OrdersForEmployees();
             this.OrdersList = ordersList;
         }

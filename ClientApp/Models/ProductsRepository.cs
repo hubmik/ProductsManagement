@@ -37,9 +37,7 @@ namespace ClientApp.Models
             {
                 IQueryable<OrderedProducts> query = context.OrderedProducts
                     .Where(x => x.Orders.OrderId == orderId)
-                    .Include(x => x.Products.ProductsCollections)
-                    //.Include(x => x.Products.ProductsCollections)
-                    ;
+                    .Include(x => x.Products.ProductsCollections);                    
 
                 list = query.ToList();
             }
@@ -82,7 +80,7 @@ namespace ClientApp.Models
             List<int> list = null;
             using (var db = new ApplicationDbContext())
             {
-                IQueryable<int> query = db.ProductsCollections.Select(x=>x.CollectionSize);
+                IQueryable<int> query = db.ProductsCollections.Select(x => x.CollectionSize);
                 list = query.ToList();
             }
             return list;

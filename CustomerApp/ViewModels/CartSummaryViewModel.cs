@@ -11,11 +11,13 @@ namespace CustomerApp.ViewModels
     public class CartSummaryViewModel
     {
         private readonly IEnumerable<Deliveries> _deliveries;
+        private readonly IEnumerable<Regions> _regions;
 
         public CartSummaryViewModel()
         {
             ShippingDetails shippingDetails = new ShippingDetails();
             _deliveries = shippingDetails.GetDeliveries();
+            _regions = shippingDetails.GetCustomerData(SessionProcess.SessionIdentifier);
         }
 
         public int RegionId { get; set; }
@@ -40,6 +42,8 @@ namespace CustomerApp.ViewModels
         [Required]
         [Display(Name = "Delivery Type")]
         public int SelectedDeliveryId { get; set; }
+
+        public IEnumerable<SelectListItem> RegionItems => new SelectList(_regions, "RegionId", Enumerable.Range(1, _regions.Count()));
 
         public IEnumerable<SelectListItem> DeliveryItems => new SelectList(_deliveries, "DeliveryId", "DeliveryType");
     }

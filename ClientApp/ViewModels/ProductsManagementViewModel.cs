@@ -23,6 +23,10 @@ namespace ClientApp.ViewModels
         private string _insertedProductPrice;
         private string _insertedProductQuantity;
         private List<Products> _outputList;
+        private int _selectedCollectionSizeToUpdate;
+        private string _selectedProduct;
+        private int _updateQuantity;
+        private decimal _updateUnitPrice;
 
         public List<Products> OutputProductsList { get => this._outputList; set => this.SetProperty(ref _outputList, value); }
         public string ProductName { get => this._name; set => this.SetProperty(ref _name, value); }
@@ -37,10 +41,15 @@ namespace ClientApp.ViewModels
         public string InsertedProductPrice { get => this._insertedProductPrice; set => this.SetProperty(ref _insertedProductPrice, value); }
         public string InsertedProductQuantity { get => this._insertedProductQuantity; set => this.SetProperty(ref _insertedProductQuantity, value); }
         public List<int> CollectionSizes { get; set; }
+        public List<string> ProductsList { get; set; }
+        public int SelectedCollectionSizeToUpdate { get => this._selectedCollectionSizeToUpdate; set => this.SetProperty(ref _selectedCollectionSizeToUpdate, value); }
+        public string SelectedProduct { get => this._selectedProduct; set => this.SetProperty(ref _selectedProduct, value); }
+        public int UpdateQuantity { get => this._updateQuantity; set => this.SetProperty(ref _updateQuantity, value); }
+        public decimal UpdateUnitPrice { get => this._updateUnitPrice; set => this.SetProperty(ref _updateUnitPrice, value); }
 
         public Prism.Commands.DelegateCommand GetProductsCommand { get; set; }
         public Prism.Commands.DelegateCommand ClearValuesCommand { get; set; }
-        public Prism.Commands.DelegateCommand UpdateDataCommand { get; set; }
+        public Prism.Commands.DelegateCommand InsertDataCommand { get; set; }
 
         public string Name => "Products Management";
 
@@ -61,7 +70,7 @@ namespace ClientApp.ViewModels
 
             GetProductsCommand = new Prism.Commands.DelegateCommand(SetDataGrid, () => !Executing);
             ClearValuesCommand = new Prism.Commands.DelegateCommand(ClearValues, () => !Executing);
-            UpdateDataCommand = new Prism.Commands.DelegateCommand(ExecuteUpdateProduct, () => !Executing);
+            InsertDataCommand = new Prism.Commands.DelegateCommand(ExecuteUpdateProduct, () => !Executing);
         }
 
         public async void SetDataGrid()
