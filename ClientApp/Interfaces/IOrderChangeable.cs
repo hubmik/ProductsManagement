@@ -10,7 +10,7 @@ namespace ClientApp.Interfaces
 {
     interface IOrderChangeable
     {
-        List<string> GetOrderStates();
+        List<string> GetOrderStates(int orderId);
         List<int> GetOrderIds(string accessKey);
         string GetStateOfSpecifiedOrder(int orderId);
     }

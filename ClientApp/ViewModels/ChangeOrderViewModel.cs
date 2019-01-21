@@ -19,7 +19,7 @@ namespace ClientApp.ViewModels
         private bool _isChangingEnabled;
         private string _selectedOrderState;
         private int _selectedOrderId;
-        private enum OrderFlags
+        internal enum OrderFlags
         {
             Ordered,
             Accepted,
@@ -83,14 +83,16 @@ namespace ClientApp.ViewModels
         {
             this.DeliveryDate = this.CurrentDate;
             this.OrderIds = orderModifier.GetOrderIds(UserCredentials.SessionKey);
-            this.OrderStates = orderModifier.GetOrderStates();
             this.SelectedOrderId = this.OrderIds.FirstOrDefault();
+            this.OrderStates = orderModifier.GetOrderStates(this.SelectedOrderId);
             this.SelectedOrderState = orderModifier.GetStateOfSpecifiedOrder(this.SelectedOrderId);
             this.IsChangingEnabled = CanChangeValue();
         }
 
         private void SetChangeableOrderedProducts()
         {
+            this.SelectedOrderState = orderModifier.SelectStateForSpecifiedOrder(this.SelectedOrderId);
+            this.OrderStates = orderModifier.GetOrderStates(this.SelectedOrderId);
             this.OrderedProductsList = orderModifier.GetOrderedProducts(this.SelectedOrderId);
             this.IsChangingEnabled = orderModifier.GetStateOfSpecifiedOrder(this.SelectedOrderId) != OrderFlags.Ordered.ToString() 
                 ? false : true;

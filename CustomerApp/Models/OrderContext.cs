@@ -92,7 +92,8 @@ namespace CustomerApp.Models
                         StatusId = 1,
                         OrderDate = myDateTime,
                         EmployeeId = AssignEmployeeToOrder(),
-                        RegionId = dataToSave.RegionId
+                        RegionId = dataToSave.RegionId,
+                        Value = cart.ComputeTotalValue()
                     };
                 }
 

@@ -11,15 +11,43 @@ namespace ClientApp.Models
 {
     class OrderModifier : IOrderChangeable
     {
-        public List<string> GetOrderStates()
+        public List<string> GetOrderStates(int orderId)
         {
             List<string> states = null;
             using (var context = new ApplicationDbContext())
             {
-                IQueryable<string> query = context.OrderStates.Select(x => x.Status);
-                states = query.ToList();
+                int order = context.Orders
+                    .Where(x => x.OrderId == orderId)
+                    .Select(x => x.StatusId)
+                    .FirstOrDefault();
+
+                if (order != 1)
+                {
+                    IQueryable<string> lastTwo = context.OrderStates
+                        .OrderBy(x => x.StatusId)
+                        .Skip(1)
+                        .Select(x => x.Status);
+
+                    states = lastTwo.ToList();
+                }
+                else
+                {
+                    IQueryable<string> query = context.OrderStates.Select(x => x.Status);
+                    states = query.ToList();
+                }
             }
             return states;
+        }
+        
+        public bool IsOrderedStatusChanged(string accessKey)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                IQueryable<Orders> query = context.Orders
+                    .Where(x => x.Employees.AccessKey == accessKey)
+                    ;
+            }
+            return false;
         }
 
         public List<Orders> GetOrders(string accessKey)
@@ -40,11 +68,28 @@ namespace ClientApp.Models
         public List<int> GetOrderIds(string accessKey)
         {
             List<int> orderIds = null;
+            List<Orders> list = null;
             using (var context = new ApplicationDbContext())
             {
                 IQueryable<int> query = context.Orders
                     .Where(x => x.Employees.AccessKey == accessKey)
+                    .Include(x => x.OrderStates)
+                    .OrderBy(x=>x.StatusId)
                     .Select(x => x.OrderId);
+                //var ord = context.Orders
+                //    .Where(x => x.Employees.AccessKey == accessKey)
+                //    .Include(x => x.OrderStates)
+                //    .GroupBy(x => new { Id = x.StatusId, Name = x.OrderStates.Status })
+                //    .Select(x => new { StatusId = x.Key.Id, StatusName = x.Key.Name, Count = x.Count() })
+                //    .ToList();
+
+                //list = ord.ToList();
+
+                var qr = context.Orders
+                    .Where(x => x.Employees.AccessKey == accessKey)
+                    .Include(x => x.OrderStates)
+                    .OrderBy(x => x.StatusId == 1).ToList();
+
                 orderIds = query.ToList();
             }
             return orderIds;
@@ -118,6 +163,24 @@ namespace ClientApp.Models
             }
 
             return state;
+        }
+
+        public string SelectStateForSpecifiedOrder(int orderId)
+        {
+            string curentStatus = GetStateOfSpecifiedOrder(orderId);
+            string valueToSet = null;
+
+            using (var context = new ApplicationDbContext())
+            {
+                IQueryable<string> c = context.Orders
+                    .Where(x => x.OrderId == orderId)
+                    .Include(x => x.OrderStates)
+                    .Select(x => x.OrderStates.Status);
+
+                valueToSet = c.FirstOrDefault();
+            }
+
+            return valueToSet;
         }
     }
 }

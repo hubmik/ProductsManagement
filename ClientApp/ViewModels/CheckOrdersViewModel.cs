@@ -15,14 +15,12 @@ namespace ClientApp.ViewModels
     {
         public event EventHandler<SelectedDateEventArgs> Date;
         ChangeOrderView ChangeOrderView { get; set; }
-
-        //private List<WcfService.OrderContext> _ordersList;
+        
         private List<Orders> _ordersList;
         private DateTime _orderDeliveryDate;
 
         public DateTime StartDate { get => DateTime.UtcNow; }
         public DateTime OrderDeliveryDate { get => this._orderDeliveryDate; set => this.SetProperty(ref this._orderDeliveryDate, value); }
-        //public List<WcfService.OrderContext> OrdersList { get => this._ordersList; set => this.SetProperty(ref this._ordersList, value); }
         public List<Orders> OrdersList { get => this._ordersList; set => this.SetProperty(ref this._ordersList, value); }
         public UpdatedOrder UpdatedOrderValues { get; set; }
         public string Name => "Check Orders";
@@ -36,18 +34,10 @@ namespace ClientApp.ViewModels
             InitOrders();
         }
 
-        //public CheckOrdersViewModel(UpdatedOrder updatedValues)
-        //{
-        //    UpdatedOrder order = updatedValues;            
-        //    UpdatedOrderValues = order;
-        //}
-
         public void InitOrders()
         {
-            //List<WcfService.OrderContext> ordersList = null;
             UsersImplements usersImplements = new UsersImplements();
             List<Orders> ordersList = usersImplements.OrdersForSpecifiedEmployee(UserCredentials.SessionKey);
-            //ordersList = await usersImplements.OrdersForEmployees();
             this.OrdersList = ordersList;
         }
 

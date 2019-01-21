@@ -35,9 +35,9 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Country" Binding="{Binding Path=Customers.Regions.Country}"/>
-                <DataGridTextColumn Header="City" Binding="{Binding Path=Customers.Regions.City}"/>
-                <DataGridTextColumn Header="Street" Binding="{Binding Path=Customers.Regions.Street}"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Path=Regions.Country}"/>
+                <DataGridTextColumn Header="City" Binding="{Binding Path=Regions.City}"/>
+                <DataGridTextColumn Header="Street" Binding="{Binding Path=Regions.Street}"/>
                 <DataGridTextColumn Header="Delivery Type" Binding="{Binding Path=Deliveries.DeliveryType}"/>
                 <DataGridTextColumn Header="Status" Binding="{Binding Path=OrderStates.Status}"/>
             </DataGrid.Columns>
