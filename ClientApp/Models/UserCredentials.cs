@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomerApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,22 @@ namespace ClientApp.Models
                 time = client.GetCurrentTime();
             }
             return time;
+        }
+
+        public bool IsUserAuthenticated(string accessKey)
+        {
+            string key = accessKey;
+            List<string> list = null;
+
+            using (var context = new ApplicationDbContext())
+            {
+                IQueryable<string> keysList = context.Employees.Select(x => x.AccessKey);
+                list = keysList.ToList();
+            }
+            if (list.Any(key.Contains))
+                return true;
+
+            return false;
         }
     }
 }

@@ -8,9 +8,9 @@ namespace ClientApp.Models
 {
     public class CompanyData
     {
-        public string CompanyName { get; } = "MerchanApp";
-        public string Country { get; } = "Poland";
-        public string City { get; } = "Opole";
-        public string Street { get; } = "Jana Bytnara 11e/12";
+        public string CompanyName { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public string Street { get; set; }
     }
 }

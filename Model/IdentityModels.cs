@@ -57,6 +57,7 @@ namespace CustomerApp.Models
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Regions> Regions { get; set; }
         public virtual DbSet<ProductsCollections> ProductsCollections { get; set; }
+        public virtual DbSet<Invoices> Invoices { get; set; }
     }
 
     public class CustomUserRole : IdentityUserRole<int> { }
@@ -210,6 +211,9 @@ namespace CustomerApp.Models
 
         [InverseProperty(nameof(Models.OrderedProducts.Orders))]
         public virtual ICollection<OrderedProducts> OrderedProducts { get; set; }
+
+        [InverseProperty(nameof(Models.Invoices.Orders))]
+        public virtual ICollection<Invoices> Invoices { get; set; }
     }
 
     public partial class OrderStates
@@ -286,5 +290,21 @@ namespace CustomerApp.Models
 
         [InverseProperty(nameof(Models.Products.ProductsCollections))]
         public virtual ICollection<Products> Products { get; set; }
+    }
+
+    public partial class Invoices
+    {
+        [Key]
+        public int InvoiceId { get; set; }
+        
+        [ForeignKey(nameof(Orders))]
+        public int OrderId { get; set; }
+
+        public string InvoiceNumber { get; set; }
+
+        public DateTime InvoiceDate { get; set; }
+
+        [ForeignKey(nameof(OrderId))]
+        public virtual Orders Orders { get; set; }
     }
 }

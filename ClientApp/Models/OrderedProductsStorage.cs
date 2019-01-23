@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomerApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,19 @@ namespace ClientApp.Models
         public string ProductName { get; set; }
         public int Quantity { get; set; }
         public decimal OrderedValue { get; set; }
-        
+
+        public decimal GetTotalValue(int orderId)
+        {
+            decimal totalValue = 0;
+            using (var context = new ApplicationDbContext())
+            {
+                IQueryable<decimal> query = context.Orders
+                    .Where(x => x.OrderId == orderId)
+                    .Select(x => x.Value);
+
+                totalValue = query.FirstOrDefault();
+            }
+            return totalValue;
+        }
     }
 }

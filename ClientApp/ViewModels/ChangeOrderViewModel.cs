@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace ClientApp.ViewModels
 {
@@ -17,13 +18,13 @@ namespace ClientApp.ViewModels
         private List<int> _orderIds;
         private DateTime _deliveryDate;
         private bool _isChangingEnabled;
+        private bool _executing;
         private string _selectedOrderState;
         private int _selectedOrderId;
         internal enum OrderFlags
         {
             Ordered,
-            Accepted,
-            Done
+            Accepted
         }
 
         public Action CloseAction { get; set; }
@@ -34,7 +35,6 @@ namespace ClientApp.ViewModels
         public DateTime DeliveryDate { get => this._deliveryDate; set => this.SetProperty(ref this._deliveryDate, value); }
         public bool IsChangingEnabled { get => this._isChangingEnabled; set => this.SetProperty(ref this._isChangingEnabled, value); }
         public string SelectedOrderState { get => this._selectedOrderState; set => this.SetProperty(ref this._selectedOrderState, value); }
-
         public int SelectedOrderId
         {
             get => this._selectedOrderId;
@@ -44,15 +44,20 @@ namespace ClientApp.ViewModels
                 this.SetChangeableOrderedProducts();
             }
         }
+        public bool Executing
+        {
+            get => this._executing;
+            set
+            {
+                if (SetProperty(ref this._executing, value))
+                    AcceptCommand.RaiseCanExecuteChanged();
+            }
+        }
 
         public Prism.Commands.DelegateCommand AcceptCommand { get; set; }
 
         public ChangeOrderViewModel()
         {
-            InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
-            List<OrderedProducts> prod = null;
-            int id = 1;
-            invoiceGenerator.CreateInvoice(prod, id);
             UserCredentials credentials = new UserCredentials();
             this.CurrentDate = credentials.CurrentTime;
             InitValues();
@@ -62,12 +67,19 @@ namespace ClientApp.ViewModels
 
         public void UpdateOrder()
         {
+            Executing = true;
             if (this.SelectedOrderState == OrderFlags.Ordered.ToString())
+            {
                 System.Windows.MessageBox.Show("Cannot set delivery date for order state \"ordered\"", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                Executing = false;
+            }
             else
             {
                 ProductsRepository productsRepository = new ProductsRepository();
-
+                InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+                InvoiceComponents invoiceComponents = new InvoiceComponents();
+                Invoices invoice = new Invoices();
+                invoice.InvoiceDate = this.CurrentDate;
                 UpdatedOrder updatedOrder = new UpdatedOrder()
                 {
                     OrderId = this.SelectedOrderId,
@@ -75,10 +87,34 @@ namespace ClientApp.ViewModels
                     OrderState = this.SelectedOrderState
                 };
 
+
+                List<OrderedProductsStorage> ordProducts = OrderedProductsList;
+
+                using (var context = new ApplicationDbContext())
+                {
+                    IQueryable<InvoiceComponents> cData = context.Orders
+                        .Where(x => x.OrderId == this.SelectedOrderId)
+                        .Include(x => x.Regions)
+                        .Include(x => x.Customers)
+                        .Select(x => new InvoiceComponents
+                        {
+                            CustomerCompanyName = x.Customers.CompanyName,
+                            CustomerCountry = x.Regions.Country,
+                            CustomerCity = x.Regions.City,
+                            CustomerStreet = x.Regions.Street
+                        });
+
+                    invoiceComponents = cData.FirstOrDefault();
+                }
+                
                 orderModifier.UpdateOrder(updatedOrder);
+                invoiceGenerator.CreateInvoice(ordProducts, invoiceComponents, invoice, updatedOrder.OrderId);
                 productsRepository.UpdateProducts(updatedOrder.OrderId);
+
+                Executing = false;
                 CloseAction();
             }
+            Executing = false;
         }        
 
         private void InitValues()

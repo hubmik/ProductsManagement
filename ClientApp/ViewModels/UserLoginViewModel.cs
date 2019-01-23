@@ -36,22 +36,25 @@ namespace ClientApp.ViewModels
 
         public async void SignInUser()
         {
+            Executing = true;
             bool isCorrect = false;
-
-            using (var client = new WcfService.Service1Client())
-            {
-                isCorrect = await client.IsUserAuthenticatedAsync(this.AccessKey);
-            }
+            Models.UserCredentials userCredentials = new Models.UserCredentials();
+            //using (var client = new WcfService.Service1Client())
+            //{
+            //    isCorrect = await client.IsUserAuthenticatedAsync(this.AccessKey);
+            //}
+            isCorrect = userCredentials.IsUserAuthenticated(this.AccessKey);
 
             if (isCorrect)
             {
                 Models.UserCredentials.SessionKey = this.AccessKey;
                 Views.ApplicationView appView = new Views.ApplicationView();
-                appView.Show();
-
+                Executing = false;
+                appView.Show();                
                 App.Current.MainWindow.Close();
                 App.Current.MainWindow = appView;
             }
+            Executing = false;
         }
 
         protected void RaiseCloseRequest()
