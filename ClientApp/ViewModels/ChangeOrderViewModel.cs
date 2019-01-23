@@ -33,14 +33,7 @@ namespace ClientApp.ViewModels
         public List<int> OrderIds { get => this._orderIds; set => this.SetProperty(ref this._orderIds, value); }
         public DateTime DeliveryDate { get => this._deliveryDate; set => this.SetProperty(ref this._deliveryDate, value); }
         public bool IsChangingEnabled { get => this._isChangingEnabled; set => this.SetProperty(ref this._isChangingEnabled, value); }
-        public string SelectedOrderState
-        {
-            get => this._selectedOrderState;
-            set
-            {
-                this.SetProperty(ref this._selectedOrderState, value);
-            }
-        }
+        public string SelectedOrderState { get => this._selectedOrderState; set => this.SetProperty(ref this._selectedOrderState, value); }
 
         public int SelectedOrderId
         {
@@ -56,6 +49,10 @@ namespace ClientApp.ViewModels
 
         public ChangeOrderViewModel()
         {
+            InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+            List<OrderedProducts> prod = null;
+            int id = 1;
+            invoiceGenerator.CreateInvoice(prod, id);
             UserCredentials credentials = new UserCredentials();
             this.CurrentDate = credentials.CurrentTime;
             InitValues();
@@ -65,19 +62,24 @@ namespace ClientApp.ViewModels
 
         public void UpdateOrder()
         {
-            ProductsRepository productsRepository = new ProductsRepository();
-
-            UpdatedOrder updatedOrder = new UpdatedOrder()
+            if (this.SelectedOrderState == OrderFlags.Ordered.ToString())
+                System.Windows.MessageBox.Show("Cannot set delivery date for order state \"ordered\"", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            else
             {
-                OrderId = this.SelectedOrderId,
-                DeliveryDate = this.DeliveryDate,
-                OrderState = this.SelectedOrderState
-            };
-            orderModifier.UpdateOrder(updatedOrder);
-            //orderedProductsList = productsRepository.QueryUpdateProducts(updatedOrder.OrderId);
-            productsRepository.UpdateProducts(updatedOrder.OrderId);
-            CloseAction();
-        }
+                ProductsRepository productsRepository = new ProductsRepository();
+
+                UpdatedOrder updatedOrder = new UpdatedOrder()
+                {
+                    OrderId = this.SelectedOrderId,
+                    DeliveryDate = this.DeliveryDate,
+                    OrderState = this.SelectedOrderState
+                };
+
+                orderModifier.UpdateOrder(updatedOrder);
+                productsRepository.UpdateProducts(updatedOrder.OrderId);
+                CloseAction();
+            }
+        }        
 
         private void InitValues()
         {

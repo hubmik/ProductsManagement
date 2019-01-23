@@ -9,7 +9,7 @@ using System.Data.Entity;
 
 namespace ClientApp.Models
 {
-    class OrderModifier : IOrderChangeable
+    public class OrderModifier : IOrderChangeable
     {
         public List<string> GetOrderStates(int orderId)
         {
