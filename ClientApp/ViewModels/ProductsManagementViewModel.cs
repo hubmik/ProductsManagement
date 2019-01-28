@@ -1,4 +1,5 @@
-﻿using CustomerApp.Models;
+﻿using ClientApp.Models;
+using CustomerApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ClientApp.ViewModels
 {
     public class ProductsManagementViewModel : Prism.Mvvm.BindableBase, IPageViewModel
     {
-        Models.ProductsRepository productsRepository;
+        ProductsRepository productsRepository;
         private bool _executing;
         private string _name;
         private string _quantity;
@@ -76,28 +77,18 @@ namespace ClientApp.ViewModels
             UpdateDataCommand = new Prism.Commands.DelegateCommand(ExecuteUpdateProduct, () => !Executing);
         }
 
-        public async void SetDataGrid()
+        public void SetDataGrid()
         {
             Executing = true;
 
             Products product = new Products();
-            WcfService.ProductExtension productExtension = new WcfService.ProductExtension();
+            productsRepository = new ProductsRepository();
 
             Validations.Parser parser = new Validations.Parser();
-            parser.ParseInput(product, productExtension, this.ProductName, this.ProductQuantity, this.ProductUnitPrice, this.ProductQuantityFrom,
+            parser.ParseInput(product, productsRepository, this.ProductName, this.ProductQuantity, this.ProductUnitPrice, this.ProductQuantityFrom,
                 this.ProductQuantityTo, this.ProductUnitPriceFrom, this.ProductUnitPriceTo);
 
-            try
-            {
-                using (var client = new WcfService.Service1Client())
-                {
-                    OutputProductsList = await client.GetProductsAsync(product, productExtension);
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show(ex.ToString(), "Error", System.Windows.MessageBoxButton.OK);
-            }
+            OutputProductsList = productsRepository.GetProducts(product, productsRepository);
 
             Executing = false;
         }

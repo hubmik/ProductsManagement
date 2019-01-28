@@ -182,5 +182,23 @@ namespace ClientApp.Models
 
             return valueToSet;
         }
+
+        public DateTime GetDeliveryDate(int orderId)
+        {
+            DateTime? deliveryDate = DateTime.UtcNow;
+
+            using (var context = new ApplicationDbContext())
+            {
+                deliveryDate = context.Orders
+                    .Where(x => x.OrderId == orderId)
+                    .Select(x => x.DeliveryDate)
+                    .FirstOrDefault();
+            }
+
+            if(deliveryDate == null)
+                deliveryDate = DateTime.UtcNow;
+
+            return (DateTime)deliveryDate;
+        }
     }
 }

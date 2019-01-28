@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using ClientApp.Models;
 
 namespace ClientApp.Validations
 {
     public class Parser
     {
-        public void ParseInput(Products product, WcfService.ProductExtension productExtension,
+        public void ParseInput(Products product, ProductExtension productExtension,
             string name,
             string quantity,
             string unitPrice,

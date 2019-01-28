@@ -9,8 +9,34 @@ using System.Data.Entity;
 
 namespace ClientApp.Models
 {
-    public class ProductsRepository : IProductsRepository
+    public class ProductsRepository : ProductExtension, IProductsRepository
     {
+        public List<Products> GetProducts(Products product, ProductExtension productExtension)
+        {
+            List<Products> products = new List<Products>();
+            IQueryable<Products> pr;
+
+            using (var context = new ApplicationDbContext())
+            {
+                pr = !string.IsNullOrEmpty(product.ProductName) || product.UnitPrice > 0 || product.Quantity > 0 ||
+                    productExtension.QuantityFrom > 0
+                    || productExtension.QuantityTo > 0 || productExtension.UnitPriceFrom > 0 || productExtension.UnitPriceTo > 0
+                    ? context.Products.
+                        Where(prd =>
+                    prd.ProductName == product.ProductName ||
+                    prd.Quantity == product.Quantity ||
+                    prd.UnitPrice == product.UnitPrice ||
+                    (prd.Quantity >= productExtension.QuantityFrom && prd.Quantity <= productExtension.QuantityTo) ||
+                    (prd.UnitPrice >= productExtension.UnitPriceFrom && prd.UnitPrice <= productExtension.UnitPriceTo)
+                    )
+                    : context.Products;
+
+                products = pr.ToList();
+            }
+
+            return products;
+        }
+
         public void UpdateProducts(int orderId)
         {
             List<OrderedProducts> orderedProducts = null;

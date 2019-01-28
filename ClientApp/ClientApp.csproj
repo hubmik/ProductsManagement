@@ -104,13 +104,13 @@
     <Compile Include="Models\InvoiceGenerator.cs" />
     <Compile Include="Models\OrderedProductsStorage.cs" />
     <Compile Include="Models\OrderModifier.cs" />
+    <Compile Include="Models\ProductExtension.cs" />
     <Compile Include="Models\ProductsRepository.cs" />
     <Compile Include="Models\UpdatedOrder.cs" />
     <Compile Include="Models\UserCredentials.cs" />
     <Compile Include="Models\UserIdentification.cs" />
     <Compile Include="Models\UsersImplements.cs" />
     <Compile Include="Validations\Parser.cs" />
-    <Compile Include="Validations\ProductsManagementInputData.cs" />
     <Compile Include="ValueConverters\NotValueConverter.cs" />
     <Compile Include="ValueConverters\TemplateValueConverter.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />

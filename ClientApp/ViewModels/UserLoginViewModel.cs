@@ -34,15 +34,12 @@ namespace ClientApp.ViewModels
             }
         }
 
-        public async void SignInUser()
+        public void SignInUser()
         {
             Executing = true;
             bool isCorrect = false;
             Models.UserCredentials userCredentials = new Models.UserCredentials();
-            //using (var client = new WcfService.Service1Client())
-            //{
-            //    isCorrect = await client.IsUserAuthenticatedAsync(this.AccessKey);
-            //}
+
             isCorrect = userCredentials.IsUserAuthenticated(this.AccessKey);
 
             if (isCorrect)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomerApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,8 +10,8 @@ namespace CustomerApp.ViewModels
     {
         public string CompanyName { get; set; }
         public string FullName { get; set; }
-        public IEnumerable<Models.ApplicationUser> OrdersCollection { get; set; }
-        public IEnumerable<Models.Orders> CustomerOrders { get; set; }
-        public IEnumerable<Models.OrderedProducts> CustomersOrderedProducts { get; set; }
+        public IEnumerable<Orders> CustomerOrders { get; set; }
+        public bool IsOrderedChecked { get; set; }
+        public bool IsAcceptedChecked { get; set; }
     }
 }
