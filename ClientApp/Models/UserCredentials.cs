@@ -14,11 +14,8 @@ namespace ClientApp.Models
         
         private static DateTime Time()
         {
-            DateTime time;
-            using (var client = new WcfService.Service1Client())
-            {
-                time = client.GetCurrentTime();
-            }
+            DateTime time = DateTime.UtcNow;
+
             return time;
         }
 

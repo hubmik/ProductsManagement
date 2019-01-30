@@ -87,8 +87,7 @@ namespace ClientApp.ViewModels
                     DeliveryDate = this.DeliveryDate,
                     OrderState = this.SelectedOrderState
                 };
-
-
+                                
                 List<OrderedProductsStorage> ordProducts = OrderedProductsList;
 
                 using (var context = new ApplicationDbContext())

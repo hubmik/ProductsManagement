@@ -38,7 +38,7 @@ namespace ClientApp.Models
             }
             return states;
         }
-        
+
         public bool IsOrderedStatusChanged(string accessKey)
         {
             using (var context = new ApplicationDbContext())
@@ -68,22 +68,14 @@ namespace ClientApp.Models
         public List<int> GetOrderIds(string accessKey)
         {
             List<int> orderIds = null;
-            List<Orders> list = null;
+
             using (var context = new ApplicationDbContext())
             {
                 IQueryable<int> query = context.Orders
                     .Where(x => x.Employees.AccessKey == accessKey)
                     .Include(x => x.OrderStates)
-                    .OrderBy(x=>x.StatusId)
+                    .OrderBy(x => x.StatusId)
                     .Select(x => x.OrderId);
-                //var ord = context.Orders
-                //    .Where(x => x.Employees.AccessKey == accessKey)
-                //    .Include(x => x.OrderStates)
-                //    .GroupBy(x => new { Id = x.StatusId, Name = x.OrderStates.Status })
-                //    .Select(x => new { StatusId = x.Key.Id, StatusName = x.Key.Name, Count = x.Count() })
-                //    .ToList();
-
-                //list = ord.ToList();
 
                 var qr = context.Orders
                     .Where(x => x.Employees.AccessKey == accessKey)
@@ -116,7 +108,7 @@ namespace ClientApp.Models
 
             return orderedProducts;
         }
-                       
+
         public virtual void UpdateOrder(UpdatedOrder updatedOrder)
         {
             List<OrderStates> statusIds = GetStatusesId();
@@ -195,7 +187,7 @@ namespace ClientApp.Models
                     .FirstOrDefault();
             }
 
-            if(deliveryDate == null)
+            if (deliveryDate == null)
                 deliveryDate = DateTime.UtcNow;
 
             return (DateTime)deliveryDate;
