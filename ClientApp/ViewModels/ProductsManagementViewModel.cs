@@ -99,7 +99,7 @@ namespace ClientApp.ViewModels
             Products product;
             bool isUpdateSuccess = false;
 
-            product = parser.ParseInput(this.SelectedProduct, this.UpdateQuantity, this.UpdateUnitPrice, SelectedCollectionSizeToUpdate, true);
+            product = parser.ParseInput(this.SelectedProduct, this.UpdateQuantity, this.UpdateUnitPrice);
             if(product == null)
                 System.Windows.MessageBox.Show("Invalid input!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             else

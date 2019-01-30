@@ -80,6 +80,7 @@ namespace ClientApp.ViewModels
                 InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
                 InvoiceComponents invoiceComponents = new InvoiceComponents();
                 Invoices invoice = new Invoices();
+
                 invoice.InvoiceDate = this.CurrentDate;
                 UpdatedOrder updatedOrder = new UpdatedOrder()
                 {

@@ -38,6 +38,13 @@ namespace ClientApp.ViewModels
         {
             UsersImplements usersImplements = new UsersImplements();
             List<Orders> ordersList = usersImplements.OrdersForSpecifiedEmployee(UserCredentials.SessionKey);
+
+            foreach (var item in ordersList)
+            {
+                if(item.DeliveryDate.HasValue)
+                    item.DeliveryDate = DateTime.Parse(string.Format("{0:MM/dd/yyyy}", item.DeliveryDate));
+            }
+
             this.OrdersList = ordersList;
         }
 

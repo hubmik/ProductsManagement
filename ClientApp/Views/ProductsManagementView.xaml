@@ -107,10 +107,6 @@
                 <TextBox Text="{Binding Path=UpdateUnitPrice}"
                          Width="120"/>
             </WrapPanel>
-            <WrapPanel Margin="2">
-                <Label Content="Update Collection Size:" />
-                <ComboBox Cursor="Hand" ItemsSource="{Binding Path=CollectionSizes}" SelectedItem="{Binding Path=SelectedCollectionSizeToUpdate}"/>
-            </WrapPanel>
         </StackPanel>
         
         <DataGrid AutoGenerateColumns="False" DockPanel.Dock="Right" IsReadOnly="True" ItemsSource="{Binding Path=OutputProductsList}" >

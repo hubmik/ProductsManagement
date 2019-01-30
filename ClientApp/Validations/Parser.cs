@@ -35,11 +35,11 @@ namespace ClientApp.Validations
                 productExtension.UnitPriceTo = decimal.Parse(unitPriceTo);
         }
 
-        public Products ParseInput(string name, string quantity, string price, int size, bool update)
+        public Products ParseInput(string name, string quantity, string price)
         {
             Products product = new Products();
 
-            if (string.IsNullOrWhiteSpace(name) || size <= 0)
+            if (string.IsNullOrWhiteSpace(name))
                 return null;
             if (string.IsNullOrWhiteSpace(quantity) && string.IsNullOrWhiteSpace(price))
                 return null;
@@ -53,10 +53,6 @@ namespace ClientApp.Validations
 
             using (var context = new ApplicationDbContext())
             {
-                var q = context.Products
-                    .Where(x => x.ProductsCollections.CollectionSize == size)
-                    .Select(x => x.CollectionId);
-                product.CollectionId = q.FirstOrDefault();
                 product.ProductId = context.Products
                     .Where(x => x.ProductName == product.ProductName)
                     .Select(x => x.ProductId)
