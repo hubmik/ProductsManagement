@@ -57,6 +57,7 @@ namespace ClientApp.ViewModels
         {
             this.ChangeOrderView = new ChangeOrderView();
             this.ChangeOrderView.ShowDialog();
+            InitOrders();
         }
     }
 }
