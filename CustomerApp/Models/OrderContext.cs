@@ -42,7 +42,10 @@ namespace CustomerApp.Models
                     Country = data.Country,
                     IsDefault = false,
                     Street = data.Street,
-                    CustomerId = context.Customers.Where(x => x.UserId == SessionProcess.SessionIdentifier).Select(x => x.CustomerId).FirstOrDefault()
+                    CustomerId = context.Customers
+                        .Where(x => x.UserId == SessionProcess.SessionIdentifier)
+                        .Select(x => x.CustomerId)
+                        .FirstOrDefault()
                 };
                 context.Regions.Add(region);
                 context.SaveChanges();
