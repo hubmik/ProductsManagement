@@ -17,10 +17,11 @@ namespace CustomerApp.Models
         private bool AddAddress(ViewModels.CartSummaryViewModel data)
         {
             List<Regions> list = null;
+            var id = System.Web.HttpContext.Current.User.Identity.GetUserId<int>();
             using (var context = new ApplicationDbContext())
             {
                 IQueryable<Regions> query = context.Regions
-                    .Where(x => x.Customers.UserId == SessionProcess.SessionIdentifier);
+                    .Where(x => x.Customers.UserId == id);
 
                 list = query.ToList();
             }
@@ -36,6 +37,7 @@ namespace CustomerApp.Models
         {
             using (var context = new ApplicationDbContext())
             {
+                var id = System.Web.HttpContext.Current.User.Identity.GetUserId<int>();
                 Regions region = new Regions
                 {
                     City = data.City,
@@ -43,7 +45,7 @@ namespace CustomerApp.Models
                     IsDefault = false,
                     Street = data.Street,
                     CustomerId = context.Customers
-                        .Where(x => x.UserId == SessionProcess.SessionIdentifier)
+                        .Where(x => x.UserId == id)
                         .Select(x => x.CustomerId)
                         .FirstOrDefault()
                 };

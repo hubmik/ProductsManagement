@@ -1,4 +1,5 @@
 ﻿using CustomerApp.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,7 +18,7 @@ namespace CustomerApp.ViewModels
         {
             ShippingDetails shippingDetails = new ShippingDetails();
             _deliveries = shippingDetails.GetDeliveries();
-            _regions = shippingDetails.GetCustomerData(SessionProcess.SessionIdentifier);
+            _regions = shippingDetails.GetCustomerData(System.Web.HttpContext.Current.User.Identity.GetUserId<int>());
         }
 
         public int RegionId { get; set; }
