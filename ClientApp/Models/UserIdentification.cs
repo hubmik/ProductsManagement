@@ -9,13 +9,15 @@ namespace ClientApp.Models
 {
     public class UserIdentification
     {
-        public async Task<Employees> GetUserIdentity()
+        public Employees GetUserCredentials(string accessKey)
         {
             Employees employee = null;
-
-            using (var client = new WcfService.Service1Client())
+            using (var context = new ApplicationDbContext())
             {
-                employee = await client.GetUserCredentialsAsync(UserCredentials.SessionKey);
+                var query = context.Employees
+                    .FirstOrDefault(x => x.AccessKey == accessKey);
+
+                employee = query as Employees;
             }
 
             return employee;

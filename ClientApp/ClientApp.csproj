@@ -88,11 +88,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connected Services\WcfService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="HelperClasses\RelayCommand.cs" />
     <Compile Include="Interfaces\ICloseable.cs" />
     <Compile Include="Interfaces\IOrderChangeable.cs" />
@@ -104,13 +99,13 @@
     <Compile Include="Models\InvoiceGenerator.cs" />
     <Compile Include="Models\OrderedProductsStorage.cs" />
     <Compile Include="Models\OrderModifier.cs" />
+    <Compile Include="Models\ProductExtension.cs" />
     <Compile Include="Models\ProductsRepository.cs" />
     <Compile Include="Models\UpdatedOrder.cs" />
     <Compile Include="Models\UserCredentials.cs" />
     <Compile Include="Models\UserIdentification.cs" />
     <Compile Include="Models\UsersImplements.cs" />
     <Compile Include="Validations\Parser.cs" />
-    <Compile Include="Validations\ProductsManagementInputData.cs" />
     <Compile Include="ValueConverters\NotValueConverter.cs" />
     <Compile Include="ValueConverters\TemplateValueConverter.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
@@ -187,34 +182,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\WcfService\ClientApp.WcfService.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\WcfService\ClientApp.WcfService.OrderContext.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\WcfService\ClientApp.WcfService.ProductExtension.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\WcfService\Service1.wsdl" />
-    <None Include="Connected Services\WcfService\Service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\WcfService\Service11.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\WcfService\Service12.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\WcfService\Service13.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\WcfService\Service14.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\WcfService\Service15.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\CustomerApp.Models.ApplicationUser.datasource" />
     <None Include="Properties\DataSources\CustomerApp.Models.Customers.datasource" />
@@ -235,24 +202,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\WcfService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\WcfService\Service1.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\WcfService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\WcfService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\WcfService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

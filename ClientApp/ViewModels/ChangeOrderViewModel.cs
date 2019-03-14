@@ -42,6 +42,7 @@ namespace ClientApp.ViewModels
             {
                 this.SetProperty(ref this._selectedOrderId, value);
                 this.SetChangeableOrderedProducts();
+                this.SetChangeableDate();
             }
         }
         public bool Executing
@@ -62,7 +63,7 @@ namespace ClientApp.ViewModels
             this.CurrentDate = credentials.CurrentTime;
             InitValues();
             SetChangeableOrderedProducts();
-            AcceptCommand = new Prism.Commands.DelegateCommand(UpdateOrder);            
+            AcceptCommand = new Prism.Commands.DelegateCommand(UpdateOrder, () => !Executing);            
         }
 
         public void UpdateOrder()
@@ -79,6 +80,7 @@ namespace ClientApp.ViewModels
                 InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
                 InvoiceComponents invoiceComponents = new InvoiceComponents();
                 Invoices invoice = new Invoices();
+
                 invoice.InvoiceDate = this.CurrentDate;
                 UpdatedOrder updatedOrder = new UpdatedOrder()
                 {
@@ -86,8 +88,7 @@ namespace ClientApp.ViewModels
                     DeliveryDate = this.DeliveryDate,
                     OrderState = this.SelectedOrderState
                 };
-
-
+                                
                 List<OrderedProductsStorage> ordProducts = OrderedProductsList;
 
                 using (var context = new ApplicationDbContext())
@@ -125,6 +126,14 @@ namespace ClientApp.ViewModels
             this.OrderStates = orderModifier.GetOrderStates(this.SelectedOrderId);
             this.SelectedOrderState = orderModifier.GetStateOfSpecifiedOrder(this.SelectedOrderId);
             this.IsChangingEnabled = CanChangeValue();
+        }
+
+        private void SetChangeableDate()
+        {
+            if (this.SelectedOrderState != OrderFlags.Ordered.ToString())
+                this.DeliveryDate = orderModifier.GetDeliveryDate(this.SelectedOrderId);
+            else
+                this.DeliveryDate = this.CurrentDate;
         }
 
         private void SetChangeableOrderedProducts()

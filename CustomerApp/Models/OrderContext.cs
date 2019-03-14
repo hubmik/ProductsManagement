@@ -17,10 +17,11 @@ namespace CustomerApp.Models
         private bool AddAddress(ViewModels.CartSummaryViewModel data)
         {
             List<Regions> list = null;
+            var id = System.Web.HttpContext.Current.User.Identity.GetUserId<int>();
             using (var context = new ApplicationDbContext())
             {
                 IQueryable<Regions> query = context.Regions
-                    .Where(x => x.Customers.UserId == SessionProcess.SessionIdentifier);
+                    .Where(x => x.Customers.UserId == id);
 
                 list = query.ToList();
             }
@@ -36,13 +37,17 @@ namespace CustomerApp.Models
         {
             using (var context = new ApplicationDbContext())
             {
+                var id = System.Web.HttpContext.Current.User.Identity.GetUserId<int>();
                 Regions region = new Regions
                 {
                     City = data.City,
                     Country = data.Country,
                     IsDefault = false,
                     Street = data.Street,
-                    CustomerId = context.Customers.Where(x => x.UserId == SessionProcess.SessionIdentifier).Select(x => x.CustomerId).FirstOrDefault()
+                    CustomerId = context.Customers
+                        .Where(x => x.UserId == id)
+                        .Select(x => x.CustomerId)
+                        .FirstOrDefault()
                 };
                 context.Regions.Add(region);
                 context.SaveChanges();
@@ -122,21 +127,42 @@ namespace CustomerApp.Models
             }
         }
 
-        public IEnumerable<ApplicationUser> GetOrders()
+        public IEnumerable<Orders> GetOrders(bool isOrderedChecked, bool isAcceptedChecked)
         {
-            IEnumerable<ApplicationUser> orders = null;
+            IEnumerable<Orders> orders = null;
 
             using (var context = new ApplicationDbContext())
             {
-                var q = context.Users
-                    .Where(x => x.Id == this._usrId)
-                    .Include(x => x.Customers.Select(s => s.Orders
-                      .Select(em => em.Employees)
-                      .Select(or => or.Orders.Select(d => d.Deliveries)
-                      .Select(ord => ord.Orders.Select(st => st.OrderStates)
-                      ))));
+                IQueryable<Orders> query = null;
+                if (isAcceptedChecked && isOrderedChecked || !isAcceptedChecked && !isOrderedChecked)
+                {
+                    query = context.Orders
+                        .Where(x => x.Customers.UserId == this._usrId)
+                        .Include(x => x.Employees)
+                        .Include(x => x.OrderStates)
+                        .Include(x => x.Deliveries)
+                        .OrderBy(x => x.OrderDate);
+                }
+                else if (isOrderedChecked)
+                {
+                    query = context.Orders
+                        .Where(x => x.Customers.UserId == this._usrId && x.StatusId == 1)
+                        .Include(x => x.Employees)
+                        .Include(x => x.OrderStates)
+                        .Include(x => x.Deliveries)
+                        .OrderBy(x=>x.OrderDate);
+                }
+                else if (isAcceptedChecked)
+                {
+                    query = context.Orders
+                        .Where(x => x.Customers.UserId == this._usrId && x.StatusId == 2)
+                        .Include(x => x.Employees)
+                        .Include(x => x.OrderStates)
+                        .Include(x => x.Deliveries)
+                        .OrderBy(x=>x.OrderDate);
+                }
 
-                orders = q.ToList();
+                orders = query.ToList();
             }
             
             return orders;

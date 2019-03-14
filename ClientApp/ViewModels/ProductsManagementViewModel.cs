@@ -1,4 +1,5 @@
-﻿using CustomerApp.Models;
+﻿using ClientApp.Models;
+using CustomerApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ClientApp.ViewModels
 {
     public class ProductsManagementViewModel : Prism.Mvvm.BindableBase, IPageViewModel
     {
-        Models.ProductsRepository productsRepository;
+        ProductsRepository productsRepository;
         private bool _executing;
         private string _name;
         private string _quantity;
@@ -42,7 +43,11 @@ namespace ClientApp.ViewModels
         public string InsertedProductQuantity { get => this._insertedProductQuantity; set => this.SetProperty(ref _insertedProductQuantity, value); }
         public List<int> CollectionSizes { get; set; }
         public List<string> ProductsList { get; set; }
-        public int SelectedCollectionSizeToUpdate { get => this._selectedCollectionSizeToUpdate; set => this.SetProperty(ref _selectedCollectionSizeToUpdate, value); }
+        public int SelectedCollectionSizeToUpdate
+        {
+            get => this._selectedCollectionSizeToUpdate;
+            set => this.SetProperty(ref _selectedCollectionSizeToUpdate, value);
+        }
         public string SelectedProduct { get => this._selectedProduct; set => this.SetProperty(ref _selectedProduct, value); }
         public string UpdateQuantity { get => this._updateQuantity; set => this.SetProperty(ref _updateQuantity, value); }
         public string UpdateUnitPrice { get => this._updateUnitPrice; set => this.SetProperty(ref _updateUnitPrice, value); }
@@ -76,39 +81,30 @@ namespace ClientApp.ViewModels
             UpdateDataCommand = new Prism.Commands.DelegateCommand(ExecuteUpdateProduct, () => !Executing);
         }
 
-        public async void SetDataGrid()
+        public void SetDataGrid()
         {
             Executing = true;
 
             Products product = new Products();
-            WcfService.ProductExtension productExtension = new WcfService.ProductExtension();
+            productsRepository = new ProductsRepository();
 
             Validations.Parser parser = new Validations.Parser();
-            parser.ParseInput(product, productExtension, this.ProductName, this.ProductQuantity, this.ProductUnitPrice, this.ProductQuantityFrom,
+            parser.ParseInput(product, productsRepository, this.ProductName, this.ProductQuantity, this.ProductUnitPrice, this.ProductQuantityFrom,
                 this.ProductQuantityTo, this.ProductUnitPriceFrom, this.ProductUnitPriceTo);
 
-            try
-            {
-                using (var client = new WcfService.Service1Client())
-                {
-                    OutputProductsList = await client.GetProductsAsync(product, productExtension);
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show(ex.ToString(), "Error", System.Windows.MessageBoxButton.OK);
-            }
+            OutputProductsList = productsRepository.GetProducts(product, productsRepository);
 
             Executing = false;
         }
 
         public void ExecuteUpdateProduct()
         {
+            Executing = true;
             Validations.Parser parser = new Validations.Parser();
             Products product;
             bool isUpdateSuccess = false;
 
-            product = parser.ParseInput(this.SelectedProduct, this.UpdateQuantity, this.UpdateUnitPrice, SelectedCollectionSizeToUpdate, true);
+            product = parser.ParseInput(this.SelectedProduct, this.UpdateQuantity, this.UpdateUnitPrice);
             if(product == null)
                 System.Windows.MessageBox.Show("Invalid input!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             else
@@ -121,10 +117,12 @@ namespace ClientApp.ViewModels
                     System.Windows.MessageBox.Show("Error during establishing connection to database!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
             ClearValues();
+            Executing = false;
         }
 
         public void ExecuteInsertProduct()
         {
+            Executing = true;
             bool commandExecutedSuccessful = false;
             Products product;
             Validations.Parser parser = new Validations.Parser();
@@ -141,6 +139,7 @@ namespace ClientApp.ViewModels
                     System.Windows.MessageBox.Show("Error during establishing connection to database!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
             ClearValues();
+            Executing = false;
         }
 
         public void ClearValues()

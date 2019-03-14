@@ -54,7 +54,7 @@ namespace ClientApp.Models
                 $"{invoiceComponents.CustomerStreet}";
 
             data += "\n\n\n";
-            data += $"TOTAL VALUE: {orderedProductsStorage.GetTotalValue(id).ToString()}";
+            data += $"TOTAL VALUE: {orderedProductsStorage.GetTotalValue(id).ToString()}zl";
 
             return data;
         }

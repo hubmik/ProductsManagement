@@ -25,11 +25,11 @@ namespace ClientApp.ViewModels
             UserController();
         }
 
-        public async void UserController()
+        public void UserController()
         {
             Employees employee = null;
             Models.UsersImplements usersImplements = new Models.UsersImplements();
-            employee = await usersImplements.GetUserIdentity();
+            employee = usersImplements.GetUserCredentials(Models.UserCredentials.SessionKey);
 
             this.UserName = employee.FirstName + " " + employee.LastName;
             this.BirthDate = employee.BirthDate;

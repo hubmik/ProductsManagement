@@ -23,18 +23,7 @@
                 <DataGridTextColumn Header="Order ID" Binding="{Binding Path=OrderId}"/>
                 <DataGridTextColumn Header="Company Name" Binding="{Binding Path=Customers.CompanyName}"/>
                 <DataGridTextColumn Header="Order Date" Binding="{Binding Path=OrderDate}"/>
-                <DataGridTemplateColumn Header="Delivery Date">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Path=DeliveryDate}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <DatePicker SelectedDate="{Binding Path=DeliveryDate}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Order Date" Binding="{Binding Path=DeliveryDate}"/>
                 <DataGridTextColumn Header="Country" Binding="{Binding Path=Regions.Country}"/>
                 <DataGridTextColumn Header="City" Binding="{Binding Path=Regions.City}"/>
                 <DataGridTextColumn Header="Street" Binding="{Binding Path=Regions.Street}"/>

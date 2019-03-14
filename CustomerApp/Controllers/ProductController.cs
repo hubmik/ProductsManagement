@@ -10,7 +10,7 @@ using System.Data.Entity;
 
 namespace CustomerApp.Controllers
 {
-    public class ProductController : AsyncController
+    public class ProductController : Controller
     {
         private IProductRepository productRepository;
 
@@ -25,7 +25,7 @@ namespace CustomerApp.Controllers
             ViewBag.NameSortParam = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.QuantitySortParam = sortOrder == "Quantity" ? "quantity_desc" : "Quantity";
             ViewBag.PriceSortParam = sortOrder == "Price" ? "price_desc" : "Price";
-
+            
             List<Models.Products> list = context.Products.ToList();
             switch (sortOrder)
             {
@@ -52,7 +52,7 @@ namespace CustomerApp.Controllers
             return View(nameof(List), list);
         }
 
-        public async Task<ViewResult> List(string productName)
+        public ViewResult List(string productName)
         {
             ViewModels.ProductsListViewModel model = new ViewModels.ProductsListViewModel();
 
@@ -66,12 +66,6 @@ namespace CustomerApp.Controllers
             {
                 ProductName = productName
             };
-            WcfService.ProductExtension productExtension = new WcfService.ProductExtension();
-
-            //using (var client = new WcfService.Service1Client())
-            //{
-            //    model.Products = await client.GetProductsAsync(prod, productExtension);
-            //}
 
             return View(nameof(List), model);
         }

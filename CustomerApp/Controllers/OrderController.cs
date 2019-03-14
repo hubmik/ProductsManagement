@@ -15,19 +15,27 @@ namespace CustomerApp.Controllers
     {
         public bool isCartAlreadyDisposed = false;
         // GET: Order
-        public ActionResult Index()
+        public ActionResult Index(OrdersViewModel ordersViewModel)
         {
             OrderContext orderContext = new OrderContext();
             OrdersViewModel ordersVM = new OrdersViewModel
             {
                 CompanyName = orderContext.GetCompanyName(),
-                OrdersCollection = orderContext.GetOrders(),
+                CustomerOrders = orderContext.GetOrders(true, true),
             };
-            ordersVM.CustomerOrders = ordersVM.OrdersCollection.FirstOrDefault()
-                .Customers
-                .FirstOrDefault()
-                .Orders
-                .OrderBy(x => x.OrderDate);
+            
+            return View(nameof(Index), ordersVM);
+        }
+
+        [HttpPost]
+        public ActionResult Index(bool IsOrderedChecked, bool IsAcceptedChecked)
+        {
+            OrderContext orderContext = new OrderContext();
+            OrdersViewModel ordersVM = new OrdersViewModel
+            {
+                CompanyName = orderContext.GetCompanyName(),
+                CustomerOrders = orderContext.GetOrders(IsOrderedChecked, IsAcceptedChecked)
+            };
 
             return View(nameof(Index), ordersVM);
         }

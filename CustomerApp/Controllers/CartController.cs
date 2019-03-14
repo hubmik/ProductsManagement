@@ -37,11 +37,11 @@ namespace CustomerApp.Controllers
             ViewModels.CartSummaryViewModel cartSummaryVM = new ViewModels.CartSummaryViewModel();
             ShippingDetails shippingDetails = new ShippingDetails();
             Regions defaultResult = shippingDetails
-                .GetCustomerData(SessionProcess.SessionIdentifier)
+                .GetCustomerData(System.Web.HttpContext.Current.User.Identity.GetUserId<int>())
                 .Where(x => x.IsDefault)
                 .FirstOrDefault();
 
-            List<Regions> regionsList = shippingDetails.GetCustomerData(SessionProcess.SessionIdentifier);
+            List<Regions> regionsList = shippingDetails.GetCustomerData(System.Web.HttpContext.Current.User.Identity.GetUserId<int>());
             
             ViewBag.RegionsList = new SelectList(regionsList, "RegionId", "RegionId");
             cartSummaryVM = new ViewModels.CartSummaryViewModel
@@ -61,7 +61,7 @@ namespace CustomerApp.Controllers
         {
             ViewModels.CartSummaryViewModel cartSummaryVM = new ViewModels.CartSummaryViewModel();
             ShippingDetails shippingDetails = new ShippingDetails();
-            List<Regions> regionsList = shippingDetails.GetCustomerData(SessionProcess.SessionIdentifier);
+            List<Regions> regionsList = shippingDetails.GetCustomerData(System.Web.HttpContext.Current.User.Identity.GetUserId<int>());
             Regions region = regionsList.Where(x => x.RegionId == RegionId).FirstOrDefault();
             cartSummaryVM = new ViewModels.CartSummaryViewModel()
             {
