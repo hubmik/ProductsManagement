@@ -407,6 +407,10 @@ namespace CustomerApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            if (Session["Cart"] != null)
+            {
+                Session["Cart"] = null;
+            }
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Login", "Account");
         }

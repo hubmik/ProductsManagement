@@ -94,7 +94,7 @@
         </StackPanel>
 
         <StackPanel>
-            <Label Content="Update Product" FontSize="20"/>
+            <Label Content="Update product" FontSize="20"/>
             <ComboBox Width="120" Cursor="Hand" HorizontalAlignment="Left" ItemsSource="{Binding Path=ProductsList}" SelectedItem="{Binding Path=SelectedProduct}"/>
             <WrapPanel Margin="2">
                 <Label Content="Update quantity:"/>

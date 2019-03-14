@@ -17,7 +17,7 @@ namespace ClientApp.ViewModels
 
         public event EventHandler CloseRequest;
         public string AccessKey { get => this.accessKey; set => this.SetProperty(ref accessKey, value); }
-        public Prism.Commands.DelegateCommand LoginCommand { get; }
+        public Prism.Commands.DelegateCommand LoginCommand { get; set; }
 
         public UserLoginViewModel()
         {
@@ -36,22 +36,25 @@ namespace ClientApp.ViewModels
 
         public void SignInUser()
         {
-            Executing = true;
-            bool isCorrect = false;
-            Models.UserCredentials userCredentials = new Models.UserCredentials();
-
-            isCorrect = userCredentials.IsUserAuthenticated(this.AccessKey);
-
-            if (isCorrect)
+            try
             {
+                Executing = true;
+                Models.UserCredentials userCredentials = new Models.UserCredentials();
                 Models.UserCredentials.SessionKey = this.AccessKey;
                 Views.ApplicationView appView = new Views.ApplicationView();
-                Executing = false;
-                appView.Show();                
+                appView.Show();
                 App.Current.MainWindow.Close();
                 App.Current.MainWindow = appView;
             }
-            Executing = false;
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Could not find specified user.", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.AccessKey = null;
+                Executing = false;
+            }
         }
 
         protected void RaiseCloseRequest()

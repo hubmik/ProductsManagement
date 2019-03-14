@@ -43,7 +43,11 @@ namespace ClientApp.ViewModels
         public string InsertedProductQuantity { get => this._insertedProductQuantity; set => this.SetProperty(ref _insertedProductQuantity, value); }
         public List<int> CollectionSizes { get; set; }
         public List<string> ProductsList { get; set; }
-        public int SelectedCollectionSizeToUpdate { get => this._selectedCollectionSizeToUpdate; set => this.SetProperty(ref _selectedCollectionSizeToUpdate, value); }
+        public int SelectedCollectionSizeToUpdate
+        {
+            get => this._selectedCollectionSizeToUpdate;
+            set => this.SetProperty(ref _selectedCollectionSizeToUpdate, value);
+        }
         public string SelectedProduct { get => this._selectedProduct; set => this.SetProperty(ref _selectedProduct, value); }
         public string UpdateQuantity { get => this._updateQuantity; set => this.SetProperty(ref _updateQuantity, value); }
         public string UpdateUnitPrice { get => this._updateUnitPrice; set => this.SetProperty(ref _updateUnitPrice, value); }
@@ -95,6 +99,7 @@ namespace ClientApp.ViewModels
 
         public void ExecuteUpdateProduct()
         {
+            Executing = true;
             Validations.Parser parser = new Validations.Parser();
             Products product;
             bool isUpdateSuccess = false;
@@ -112,10 +117,12 @@ namespace ClientApp.ViewModels
                     System.Windows.MessageBox.Show("Error during establishing connection to database!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
             ClearValues();
+            Executing = false;
         }
 
         public void ExecuteInsertProduct()
         {
+            Executing = true;
             bool commandExecutedSuccessful = false;
             Products product;
             Validations.Parser parser = new Validations.Parser();
@@ -132,6 +139,7 @@ namespace ClientApp.ViewModels
                     System.Windows.MessageBox.Show("Error during establishing connection to database!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
             ClearValues();
+            Executing = false;
         }
 
         public void ClearValues()

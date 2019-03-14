@@ -141,7 +141,7 @@ namespace CustomerApp.Models
                         .Include(x => x.Employees)
                         .Include(x => x.OrderStates)
                         .Include(x => x.Deliveries)
-                        .OrderBy(x=>x.OrderDate);
+                        .OrderBy(x => x.OrderDate);
                 }
                 else if (isOrderedChecked)
                 {
